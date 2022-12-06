@@ -2086,7 +2086,7 @@ License: For each use you must have a valid license purchased only from above li
 									<span class="h-20px border-1 border-gray-200 border-start ms-3 mx-2 me-1"></span>
 									<!--end::Separator-->
 									<!--begin::Description-->
-									<span class="text-muted fs-7 fw-bold mt-2">#XRS-45670</span>
+									<span class="text-muted fs-7 fw-bold mt-2">Pharmacist</span>
 									<!--end::Description--></h1>
 									<!--end::Title-->
 								</div>
