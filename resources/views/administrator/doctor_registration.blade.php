@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -49,8 +49,15 @@
         }  
     </style> 
 </head>
-<body>
-    
+<body> --}}
+@extends('administrator.navbar')
+@section('title', 'Dashboard')
+@section('css')
+
+@endsection
+
+@section('content')
+  <div>
     <form method="post">
         {{ csrf_field() }}  
         <div class="container">  
@@ -94,6 +101,11 @@
             <input type="password" placeholder="Retype Password" name="psw-repeat" required>  
             <button type="submit" class="registerbtn">Register</button>    
     </form>  
+  </div>
+  @endsection
 
-</body>
-</html>
+  @section('js')
+  
+  @endsection
+{{-- </body>
+</html> --}}

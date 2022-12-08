@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\administrator;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterPharmacistController extends Controller
 {
@@ -26,6 +28,30 @@ class RegisterPharmacistController extends Controller
     public function create()
     {
         //
+    }
+
+    public function registerPharmacist(Request $request) 
+    {
+        $request -> validate([
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'phone' => 'required',
+            'email' => 'required',
+            'psw' => 'required',
+        ]);
+
+        // $school->save();
+        $query = DB::table('users')->insert([
+            'name' => $request->firstname . ' ' . $request->lastname,
+            'email' => $request->email,
+            'role' => 'pharmacist',
+            'password' => Hash::make($request->psw),
+            'phone_number' => $request->phone,
+            'gender' => $request->input('gender'),
+            'address' => $request->address,
+            'created_at' => now(),
+        ]);
+        return redirect()->route('admin.dashboard');
     }
 
     /**

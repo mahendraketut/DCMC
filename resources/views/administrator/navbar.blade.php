@@ -348,7 +348,7 @@ License: For each use you must have a valid license purchased only from above li
 											</a>
 										</div>
 										<div class="menu-item">
-											<a class="menu-link" href="../../demo1/dist/account/settings.html">
+											<a class="menu-link" href="{{ Route('register_pharmacist') }}">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
