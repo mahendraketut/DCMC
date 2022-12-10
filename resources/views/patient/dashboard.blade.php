@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div class="row gy-5 g-xl-8">
+{{-- <div class="row gy-5 g-xl-8">
     <!--begin::Col-->
     <div class="col-xl-4">
         <!--begin::Mixed Widget 2-->
@@ -2657,7 +2657,7 @@
             <!--end::Modal body-->
         </div>
     </div>
-</div>
+</div> --}}
 <!--end::Modal - New Product-->
 <!--end::Modals-->
 @endsection

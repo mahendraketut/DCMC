@@ -38,7 +38,7 @@
                 <!--begin::Wrapper-->
                 <div class="w-lg-500px p-10 p-lg-15 mx-auto">
                     <!--begin::Form-->
-                    <form method="POST" action="{{ route('login') }}">
+                    <form id="kt_docs_formvalidation_text" class="form" method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="text-center mb-10">
                             <!--begin::Title-->
@@ -49,10 +49,11 @@
                             <a href="{{ route('register')}}" class="link-primary fw-bolder">Create an Account</a></div>
                             <!--end::Link-->
                         </div>
+
                         <div class="fv-row mb-10">
                             <label for="email" class="form-label fs-6 fw-bolder text-dark">{{ __('Email Address') }}</label>
                             <div class="col">
-                                <input id="email" type="email" class="form-control form-control-lg form-control-solid form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="email" type="email" class="form-control form-control-solid mb-3 mb-lg-0 form-control form-control-user form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -99,14 +100,14 @@
 
                         <div class="row mb-0">
                             <div class="col">
-                                <button type="submit" class="btn btn-lg btn-primary w-100 mb-5">
+                                <button type="submit" class="btn btn-lg btn-primary w-100 mb-5" id="kt_docs_formvalidation_text_submit">
                                     {{ __('Login') }}
                                 </button>
                                 <!--begin::Separator-->
                                 <div class="text-center text-muted text-uppercase fw-bolder mb-5">or</div>
                                 <!--end::Separator-->
                                 <!--begin::Google link-->
-                                <a href="#" class="btn btn-flex flex-center btn-light btn-lg w-100 mb-5">
+                                <a href="{{route('google.login')}}" class="btn btn-flex flex-center btn-light btn-lg w-100 mb-5">
                                 <img alt="Logo" src="{{asset('admin/assets/media/svg/brand-logos/google-icon.svg')}}" class="h-20px me-3" />Continue with Google</a>
                                 <!--end::Google link-->
                                 </div>
@@ -120,11 +121,11 @@
             <!--begin::Footer-->
             <div class="d-flex flex-center flex-wrap fs-6 p-5 pb-0">
                 <!--begin::Links-->
-                <div class="d-flex flex-center fw-bold fs-6">
-                    <a href="https://keenthemes.com" class="text-muted text-hover-primary px-2" target="_blank">About</a>
+                {{-- <div class="d-flex flex-center fw-bold fs-6">
+                    <a href="#" class="text-muted text-hover-primary px-2" target="_blank">About</a>
                     <a href="https://devs.keenthemes.com" class="text-muted text-hover-primary px-2" target="_blank">Support</a>
                     <a href="https://1.envato.market/EA4JP" class="text-muted text-hover-primary px-2" target="_blank">Purchase</a>
-                </div>
+                </div> --}}
                 <!--end::Links-->
             </div>
             <!--end::Footer-->
