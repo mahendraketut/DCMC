@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div class="row gy-5 g-xl-8">
+{{-- <div class="row gy-5 g-xl-8">
     <!--begin::Col-->
     <div class="col-xl-4">
         <!--begin::Mixed Widget 2-->
@@ -2359,10 +2359,10 @@
         <!--end::Tables Widget 5-->
     </div>
     <!--end::Col-->
-</div>
+</div> --}}
 <!--end::Row-->
 <!--begin::Calendar Widget 1-->
-<div class="card">
+{{-- <div class="card">
     <!--begin::Card header-->
     <div class="card-header">
         <h3 class="card-title align-items-start flex-column">
@@ -2381,7 +2381,7 @@
         <!--end::Calendar-->
     </div>
     <!--end::Card body-->
-</div>
+</div> --}}
 <!--end::Calendar Widget 1-->
 <!--begin::Modals-->
 <!--begin::Modal - New Product-->

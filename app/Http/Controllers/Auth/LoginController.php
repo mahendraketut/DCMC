@@ -40,29 +40,28 @@ class LoginController extends Controller
     }
 
     public function login(Request $request)
-    {   
+    {
         $input = $request->all();
-     
+
         $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required',
         ]);
-     
-        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
-        {
+
+        if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))) {
             if (auth()->user()->role == 'administrator') {
                 return redirect()->route('admin.dashboard');
-            }elseif (auth()->user()->role == 'doctor') {
+            } elseif (auth()->user()->role == 'doctor') {
                 return redirect()->route('doctor.dashboard');
-            }elseif (auth()->user()->role == 'pharmacist'){
+            } elseif (auth()->user()->role == 'pharmacist') {
                 return redirect()->route('pharmacist.dashboard');
-            }elseif (auth()->user()->role == 'patient'){
+            } elseif (auth()->user()->role == 'patient') {
                 return redirect()->route('patient.dashboard');
             }
-        }else{
-            return redirect()->route('login')
-                ->with('error','Email-Address And Password Are Wrong.');
+        } else {
+            // return redirect()->route('login')
+            //     ->with('error', 'Email-Address And Password Are Wrong.');
+            return back()->with('error', 'Email-Address And Password Are Wrong.');
         }
-          
     }
 }
