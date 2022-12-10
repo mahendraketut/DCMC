@@ -37,6 +37,10 @@ Route::middleware(['auth', 'user-access:administrator'])->group(function () {
     Route::get('/admin.profile.edit', [App\Http\Controllers\administrator\UpdateProfileController::class, 'edit'])->name('admin.profile.edit');
     Route::put('/admin.profile.update', [App\Http\Controllers\administrator\UpdateProfileController::class, 'update'])->name('admin.profile.update');
     Route::delete('/admin.profile.delete', [App\Http\Controllers\administrator\UpdateProfileController::class, 'destroy'])->name('admin.profile.delete');
+    Route::get('/admin.dashboard/register_doctor', [App\Http\Controllers\administrator\RegisterDoctorController::class, 'index'])->name('register_doctor');
+    Route::get('/admin.dashboard/register_pharmacist', [App\Http\Controllers\administrator\RegisterPharmacistController::class, 'index'])->name('register_pharmacist');
+    Route::post('/admin.dashboard/register_doctor', [App\Http\Controllers\administrator\RegisterDoctorController::class, 'registerDoctor']);
+    Route::post('/admin.dashboard/register_pharmacist', [App\Http\Controllers\administrator\RegisterPharmacistController::class, 'registerPharmacist']);
 });
 Route::middleware(['auth', 'user-access:doctor'])->group(function () {
     Route::get('/doctor.dashboard', [App\Http\Controllers\doctor\DashboardController::class, 'index'])->name('doctor.dashboard');
