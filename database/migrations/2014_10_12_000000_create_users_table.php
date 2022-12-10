@@ -20,6 +20,10 @@ return new class extends Migration
             $table->string('role')->default('patient');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('phone_number')->nullable();
+            $table->string('specialist')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('address')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
