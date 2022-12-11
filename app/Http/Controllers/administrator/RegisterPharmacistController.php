@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class RegisterPharmacistController extends Controller
 {
@@ -30,25 +31,40 @@ class RegisterPharmacistController extends Controller
         //
     }
 
-    public function registerPharmacist(Request $request) 
+    public function registerPharmacist(Request $request)
     {
-        $request -> validate([
+        $request->validate([
             'firstname' => 'required',
             'lastname' => 'required',
             'phone' => 'required',
             'email' => 'required',
             'psw' => 'required',
+            'confirm_psw' => 'required|same:psw',
         ]);
+
+        $config = [
+            'table' => 'users',
+            'field' => 'user_id',
+            'length' => 8,
+            'prefix' => 'PHA-'
+        ];
+
+        $userid = IdGenerator::generate($config);
 
         // $school->save();
         $query = DB::table('users')->insert([
+            'user_id' => $userid,
             'name' => $request->firstname . ' ' . $request->lastname,
+            'username' => $request->username,
             'email' => $request->email,
+            'dob' => $request->dob,
             'role' => 'pharmacist',
             'password' => Hash::make($request->psw),
-            'phone_number' => $request->phone,
+            'phone' => $request->phone,
+            'license' => $request->license,
             'gender' => $request->input('gender'),
             'address' => $request->address,
+            'city' => $request->city,
             'created_at' => now(),
         ]);
         return redirect()->route('admin.dashboard');
