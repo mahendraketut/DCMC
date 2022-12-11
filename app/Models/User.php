@@ -31,6 +31,8 @@ class User extends Authenticatable
         'role',
         'google_id',
         'profile_pic',
+        'specialist',
+        'license',
     ];
 
     /**

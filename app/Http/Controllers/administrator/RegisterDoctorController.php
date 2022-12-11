@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\administrator;
 
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -30,26 +31,45 @@ class RegisterDoctorController extends Controller
         //
     }
 
-    public function registerDoctor(Request $request) 
+    public function registerDoctor(Request $request)
     {
-        $request -> validate([
+        $request->validate([
             'firstname' => 'required',
             'lastname' => 'required',
+            'username' => 'required',
             'phone' => 'required',
             'email' => 'required',
             'psw' => 'required',
+            'confirm_psw' => 'required|same:psw',
+            'dob' => 'required|date|before:today',
+            'specialist' => 'required',
+            'license' => 'required',
         ]);
+
+        $config = [
+            'table' => 'users',
+            'field' => 'user_id',
+            'length' => 8,
+            'prefix' => 'DOC-'
+        ];
+
+        $userid = IdGenerator::generate($config);
 
         // $school->save();
         $query = DB::table('users')->insert([
+            'user_id' => $userid,
             'name' => $request->firstname . ' ' . $request->lastname,
+            'username' => $request->username,
+            'dob' => $request->dob,
             'email' => $request->email,
             'role' => 'doctor',
             'password' => Hash::make($request->psw),
-            'phone_number' => $request->phone,
+            'phone' => $request->phone,
             'specialist' => $request->input('specialist'),
+            'license' => $request->license,
             'gender' => $request->input('gender'),
             'address' => $request->address,
+            'city' => $request->city,
             'created_at' => now(),
         ]);
         return redirect()->route('admin.dashboard');
