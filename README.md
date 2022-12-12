@@ -1,5 +1,5 @@
 
-![Logo](resources/img/JDCDentalMasterBW.png)
+![Logo](public/assets/img/logo-light.svg)
 
 
 # DCMC: Web-Based Booking and Scheduling Management System for JDC Dental Clinic
@@ -13,8 +13,7 @@ By Implementing this system, we hope that the problem in maladministration and d
 ## Acknowledgements
 
 - [Laravel](https://laravel.com/)
-- [Hope UI](https://hopeui.iqonic.design/)
-
+- [Metronic](https://)
 
 
 ## Authors
