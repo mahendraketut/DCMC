@@ -127,7 +127,7 @@ License: For each use you must have a valid license purchased only from above li
 									</div>
 								</div>
                                 <div class="menu-item">
-									<a class="menu-link" href="../../demo1/dist/apps/calendar.html">
+									<a class="menu-link" href="{{route('admin.schedule')}}">
 										<span class="menu-icon">
 											<!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
 											<span class="svg-icon svg-icon-2">
