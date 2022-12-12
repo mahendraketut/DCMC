@@ -36,7 +36,7 @@ class RegisterDoctorController extends Controller
         $request->validate([
             'firstname' => 'required',
             'lastname' => 'required',
-            'username' => 'required',
+            'username' => 'required|unique:users,username',
             'phone' => 'required',
             'email' => 'required',
             'psw' => 'required',
@@ -50,7 +50,7 @@ class RegisterDoctorController extends Controller
             'table' => 'users',
             'field' => 'user_id',
             'length' => 8,
-            'prefix' => 'DOC-'
+            'prefix' => 'DOC-' . date('YmdHis')
         ];
 
         $userid = IdGenerator::generate($config);
