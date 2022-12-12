@@ -41,6 +41,12 @@ Route::middleware(['auth', 'user-access:administrator'])->group(function () {
     Route::get('/admin.dashboard/register_pharmacist', [App\Http\Controllers\administrator\RegisterPharmacistController::class, 'index'])->name('register_pharmacist');
     Route::post('/admin.dashboard/register_doctor', [App\Http\Controllers\administrator\RegisterDoctorController::class, 'registerDoctor']);
     Route::post('/admin.dashboard/register_pharmacist', [App\Http\Controllers\administrator\RegisterPharmacistController::class, 'registerPharmacist']);
+    Route::get('/admin.dashboard/schedule', [App\Http\Controllers\administrator\ScheduleController::class, 'index'])->name('admin.schedule');
+    Route::get('/admin.dashboard/schedule.add', [App\Http\Controllers\administrator\ScheduleController::class, 'create'])->name('admin.schedule.add');
+    Route::get('/admin.dashboard/schedule.edit/{id}', [App\Http\Controllers\administrator\ScheduleController::class, 'edit'])->name('admin.schedule.edit');
+    Route::get('/admin.dashboard/schedule.delete/{id}', [App\Http\Controllers\administrator\ScheduleController::class, 'destroy'])->name('admin.schedule.delete');
+    Route::post('/admin.dashboard/schedule.update', [App\Http\Controllers\administrator\ScheduleController::class, 'update'])->name('admin.schedule.update');
+    Route::post('/admin.dashboard/schedule.add', [App\Http\Controllers\administrator\ScheduleController::class, 'store'])->name('admin.schedule.store');
 });
 Route::middleware(['auth', 'user-access:doctor'])->group(function () {
     Route::get('/doctor.dashboard', [App\Http\Controllers\doctor\DashboardController::class, 'index'])->name('doctor.dashboard');
