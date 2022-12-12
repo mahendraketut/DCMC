@@ -62,4 +62,6 @@ Route::middleware(['auth', 'user-access:patient'])->group(function () {
     Route::get('/patient.profile.edit', [App\Http\Controllers\patient\UpdateProfileController::class, 'edit'])->name('patient.profile.edit');
     Route::put('/patient.profile.update', [App\Http\Controllers\patient\UpdateProfileController::class, 'update'])->name('patient.profile.update');
     Route::delete('/patient.profile.delete', [App\Http\Controllers\patient\UpdateProfileController::class, 'destroy'])->name('patient.profile.delete');
+    Route::get('/patient.view.doctor', [App\Http\Controllers\patient\ViewDoctorController::class, 'index'])->name('patient.view.doctor');
+    Route::get('/patient.view.detail.doctor/{id}', [App\Http\Controllers\patient\ViewDoctorController::class, 'show'])->name('patient.view.detail.doctor');
 });

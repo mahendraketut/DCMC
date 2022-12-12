@@ -70,7 +70,7 @@ class RegisterController extends Controller
             'table' => 'users',
             'field' => 'user_id',
             'length' => 8,
-            'prefix' => 'PAT-'
+            'prefix' => 'PAT-' . date('YmdHis')
         ];
 
         $userid = IdGenerator::generate($config);

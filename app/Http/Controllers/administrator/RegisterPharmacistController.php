@@ -36,6 +36,7 @@ class RegisterPharmacistController extends Controller
         $request->validate([
             'firstname' => 'required',
             'lastname' => 'required',
+            'username' => 'required|unique:users,username',
             'phone' => 'required',
             'email' => 'required',
             'psw' => 'required',
@@ -46,7 +47,7 @@ class RegisterPharmacistController extends Controller
             'table' => 'users',
             'field' => 'user_id',
             'length' => 8,
-            'prefix' => 'PHA-'
+            'prefix' => 'PHA-' . date('YmdHis')
         ];
 
         $userid = IdGenerator::generate($config);

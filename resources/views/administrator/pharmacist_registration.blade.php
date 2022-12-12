@@ -27,7 +27,7 @@
                 <div class="col">
                   <label class="col-lg-12 col-form-label required fw-bold fs-6"> Firstname </label>
                   <div class="col-lg-12 fv-row">
-                    <input type="text" name="firstname" placeholder= "Firstname" class="form-control form-control-lg form-control-solid form-control @error('firstname') is-invalid @enderror" required />
+                    <input type="text" name="firstname" placeholder= "Firstname" class="form-control form-control-lg form-control-solid form-control @error('firstname') is-invalid @enderror" value="{{old("firstname")}}" required />
                     @error('firstname')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -38,7 +38,7 @@
                 <div class="col">
                   <label class="col-lg-12 col-form-label required fw-bold fs-6"> Lastname </label>
                   <div class="col-lg-12 fv-row">
-                    <input type="text" name="lastname" placeholder= "Lastname" class="form-control form-control-lg form-control-solid form-control @error('lastname') is-invalid @enderror" required />
+                    <input type="text" name="lastname" placeholder= "Lastname" class="form-control form-control-lg form-control-solid form-control @error('lastname') is-invalid @enderror" value="{{old("lastname")}}" required />
                     @error('lastname')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -52,7 +52,7 @@
               <div class="row mb-6">
                 <div class="col">
                   <label class="col-lg-12 col-form-label required fw-bold fs-6">Gender</label>
-                  <select id="gender" name="gender" class="form-select form-select-solid form-select-lg fw-bold form-control @error('gender') is-invalid @enderror">
+                  <select id="gender" name="gender" class="form-select form-select-solid form-select-lg fw-bold form-control @error('gender') is-invalid @enderror" value="{{old("gender")}}">
                     <option value="">Select one...</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
@@ -71,7 +71,7 @@
                   <div class="col">
                     <label class="col-lg-12 col-form-label required fw-bold fs-6">Date of Birth</label>
                     <div class="col-lg-12 fv-row">
-                        <input type="date" name="dob" placeholder= "Date of Birth" class="form-control form-control-lg form-control-solid form-control @error('dateofbirth') is-invalid @enderror" required />
+                        <input type="date" name="dob" placeholder= "Date of Birth" class="form-control form-control-lg form-control-solid form-control @error('dateofbirth') is-invalid @enderror" value="{{old("dob")}}" required />
                         @error('dateofbirth')
                           <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -86,7 +86,7 @@
                   <div class="col-md-9">
                     <label class="col-lg-12 col-form-label fw-bold fs-6"> Address </label>
                     <div class="col-lg-12 fv-row">
-                        <input type="text" name="address" placeholder= "Address" class="form-control form-control-lg form-control-solid form-control @error('address') is-invalid @enderror" required />
+                        <input type="text" name="address" placeholder= "Address" class="form-control form-control-lg form-control-solid form-control @error('address') is-invalid @enderror" value="{{old("address")}}" required />
                         @error('address')
                           <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -97,7 +97,7 @@
                   <div class="col-md-3">
                     <label class="col-lg-12 col-form-label fw-bold fs-6"> City </label>
                     <div class="col-lg-12 fv-row">
-                        <input type="text" name="city" placeholder= "City" class="form-control form-control-lg form-control-solid form-control @error('city') is-invalid @enderror" required />
+                        <input type="text" name="city" placeholder= "City" class="form-control form-control-lg form-control-solid form-control @error('city') is-invalid @enderror" value="{{old("city")}}" required />
                         @error('city')
                           <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -112,7 +112,7 @@
                 <div class="col">
                   <label class="col-lg-12 col-form-label required fw-bold fs-6"> License</label>
                   <div class="col-lg-12 fv-row">
-                    <input type="text" name="license" placeholder= "License Number" class="form-control form-control-lg form-control-solid form-control @error('license') is-invalid @enderror" required />
+                    <input type="text" name="license" placeholder= "License Number" class="form-control form-control-lg form-control-solid form-control @error('license') is-invalid @enderror" value="{{old("license")}}" required />
                     @error('license')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -123,7 +123,7 @@
                 <div class="col">
                   <label class="col-lg-12 col-form-label required fw-bold fs-6"> Phone </label>
                   <div class="col-lg-12 fv-row">
-                    <input type="text" name="phone" placeholder= "Phone" class="form-control form-control-lg form-control-solid form-control @error('phone') is-invalid @enderror" required />
+                    <input type="text" name="phone" placeholder= "Phone" class="form-control form-control-lg form-control-solid form-control @error('phone') is-invalid @enderror" value="{{old("phone")}}" required />
                     @error('phone')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -138,7 +138,7 @@
                   <div class="col-md-6">
                     <label class="col-lg-12 col-form-label required fw-bold fs-6"> Username </label>
                     <div class="col-lg-12 fv-row">
-                        <input type="text" name="username" placeholder= "Username" class="form-control form-control-lg form-control-solid form-control @error('username') is-invalid @enderror" required />
+                        <input type="text" name="username" placeholder= "Username" class="form-control form-control-lg form-control-solid form-control @error('username') is-invalid @enderror" value="{{old("username")}}" required />
                         @error('username')
                           <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -149,7 +149,7 @@
                   <div class="col-md-6">
                     <label class="col-lg-12 col-form-label required fw-bold fs-6"> Email </label>
                     <div class="col-lg-12 fv-row">
-                        <input type="email" name="email" placeholder= "Email" class="form-control form-control-lg form-control-solid form-control @error('email') is-invalid @enderror" required />
+                        <input type="email" name="email" placeholder= "Email" class="form-control form-control-lg form-control-solid form-control @error('email') is-invalid @enderror" value="{{old("email")}}" required />
                         @error('email')
                           <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -168,7 +168,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-12 fv-row">
-                        <input type="password" class="form-control form-control-lg form-control-solid form-control @error('password') is-invalid @enderror" name="psw" placeholder="Password" />
+                        <input type="password" class="form-control form-control-lg form-control-solid form-control @error('password') is-invalid @enderror" name="psw" placeholder="Password" value="{{old("psw")}}"/>
                         @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -185,7 +185,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-12 fv-row">
-                        <input type="password" class="form-control form-control-lg form-control-solid form-control @error('confirm_psw') is-invalid @enderror" name="confirm_psw" placeholder="Confirm Password" />
+                        <input type="password" class="form-control form-control-lg form-control-solid form-control @error('confirm_psw') is-invalid @enderror" name="confirm_psw" placeholder="Confirm Password" value="{{old("confirm_psw")}}"/>
                         @error('confirm_psw')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

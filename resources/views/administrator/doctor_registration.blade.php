@@ -31,7 +31,7 @@
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-12 fv-row">
-                            <input type="text" class="form-control form-control-lg form-control-solid form-control @error('firstname') is-invalid @enderror" name="firstname" placeholder="First Name" />
+                            <input type="text" class="form-control form-control-lg form-control-solid form-control @error('firstname') is-invalid @enderror" name="firstname" placeholder="First Name" value="{{old("firstname")}}" />
                             @error('firstname')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -48,7 +48,7 @@
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-12 fv-row">
-                            <input type="text" class="form-control form-control-lg form-control-solid form-control @error('lastname') is-invalid @enderror" name="lastname" placeholder="Last Name" />
+                            <input type="text" class="form-control form-control-lg form-control-solid form-control @error('lastname') is-invalid @enderror" name="lastname" placeholder="Last Name" value="{{old("lastname")}}"/>
                             @error('lastname')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -68,7 +68,7 @@
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col fv-row">
-                            <input type="date" class="form-control form-control-lg form-control-solid form-control @error('dateofbirth') is-invalid @enderror" name="dob" placeholder="Date of Birth" />
+                            <input type="date" class="form-control form-control-lg form-control-solid form-control @error('dateofbirth') is-invalid @enderror" name="dob" placeholder="Date of Birth" value="{{old("dob")}}"/>
                             @error('dateofbirth')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -85,7 +85,7 @@
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col fv-row">
-                            <select id="gender" name="gender" class="form-select form-select-solid form-select-lg fw-bold form-control @error('gender') is-invalid @enderror">
+                            <select id="gender" name="gender" class="form-select form-select-solid form-select-lg fw-bold form-control @error('gender') is-invalid @enderror" value="{{old("gender")}}">
                                 <option value="">Select one...</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
@@ -111,7 +111,7 @@
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col fv-row">
-                            <input type="text" class="form-control form-control-lg form-control-solid form-control @error('address') is-invalid @enderror" name="address" placeholder="Address" />
+                            <input type="text" class="form-control form-control-lg form-control-solid form-control @error('address') is-invalid @enderror" name="address" placeholder="Address" value="{{old("address")}}"/>
                             @error('address')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -128,7 +128,7 @@
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col fv-row">
-                            <input type="text" class="form-control form-control-lg form-control-solid form-control @error('city') is-invalid @enderror" name="city" placeholder="City" />
+                            <input type="text" class="form-control form-control-lg form-control-solid form-control @error('city') is-invalid @enderror" name="city" placeholder="City" value="{{old("city")}}"/>
                             @error('city')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -149,7 +149,7 @@
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col fv-row">
-                            <select id="specialist" name="specialist" class="form-select form-select-solid form-select-lg fw-bold form-control @error('specialist') is-invalid @enderror">
+                            <select id="specialist" name="specialist" class="form-select form-select-solid form-select-lg fw-bold form-control @error('specialist') is-invalid @enderror" value="{{old("specialist")}}">
                                 <option value="Mouth Surgery">Mouth Surgery</option>
                                 <option value="Tooth Conservation">Tooth Conservation</option>
                                 <option value="Oral Disease">Oral Disease</option>
@@ -174,7 +174,7 @@
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col fv-row">
-                            <input type="text" class="form-control form-control-lg form-control-solid form-control @error('license') is-invalid @enderror" name="license" placeholder="License" />
+                            <input type="text" class="form-control form-control-lg form-control-solid form-control @error('license') is-invalid @enderror" name="license" placeholder="License" value="{{old("license")}}"/>
                             @error('license')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -195,7 +195,7 @@
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-12 fv-row">
-                            <input type="text" class="form-control form-control-lg form-control-solid form-control @error('username') is-invalid @enderror" name="username" placeholder="Username" />
+                            <input type="text" class="form-control form-control-lg form-control-solid form-control @error('username') is-invalid @enderror" name="username" placeholder="Username" value="{{old("username")}}"/>
                             @error('username')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -214,7 +214,7 @@
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-12 fv-row">
-                            <input type="email" class="form-control form-control-lg form-control-solid form-control @error('email') is-invalid @enderror" name="email" placeholder="Email" />
+                            <input type="email" class="form-control form-control-lg form-control-solid form-control @error('email') is-invalid @enderror" name="email" placeholder="Email" value="{{old("email")}}"/>
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -229,7 +229,7 @@
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-12 fv-row">
-                            <input type="text" class="form-control form-control-lg form-control-solid form-control @error('phone') is-invalid @enderror" name="phone" placeholder="Phone Number" />
+                            <input type="text" class="form-control form-control-lg form-control-solid form-control @error('phone') is-invalid @enderror" name="phone" placeholder="Phone Number" value="{{old("phone")}}"/>
                             @error('phone')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -249,7 +249,7 @@
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-12 fv-row">
-                            <input type="password" class="form-control form-control-lg form-control-solid form-control @error('password') is-invalid @enderror" name="psw" placeholder="Password" />
+                            <input type="password" class="form-control form-control-lg form-control-solid form-control @error('password') is-invalid @enderror" name="psw" placeholder="Password" value="{{old("psw")}}"/>
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -266,7 +266,7 @@
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-12 fv-row">
-                            <input type="password" class="form-control form-control-lg form-control-solid form-control @error('confirm_psw') is-invalid @enderror" name="confirm_psw" placeholder="Confirm Password" />
+                            <input type="password" class="form-control form-control-lg form-control-solid form-control @error('confirm_psw') is-invalid @enderror" name="confirm_psw" placeholder="Confirm Password" value="{{old("confirm_psw")}}"/>
                             @error('confirm_psw')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

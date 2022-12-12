@@ -20,7 +20,7 @@ License: For each use you must have a valid license purchased only from above li
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta property="og:locale" content="en_US" />
 		<meta property="og:type" content="article" />
-		 <link rel="shortcut icon" href="assets/img/icon.svg" />
+        <link rel="shortcut icon" href="assets/img/icon.svg" />
         <!--begin::icons logo from img-->
 		<!--begin::Fonts-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />

@@ -91,7 +91,7 @@ License: For each use you must have a valid license purchased only from above li
 									</div>
 								</div>
                                 <div class="menu-item">
-									<a class="menu-link" href="#">
+									<a class="menu-link" href="{{route('patient.view.doctor')}}">
 										<span class="menu-icon">
 											<!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
 											<span class="svg-icon svg-icon-2">
