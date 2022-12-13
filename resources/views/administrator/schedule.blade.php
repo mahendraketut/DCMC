@@ -7,7 +7,6 @@
 @endsection
 
 @section('content')
-{{-- @include('administrator.schedule-add') --}}
 <!--begin::Col-->
 <div class="col-xl-12">
     <!--begin::Tables Widget 9-->
