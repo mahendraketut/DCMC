@@ -54,6 +54,12 @@ Route::middleware(['auth', 'user-access:doctor'])->group(function () {
     Route::get('/doctor.profile.edit', [App\Http\Controllers\doctor\UpdateProfileController::class, 'edit'])->name('doctor.profile.edit');
     Route::put('/doctor.profile.update', [App\Http\Controllers\doctor\UpdateProfileController::class, 'update'])->name('doctor.profile.update');
     Route::delete('/doctor.profile.delete', [App\Http\Controllers\doctor\UpdateProfileController::class, 'destroy'])->name('doctor.profile.delete');
+    Route::get('/doctor.dashboard/schedule', [App\Http\Controllers\doctor\ScheduleController::class, 'index'])->name('doctor.schedule');
+    Route::get('/doctor.dashboard/schedule.add', [App\Http\Controllers\doctor\ScheduleController::class, 'create'])->name('doctor.schedule.add');
+    Route::get('/doctor.dashboard/schedule.edit/{id}', [App\Http\Controllers\doctor\ScheduleController::class, 'edit'])->name('doctor.schedule.edit');
+    Route::get('/doctor.dashboard/schedule.delete/{id}', [App\Http\Controllers\doctor\ScheduleController::class, 'destroy'])->name('doctor.schedule.delete');
+    Route::post('/doctor.dashboard/schedule.update', [App\Http\Controllers\doctor\ScheduleController::class, 'update'])->name('doctor.schedule.update');
+    Route::post('/doctor.dashboard/schedule.add', [App\Http\Controllers\doctor\ScheduleController::class, 'store'])->name('doctor.schedule.store');
 });
 Route::middleware(['auth', 'user-access:pharmacist'])->group(function () {
     Route::get('/pharmacist.dashboard', [App\Http\Controllers\pharmacist\DashboardController::class, 'index'])->name('pharmacist.dashboard');
