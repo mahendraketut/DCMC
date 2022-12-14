@@ -7,6 +7,7 @@ use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 
 class ScheduleController extends Controller
 {
@@ -19,7 +20,8 @@ class ScheduleController extends Controller
     {
         //
         $schedule = Schedule::get();
-        return view('administrator.schedule', compact('schedule'));
+        $doctor = User::where('role', '=', 'doctor')->get();
+        return view('administrator.schedule', compact('schedule', 'doctor'));
     }
 
     /**
@@ -46,8 +48,9 @@ class ScheduleController extends Controller
         $request->validate([
             'doctor_name' => 'required',
             'day' => 'required',
-            'start_time' => 'required',
-            'end_time' => 'required',
+            'start_time' => 'unique:schedule,start_time,NULL,id,day,' . $request->day,
+            'end_time' => 'unique:schedule,end_time,NULL,id,day,' . $request->day,
+
         ]);
 
         $query = DB::table('schedule')->insert([
@@ -55,8 +58,13 @@ class ScheduleController extends Controller
             'day' => $request->day,
             'start_time' => $request->start_time,
             'end_time' => $request->end_time,
+            'created_at' => Carbon::now(),
         ]);
-        return redirect()->route('admin.schedule')->with('success', 'Schedule Added Successfully');
+        // return redirect()->route('admin.schedule')->with('success', 'Schedule Added Successfully');
+        //redirect ro schedule page if success and stay on same page if not
+        if ($query) {
+            return redirect()->route('admin.schedule')->with('success', 'Schedule Added Successfully');
+        }
     }
 
     /**
@@ -103,7 +111,7 @@ class ScheduleController extends Controller
 
         $id = $request->id;
 
-        Schedule::where('id','=',$id)->update([
+        Schedule::where('id', '=', $id)->update([
             'doctor_name' => $request->doctor_name,
             'day' => $request->day,
             'start_time' => $request->start_time,
@@ -122,7 +130,7 @@ class ScheduleController extends Controller
     public function destroy($id)
     {
         //
-        Schedule::where('id','=',$id)->delete();
+        Schedule::where('id', '=', $id)->delete();
         return redirect()->back()->with('success', 'Schedule Deleted Successfully');
     }
 }

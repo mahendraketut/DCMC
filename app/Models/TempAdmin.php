@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class TempAdmin extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -18,21 +18,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'user_id',
+        'request_id',
         'name',
-        'username',
         'email',
-        'gender',
-        'dob',
-        'phone',
-        'address',
-        'city',
         'password',
-        'role',
-        'google_id',
-        'profile_pic',
-        'specialist',
-        'license',
+        'status',
+        'verified_at',
     ];
 
     /**
