@@ -19,6 +19,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
+//register admin route
+Route::get('/admin.register', [App\Http\Controllers\Auth\RegisterAdminController::class, 'index'])->name('admin.register.page');
+Route::post('/admin.register', [App\Http\Controllers\Auth\RegisterAdminController::class, 'store'])->name('admin.register.post');
+
+
 //google login route
 Route::get('auth/google', [App\Http\Controllers\GoogleController::class, 'redirectToGoogle'])->name('google.login');
 Route::get('auth/google/callback', [App\Http\Controllers\GoogleController::class, 'handleGoogleCallback'])->name('google.callback');
@@ -47,6 +52,9 @@ Route::middleware(['auth', 'user-access:administrator'])->group(function () {
     Route::get('/admin.dashboard/schedule.delete/{id}', [App\Http\Controllers\administrator\ScheduleController::class, 'destroy'])->name('admin.schedule.delete');
     Route::post('/admin.dashboard/schedule.update', [App\Http\Controllers\administrator\ScheduleController::class, 'update'])->name('admin.schedule.update');
     Route::post('/admin.dashboard/schedule.add', [App\Http\Controllers\administrator\ScheduleController::class, 'store'])->name('admin.schedule.store');
+    Route::get('/admin.dashboard/proposed-admin', [App\Http\Controllers\administrator\ProposedAdminAccountController::class, 'index'])->name('admin.proposed');
+    Route::get('/admin.dashboard/proposed-admin.approve/{id}', [App\Http\Controllers\administrator\ProposedAdminAccountController::class, 'approve'])->name('admin.proposed.approve');
+    Route::get('/admin.dashboard/proposed-admin.reject/{id}', [App\Http\Controllers\administrator\ProposedAdminAccountController::class, 'reject'])->name('admin.proposed.reject');
 });
 Route::middleware(['auth', 'user-access:doctor'])->group(function () {
     Route::get('/doctor.dashboard', [App\Http\Controllers\doctor\DashboardController::class, 'index'])->name('doctor.dashboard');

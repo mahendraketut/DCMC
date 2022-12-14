@@ -150,7 +150,8 @@
                         <!--begin::Heading-->
                         <div class="mb-10 text-center">
                             <!--begin::Title-->
-                            <h1 class="text-dark mb-3">Create an Account</h1>
+                            <h1 class="text-dark mb-5">Create an Account</h1>
+                            <p class="text-gray-400 fw-bold fs-4">You want to make an administrator account? <a href="{{route('admin.register.page')}}">Register here</a></p>
                             <!--end::Title-->
                             <!--begin::Link-->
                             <div class="text-gray-400 fw-bold fs-4">Already have an account?
@@ -161,6 +162,8 @@
                         <!--begin::Action-->
                         <a type="button" class="btn btn-light-primary fw-bolder w-100 mb-10" href="{{route('google.login')}}">
                         <img alt="Logo" src="admin/assets/media/svg/brand-logos/google-icon.svg" class="h-20px me-3" />Sign in with Google</a>
+
+
                         <!--end::Action-->
                         <!--begin::Separator-->
                         <div class="d-flex align-items-center mb-10">
@@ -248,9 +251,8 @@
             <div class="d-flex flex-center flex-wrap fs-6 p-5 pb-0">
                 <!--begin::Links-->
                 <div class="d-flex flex-center fw-bold fs-6">
-                    <a href="https://keenthemes.com" class="text-muted text-hover-primary px-2" target="_blank">About</a>
-                    <a href="https://devs.keenthemes.com" class="text-muted text-hover-primary px-2" target="_blank">Support</a>
-                    <a href="https://1.envato.market/EA4JP" class="text-muted text-hover-primary px-2" target="_blank">Purchase</a>
+                    <a href="#" class="text-muted text-hover-primary px-2" target="_blank">About</a>
+                    <a href="#" class="text-muted text-hover-primary px-2" target="_blank">Support</a>
                 </div>
                 <!--end::Links-->
             </div>
