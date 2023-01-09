@@ -33,7 +33,7 @@ class ProposedAdminAccountController extends Controller
             'password' => TempAdmin::where('id', $id)->first()->password,
             'role' => 'administrator'
         ]);
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Account has been approved');
     }
 
     public function reject($id)

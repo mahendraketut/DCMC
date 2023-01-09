@@ -7,7 +7,7 @@
     <!--begin::Authentication - Sign-up -->
     <div class="d-flex flex-column flex-lg-row flex-column-fluid">
         <!--begin::Aside-->
-        <div class="d-flex flex-column flex-lg-row-auto w-xl-600    px positon-xl-relative" style="background: rgb(0,17,148); background: linear-gradient(28deg, rgba(0,17,148,1) 0%, rgba(28,178,194,1) 100%);">
+        <div class="d-flex flex-column flex-lg-row-auto w-xl-600px positon-xl-relative" style="background: rgb(0,17,148); background: linear-gradient(28deg, rgba(0,17,148,1) 0%, rgba(28,178,194,1) 100%);">
             <!--begin::Wrapper-->
             <div class="d-flex flex-column position-xl-fixed top-0 bottom-0 w-xl-600px scroll-y">
                 <!--begin::Content-->
@@ -113,6 +113,11 @@
                                 <input id="password-confirm" type="password" class="form-control form-control-lg form-control-solid form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
+                        @error('password-confirmation')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
 
                         <div class="row mb-0">
                             <div class="col">

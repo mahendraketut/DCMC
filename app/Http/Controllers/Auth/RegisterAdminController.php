@@ -41,7 +41,8 @@ class RegisterAdminController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:5|max:12'
+            'password' => 'required|min:5|max:12',
+            // 'confirmed_password' => 'required|same:password'
         ]);
 
         $config = [
@@ -60,7 +61,7 @@ class RegisterAdminController extends Controller
             'created_at' => now()
         ]);
         if ($query) {
-            return back()->with('success', 'We will verify your request in 24 hours!');
+            return back()->with('success', 'Your Proposed administrator account succesfully uploaded, We will verify your request in 24 hours! Please try to login after 24 hours.');
         } else {
             return back()->with('fail', 'Something went wrong');
         }

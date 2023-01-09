@@ -40,7 +40,7 @@
                     <!--begin::Table body-->
                     <tbody>
                         @if ($tempAdmins->count() == 0)
-                            <th class="ps-4 min-w-20px text-center" colspan="6">No Schedule Data</th>
+                            <th class="ps-4 min-w-20px text-center" colspan="6">No Proposed Admin Account Data</th>
                         @else
                             @foreach ($tempAdmins as $admin)
                             <tr>

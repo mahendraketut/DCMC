@@ -72,7 +72,7 @@ class RegisterDoctorController extends Controller
             'city' => $request->city,
             'created_at' => now(),
         ]);
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('admin.dashboard')->with('success', 'Doctor added successfully');
         // if($query) {
         //     return back()->with('success', 'School added successfully');
         // } else {

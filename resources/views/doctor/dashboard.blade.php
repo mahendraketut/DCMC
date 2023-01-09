@@ -12,7 +12,7 @@
         <div class="card card-xl-stretch">
             <!--begin::Header-->
             <div class="card-header border-0 bg-danger py-5">
-                <h3 class="card-title fw-bolder text-white">Sales Statistics</h3>
+                <h3 class="card-title fw-bolder text-white"></h3>
                 <div class="card-toolbar">
                     <!--begin::Menu-->
                     <button type="button" class="btn btn-sm btn-icon btn-color-white btn-active-white btn-active-color- border-0 me-n3" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">

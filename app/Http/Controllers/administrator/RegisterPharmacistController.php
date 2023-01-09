@@ -68,7 +68,7 @@ class RegisterPharmacistController extends Controller
             'city' => $request->city,
             'created_at' => now(),
         ]);
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('admin.dashboard')->with('success', 'Pharmacist registered successfully!');
     }
 
     /**
