@@ -353,6 +353,7 @@ License: For each use you must have a valid license purchased only from above li
 		</div>
 		<!--end::Scrolltop-->
 		<!--begin::Javascript-->
+        @include('sweetalert::alert')
         @yield('script')
 		<script>var hostUrl = "{{asset('admin/assets/')}}";</script>
 		<!--begin::Global Javascript Bundle(used by all pages)-->
