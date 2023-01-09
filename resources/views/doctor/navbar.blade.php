@@ -328,6 +328,8 @@ License: For each use you must have a valid license purchased only from above li
 		<script src="{{asset('admin/assets/js/custom/utilities/modals/users-search.js')}}"></script>
 		<!--end::Page Custom Javascript-->
 		<!--end::Javascript-->
+        @include('sweetalert::alert')
+
 	</body>
 	<!--end::Body-->
 </html>
