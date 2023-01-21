@@ -54,6 +54,7 @@ class ScheduleController extends Controller
         ]);
 
         $query = DB::table('schedule')->insert([
+            'doctor_id' => User::where('name', '=', $request->doctor_name)->first()->id,
             'doctor_name' => $request->doctor_name,
             'day' => $request->day,
             'start_time' => $request->start_time,
@@ -64,6 +65,8 @@ class ScheduleController extends Controller
         //redirect ro schedule page if success and stay on same page if not
         if ($query) {
             return redirect()->route('admin.schedule')->with('success', 'Schedule Added Successfully');
+        } else {
+            return redirect()->route('admin.schedule')->with('error', 'Schedule Added Failed');
         }
     }
 
