@@ -23,7 +23,18 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                // return redirect(RouteServiceProvider::HOME);
+                if (Auth::user()->role == 'administrator') {
+                    return redirect(RouteServiceProvider::ADMIN);
+                } elseif (Auth::user()->role == 'doctor') {
+                    return redirect(RouteServiceProvider::DOCTOR);
+                } elseif (Auth::user()->role == 'patient') {
+                    return redirect(RouteServiceProvider::PATIENT);
+                } elseif (Auth::user()->role == 'pharmacist') {
+                    return redirect(RouteServiceProvider::PHARMACIST);
+                } else {
+                    return redirect(RouteServiceProvider::LOGIN);
+                }
             }
         }
 

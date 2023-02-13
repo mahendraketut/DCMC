@@ -60,7 +60,7 @@ class RegisterPharmacistController extends Controller
             'email' => $request->email,
             'dob' => $request->dob,
             'role' => 'pharmacist',
-            'password' => Hash::make($request->psw),
+            'password' => bcrypt($request->psw),
             'phone' => $request->phone,
             'license' => $request->license,
             'gender' => $request->input('gender'),

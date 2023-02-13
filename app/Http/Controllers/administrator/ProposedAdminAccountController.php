@@ -12,7 +12,7 @@ class ProposedAdminAccountController extends Controller
 {
     public function index()
     {
-        $tempAdmins = TempAdmin::where('status', 'pending')->get();
+        $tempAdmins = TempAdmin::orderBy('created_at', 'desc')->get();
         return view('administrator.proposed-admin', compact('tempAdmins'));
     }
 
@@ -39,6 +39,24 @@ class ProposedAdminAccountController extends Controller
     public function reject($id)
     {
         TempAdmin::where('id', $id)->update(['status' => 'rejected']);
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Account rejected');
+    }
+
+    public function autoDelete()
+    {
+        $tempAdmins = TempAdmin::where('status', 'rejected')->get();
+        foreach ($tempAdmins as $tempAdmin) {
+            $date = $tempAdmin->updated_at;
+            $date = strtotime($date);
+            $date = date('Y-m-d', $date);
+            $date = strtotime($date);
+            $date = strtotime("+1 month", $date);
+            $date = date('Y-m-d', $date);
+            $date = strtotime($date);
+            $today = strtotime(date('Y-m-d'));
+            if ($today > $date) {
+                TempAdmin::where('id', $tempAdmin->id)->delete();
+            }
+        }
     }
 }

@@ -44,6 +44,7 @@ class RegisterDoctorController extends Controller
             'dob' => 'required|date|before:today',
             'specialist' => 'required',
             'license' => 'required',
+
         ]);
 
         $config = [
@@ -63,7 +64,7 @@ class RegisterDoctorController extends Controller
             'dob' => $request->dob,
             'email' => $request->email,
             'role' => 'doctor',
-            'password' => Hash::make($request->psw),
+            'password' => bcrypt($request->psw),
             'phone' => $request->phone,
             'specialist' => $request->input('specialist'),
             'license' => $request->license,
@@ -73,7 +74,7 @@ class RegisterDoctorController extends Controller
             'created_at' => now(),
         ]);
         return redirect()->route('admin.dashboard')->with('success', 'Doctor added successfully');
-        // if($query) {
+        // if ($query) {
         //     return back()->with('success', 'School added successfully');
         // } else {
         //     return back()->with('fail', 'Something went wrong');

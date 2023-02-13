@@ -101,7 +101,7 @@
                 <form class="form" id="modal_add_schedule_form" action="{{route('doctor.schedule.store')}}" method="POST">
                     @csrf
                     <!--begin::Input group-->
-                    <!--begin::Label-->
+                    {{-- <!--begin::Label-->
                     <div class="fv-row mb-10">
                         <!--begin::Label-->
                         <label class="col col-form-label required fw-bold fs-6">Doctor Name</label>
@@ -121,7 +121,7 @@
                             @enderror
                         </div>
                         <!--end::Col-->
-                    </div>
+                    </div> --}}
                     <!--end::Input group-->
                     <!--end::Input group-->
                     <!--begin::Input group-->
