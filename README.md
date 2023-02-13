@@ -14,6 +14,7 @@ By Implementing this system, we hope that the problem in maladministration and d
 
 - [Laravel](https://laravel.com/)
 - [Metronic](https://)
+- [Datatable](https://yajrabox.com/docs/laravel-datatables/10.0/)
 
 
 ## Authors
