@@ -1,5 +1,5 @@
 @extends('administrator.navbar')
-@section('title', 'Dashboard')
+@section('title', 'Doctor Schedule')
 @section('css')
 <!--begin::Page Vendors Styles(used by this page)-->
 <link href="{{ asset('admin/assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
@@ -60,7 +60,7 @@
                                 <td class="ps-4 min-w-50px text-center">{{$schedule->start_time}}</td>
                                 <td class="ps-4 min-w-50px text-center">{{$schedule->end_time}}</td>
                                 <td class="ps-4 min-w-20px text-center">
-                                    <a href="{{url('/admin.dashboard/schedule.edit/'.$schedule->id)}}" class="btn btn-primary">Edit</a> |
+                                    <a href="{{url('/admin.dashboard/schedule.edit/'.$schedule->id)}}" class="btn btn-primary">Edit</a>
                                     <a href="{{url('/admin.dashboard/schedule.delete/'.$schedule->id)}}" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>

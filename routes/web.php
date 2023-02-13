@@ -55,6 +55,10 @@ Route::middleware(['auth', 'user-access:administrator'])->group(function () {
     Route::get('/admin.dashboard/proposed-admin', [App\Http\Controllers\administrator\ProposedAdminAccountController::class, 'index'])->name('admin.proposed');
     Route::get('/admin.dashboard/proposed-admin.approve/{id}', [App\Http\Controllers\administrator\ProposedAdminAccountController::class, 'approve'])->name('admin.proposed.approve');
     Route::get('/admin.dashboard/proposed-admin.reject/{id}', [App\Http\Controllers\administrator\ProposedAdminAccountController::class, 'reject'])->name('admin.proposed.reject');
+    Route::get('/admin.viewalladmin', [App\Http\Controllers\administrator\viewAllAdmin::class, 'index'])->name('admin.ViewAlladministrator');
+    Route::get('/admin.viewalldoctor', [App\Http\Controllers\administrator\viewAllDoctor::class, 'index'])->name('admin.ViewAllDoctor');
+    Route::get('/admin.viewallpharmacist', [App\Http\Controllers\administrator\viewAllPharmacist::class, 'index'])->name('admin.ViewAllPharmacist');
+    Route::get('/admin.viewallpatient', [App\Http\Controllers\administrator\viewAllPatient::class, 'index'])->name('admin.ViewAllPatient');
 });
 Route::middleware(['auth', 'user-access:doctor'])->group(function () {
     Route::get('/doctor.dashboard', [App\Http\Controllers\doctor\DashboardController::class, 'index'])->name('doctor.dashboard');

@@ -39,7 +39,7 @@
                         <div class="col fv-row">
                             <select id="doctor_name" name="doctor_name" class="form-select form-select-solid form-select-lg fw-bold form-control @error('doctor_name') is-invalid @enderror">
                                 @foreach ($doctor as $doctor)
-                                <option value="{{$doctor->name}}">{{$doctor->name}}</option>
+                                <option value="{{$doctor->name}}" {{ $data->doctor_name == $doctor->name ? 'selected' : '' }}>{{$doctor->name}}</option>
                                 @endforeach
                             </select>
                             @error('doctor_name')
@@ -56,13 +56,13 @@
                         <!--begin::Col-->
                         <div class="col fv-row">
                             <select id="day" name="day" class="form-select form-select-solid form-select-lg fw-bold form-control @error('day') is-invalid @enderror">
-                                <option value="Sunday">Sunday</option>
-                                <option value="Monday">Monday</option>
-                                <option value="Tuesday">Tuesday</option>
-                                <option value="Wednesday">Wednesday</option>
-                                <option value="Thursday">Thursday</option>
-                                <option value="Friday">Friday</option>
-                                <option value="Saturday">Saturday</option>
+                                <option value="Sunday" {{ $data->day == 'Sunday' ? 'selected' : '' }}>Sunday</option>
+                                <option value="Monday" {{ $data->day == 'Monday' ? 'selected' : '' }}>Monday</option>
+                                <option value="Tuesday" {{ $data->day == 'Tuesday' ? 'selected' : '' }}>Tuesday</option>
+                                <option value="Wednesday" {{ $data->day == 'Wednesday' ? 'selected' : '' }}>Wednesday</option>
+                                <option value="Thursday" {{ $data->day == 'Thursday' ? 'selected' : '' }}>Thursday</option>
+                                <option value="Friday" {{ $data->day == 'Friday' ? 'selected' : '' }}>Friday</option>
+                                <option value="Saturday" {{ $data->day == 'Saturday' ? 'selected' : '' }}>Saturday</option>
                             </select>
                             @error('day')
                             <span class="invalid-feedback" role="alert">
