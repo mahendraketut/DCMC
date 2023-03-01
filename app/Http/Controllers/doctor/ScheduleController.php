@@ -4,7 +4,9 @@ namespace App\Http\Controllers\doctor;
 
 use App\Models\User;
 use App\Models\Schedule;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
@@ -19,7 +21,7 @@ class ScheduleController extends Controller
     {
         //
         $doctor = User::where('role', '=', 'doctor')->get();
-        $schedule = Schedule::get();
+        $schedule = Schedule::where('doctor_id', '=', Auth::user()->id)->get();
         return view('doctor.schedule', compact('schedule', 'doctor'));
     }
 
@@ -45,17 +47,19 @@ class ScheduleController extends Controller
     {
         //
         $request->validate([
-            'doctor_name' => 'required',
+            // 'doctor_name' => 'required',
             'day' => 'required',
             'start_time' => 'required',
             'end_time' => 'required',
         ]);
 
         $query = DB::table('schedule')->insert([
-            'doctor_name' => $request->doctor_name,
+            'doctor_id' => Auth::user()->id,
+            'doctor_name' => Auth::user()->name,
             'day' => $request->day,
             'start_time' => $request->start_time,
             'end_time' => $request->end_time,
+            'created_at' => Carbon::now('+08:00'),
         ]);
         return redirect()->route('doctor.schedule')->with('success', 'Schedule Added Successfully');
     }
@@ -104,7 +108,7 @@ class ScheduleController extends Controller
 
         $id = $request->id;
 
-        Schedule::where('id','=',$id)->update([
+        Schedule::where('id', '=', $id)->update([
             'doctor_name' => $request->doctor_name,
             'day' => $request->day,
             'start_time' => $request->start_time,
@@ -123,7 +127,7 @@ class ScheduleController extends Controller
     public function destroy($id)
     {
         //
-        Schedule::where('id','=',$id)->delete();
+        Schedule::where('id', '=', $id)->delete();
         return redirect()->back()->with('success', 'Schedule Deleted Successfully');
     }
 }

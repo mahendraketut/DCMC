@@ -56,7 +56,7 @@ class RegisterAdminController extends Controller
             'request_id' => IdGenerator::generate($config),
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => bcrypt($request->password),
             'status' => 'pending',
             'created_at' => now()
         ]);

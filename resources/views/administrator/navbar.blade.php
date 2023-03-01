@@ -142,6 +142,56 @@ License: For each use you must have a valid license purchased only from above li
 										<span class="menu-title">Proposed Admin Account</span>
 									</a>
 								</div>
+                                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+									<span class="menu-link">
+										<span class="menu-icon">
+											<!--begin::Svg Icon | path: icons/duotune/communication/com013.svg-->
+											<span class="svg-icon svg-icon-2">
+												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+													<path d="M6.28548 15.0861C7.34369 13.1814 9.35142 12 11.5304 12H12.4696C14.6486 12 16.6563 13.1814 17.7145 15.0861L19.3493 18.0287C20.0899 19.3618 19.1259 21 17.601 21H6.39903C4.87406 21 3.91012 19.3618 4.65071 18.0287L6.28548 15.0861Z" fill="currentColor" />
+													<rect opacity="0.3" x="8" y="3" width="8" height="8" rx="4" fill="currentColor" />
+												</svg>
+											</span>
+											<!--end::Svg Icon-->
+										</span>
+										<span class="menu-title">View All Users Lists</span>
+										<span class="menu-arrow"></span>
+									</span>
+									<div class="menu-sub menu-sub-accordion menu-active-bg">
+                                        <div class="menu-item">
+											<a class="menu-link" href="{{ Route('admin.ViewAlladministrator') }}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">View All Administrator Lists</span>
+											</a>
+										</div>
+										<div class="menu-item">
+											<a class="menu-link" href="{{ Route('admin.ViewAllDoctor') }}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">View All Doctor Lists</span>
+											</a>
+										</div>
+										<div class="menu-item">
+											<a class="menu-link" href="{{ Route('admin.ViewAllPharmacist') }}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">View All Pharmacist Lists</span>
+											</a>
+										</div>
+                                        <div class="menu-item">
+											<a class="menu-link" href="{{ Route('admin.ViewAllPatient') }}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">View All Patient Lists</span>
+											</a>
+										</div>
+									</div>
+								</div>
                                 <div class="menu-item">
 									<div class="menu-content pt-8 pb-2">
 										<span class="menu-section text-muted text-uppercase fs-8 ls-1">SCHEDULE</span>
@@ -290,6 +340,8 @@ License: For each use you must have a valid license purchased only from above li
 									<!--begin::Description-->
 									<span class="text-muted fs-7 fw-bold">Administrator</span>
 									<!--end::Description--></h1>
+                                    <!--update date and time-->
+
 									<!--end::Title-->
 								</div>
 								<!--end::Page title-->
@@ -316,7 +368,13 @@ License: For each use you must have a valid license purchased only from above li
 						<div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
 							<!--begin::Copyright-->
 							<div class="text-dark order-2 order-md-1">
-								<span class="text-muted fw-bold me-1">2022©</span>
+                                <!--auto update year-->
+                                <script type="text/javascript">
+                                    var d = new Date();
+                                    var n = d.getFullYear();
+                                    document.write(n);
+                                </script>
+								<span class="text-muted fw-bold me-1">©</span>
 								<a href="#" target="_blank" class="text-gray-800 text-hover-primary">DCMC</a>
 							</div>
 							<!--end::Copyright-->

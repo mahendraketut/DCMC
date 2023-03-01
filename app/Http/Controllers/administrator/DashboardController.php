@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\administrator;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -14,7 +15,17 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('administrator.dashboard');
+        $accounts = User::all();
+        //count numbers of users with role admin
+        $adminCount = User::where('role', 'administrator')->count();
+        //count numbers of users with role doctor
+        $doctorCount = User::where('role', 'doctor')->count();
+        //count numbers of users with role patient
+        $patientCount = User::where('role', 'patient')->count();
+        //count numbers of users with role pharmacist
+        $pharmacistCount = User::where('role', 'pharmacist')->count();
+        //return view with data
+        return view('administrator.dashboard', compact('accounts', 'adminCount', 'doctorCount', 'patientCount', 'pharmacistCount'));
     }
 
     /**

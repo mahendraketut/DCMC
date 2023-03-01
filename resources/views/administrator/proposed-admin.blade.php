@@ -33,6 +33,7 @@
                             <th class="ps-4 min-w-50px text-center">Proposed Day</th>
                             <th class="ps-4 min-w-2000px text-center">Admin Name</th>
                             <th class="ps-4 min-w-50px text-center">Admin Email</th>
+                            <th class="ps-4 min-w-50px text-center">Status</th>
                             <th class="ps-4 min-w-50px text-center">Action</th>
                         </tr>
                     </thead>
@@ -43,7 +44,7 @@
                             <th class="ps-4 min-w-20px text-center" colspan="6">No Proposed Admin Account Data</th>
                         @else
                             @foreach ($tempAdmins as $admin)
-                            <tr>
+                            {{-- <tr>
                                 <td class="ps-4 min-w-20px text-center">{{$loop->iteration}}</td>
                                 <td class="ps-4 min-w-200px text-center">#{{$admin->request_id}}</td>
                                 <td class="ps-4 min-w-100px text-center">{{$admin->created_at}}</td>
@@ -53,7 +54,51 @@
                                     <a href="{{url('/admin.dashboard/proposed-admin.approve/'.$admin->id)}}" class="btn btn-primary">Approve</a>
                                     <a href="{{url('/admin.dashboard/proposed-admin.reject/'.$admin->id)}}" class="btn btn-danger">Reject</a>
                                 </td>
-                            </tr>
+                            </tr> --}}
+                            {{-- if status is rejected then show in red --}}
+                            @if ($admin->status == 'rejected')
+                                <tr>
+                                    <td class="ps-4 min-w-20px text-center">{{$loop->iteration}}</td>
+                                    <td class="ps-4 min-w-200px text-center">#{{$admin->request_id}}</td>
+                                    <td class="ps-4 min-w-100px text-center">{{$admin->created_at}}</td>
+                                    <td class="ps-4 min-w-50px text-center">{{$admin->name}}</td>
+                                    <td class="ps-4 min-w-50px text-center">{{$admin->email}}</td>
+                                    <td class="ps-4 min-w-20px text-center">
+                                        <span class="badge badge-light-danger">Rejected</span>
+                                    {{-- <td class="ps-4 min-w-20px text-center">
+                                        <a href="{{url('/admin.dashboard/proposed-admin.approve/'.$admin->id)}}" class="btn btn-primary" disabled>Approve</a>
+                                        <a href="{{url('/admin.dashboard/proposed-admin.reject/'.$admin->id)}}" class="btn btn-danger" disabled>Reject</a>
+                                    </td> --}}
+                                </tr>
+                            @elseif ($admin->status == 'verified')
+                                <tr>
+                                    <td class="ps-4 min-w-20px text-center">{{$loop->iteration}}</td>
+                                    <td class="ps-4 min-w-200px text-center">#{{$admin->request_id}}</td>
+                                    <td class="ps-4 min-w-100px text-center">{{$admin->created_at}}</td>
+                                    <td class="ps-4 min-w-50px text-center">{{$admin->name}}</td>
+                                    <td class="ps-4 min-w-50px text-center">{{$admin->email}}</td>
+                                    <td class="ps-4 min-w-20px text-center">
+                                        <span class="badge badge-light-success">Approved</span>
+                                    {{-- <td class="ps-4 min-w-20px text-center">
+                                        <a href="{{url('/admin.dashboard/proposed-admin.approve/'.$admin->id)}}" class="btn btn-light" disabled>Approve</a>
+                                        <a href="{{url('/admin.dashboard/proposed-admin.reject/'.$admin->id)}}" class="btn btn-light" disabled>Reject</a>
+                                    </td> --}}
+                                </tr>
+                            @else
+                                <tr>
+                                    <td class="ps-4 min-w-20px text-center">{{$loop->iteration}}</td>
+                                    <td class="ps-4 min-w-200px text-center">#{{$admin->request_id}}</td>
+                                    <td class="ps-4 min-w-100px text-center">{{$admin->created_at}}</td>
+                                    <td class="ps-4 min-w-50px text-center">{{$admin->name}}</td>
+                                    <td class="ps-4 min-w-50px text-center">{{$admin->email}}</td>
+                                    <td class="ps-4 min-w-20px text-center">
+                                        <span class="badge badge-light-info">Pending</span>
+                                    <td class="ps-4 min-w-20px text-center">
+                                        <a href="{{url('/admin.dashboard/proposed-admin.approve/'.$admin->id)}}" class="btn btn-primary">Approve</a>
+                                        <a href="{{url('/admin.dashboard/proposed-admin.reject/'.$admin->id)}}" class="btn btn-danger">Reject</a>
+                                    </td>
+                                </tr>
+                            @endif
                             @endforeach
                         @endif
                     </tbody>
