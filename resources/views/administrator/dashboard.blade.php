@@ -130,7 +130,7 @@
                                 </svg>
                             </span>
                             <!--end::Svg Icon-->
-                            <a href="#" class="text-warning fw-bold fs-6">Weekly Sales</a>
+                            <a href="{{Route('admin.ViewAlladministrator')}}" class="text-primary fw-bold fs-6">Administrator</a>
                         </div>
                         <!--end::Col-->
                         <!--begin::Col-->
@@ -144,10 +144,8 @@
                             </span>
                             <!--end::Svg Icon-->
                             <a href="#" class="text-primary fw-bold fs-6">New Projects</a>
-                        </div>
-                        <!--end::Col-->
+                            <a href="{{Route('admin.ViewAllDoctor')}}" class="text-primary fw-bold fs-6">Doctors</a>
                     </div>
-                    <!--end::Row-->
                     <!--begin::Row-->
                     <div class="row g-0">
                         <!--begin::Col-->
@@ -160,7 +158,7 @@
                                 </svg>
                             </span>
                             <!--end::Svg Icon-->
-                            <a href="#" class="text-danger fw-bold fs-6 mt-2">Item Orders</a>
+                            <a href="{{Route('admin.ViewAllPharmacist')}}" class="text-primary fw-bold fs-6">Pharmacist</a>
                         </div>
                         <!--end::Col-->
                         <!--begin::Col-->
@@ -174,10 +172,8 @@
                             </span>
                             <!--end::Svg Icon-->
                             <a href="#" class="text-success fw-bold fs-6 mt-2">Bug Reports</a>
-                        </div>
-                        <!--end::Col-->
+                            <a href="{{Route('admin.ViewAllPatient')}}" class="text-primary fw-bold fs-6">Patient</a>
                     </div>
-                    <!--end::Row-->
                 </div>
                 <!--end::Stats-->
             </div>
