@@ -1,6 +1,5 @@
 @extends('administrator.navbar')
 @section('title', 'Dashboard')
-@section('css')
 
 @endsection
 
