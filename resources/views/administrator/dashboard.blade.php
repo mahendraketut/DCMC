@@ -127,7 +127,7 @@
                             {{-- count numbers of administrator --}}
                             <p class="text-primary fw-bolder fs-1">{{ $adminCount }}</p>
                             <!--end::Svg Icon-->
-                            <a href="#" class="text-warning fw-bold fs-6">Weekly Sales</a>
+                            <a href="#" class="text-primary fw-bold fs-6">Administrator</a>
                         </div>
                         <!--end::Col-->
                         <!--begin::Col-->
@@ -135,7 +135,7 @@
                             <p class="text-primary fw-bolder fs-1">{{ $doctorCount }}</p>
 
                             <!--end::Svg Icon-->
-                            <a href="#" class="text-primary fw-bold fs-6">New Projects</a>
+                            <a href="#" class="text-primary fw-bold fs-6">Doctors</a>
                         </div>
                         <!--end::Col-->
                     </div>
@@ -147,7 +147,7 @@
                             {{-- count numbers of administrator --}}
                             <p class="text-primary fw-bolder fs-1">{{ $pharmacistCount }}</p>
                             <!--end::Svg Icon-->
-                            <a href="#" class="text-danger fw-bold fs-6 mt-2">Item Orders</a>
+                            <a href="#" class="text-primary fw-bold fs-6">Pharmacist</a>
                         </div>
                         <!--end::Col-->
                         <!--begin::Col-->
@@ -155,7 +155,7 @@
                             <p class="text-primary fw-bolder fs-1">{{ $patientCount }}</p>
 
                             <!--end::Svg Icon-->
-                            <a href="#" class="text-success fw-bold fs-6 mt-2">Bug Reports</a>
+                            <a href="#" class="text-primary fw-bold fs-6">Patient</a>
                         </div>
                         <!--end::Col-->
                     </div>
