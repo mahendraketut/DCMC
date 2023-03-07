@@ -15,22 +15,22 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id')->unique()->nullable();
+            $table->foreignId('admin_id')->nullable()->constrained();
+            $table->foreignId('doctor_id')->nullable()->constrained();
+            $table->foreignId('pharmacist_id')->nullable()->constrained();
+            $table->foreignId('patient_id')->nullable()->constrained();
             $table->string('name');
             $table->string('username')->unique()->nullable();
             $table->string('email');
-            $table->string('google_id')->unique()->nullable();
             $table->enum('gender', ['Male', 'Female', 'Other']);
             $table->date('dob')->nullable();
-            $table->enum('specialist', ['Mouth Surgery', 'Tooth Conservation', 'Oral Disease', 'Orthodontics', 'Periodontics', 'Prosthodontics', 'Dental Radiology'])->nullable();
-            $table->string('license')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('role')->default('patient');
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->string('profile_pic')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
