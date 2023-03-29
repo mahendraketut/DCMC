@@ -285,7 +285,7 @@
             <!--begin:::Tab item-->
             <li class="nav-item ms-auto">
                 <!--begin::Action menu-->
-                <a href="#" class="btn btn-primary ps-7" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">Make Appointment</a>
+                <a href="{{route('make.appointment')}}" class="btn btn-primary ps-7" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">Make Appointment</a>
                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
                 {{-- <span class="svg-icon svg-icon-2 me-0">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">

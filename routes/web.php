@@ -88,4 +88,6 @@ Route::middleware(['auth', 'user-access:patient'])->group(function () {
     Route::delete('/patient.profile.delete', [App\Http\Controllers\patient\UpdateProfileController::class, 'destroy'])->name('patient.profile.delete');
     Route::get('/patient.view.doctor', [App\Http\Controllers\patient\ViewDoctorController::class, 'index'])->name('patient.view.doctor');
     Route::get('/patient.view.detail.doctor/{id}', [App\Http\Controllers\patient\ViewDoctorController::class, 'show'])->name('patient.view.detail.doctor');
+    Route::get('/patient.make.appointment', [App\Http\Controllers\patient\MakeAppointment::class, 'index'])->name('make.appointment');
+    Route::post('/patient.make.appointment', [App\Http\Controllers\patient\MakeAppointment::class, "store"])->name('make.appointment.store');
 });
