@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 // use League\OAuth1\Client\Server\User;s
 
+
 class addSpecialistCategory extends Controller
 {
     /**
@@ -61,10 +62,27 @@ class addSpecialistCategory extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int $id
+
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Specialist  $specialist
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Specialist $specialist)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Specialist  $specialist
+
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
+
         $id = Crypt::decrypt($id);
         //edit the specialist category form based on the id
         $specialist = Specialist::where('id', '=', $id)->first();
@@ -89,7 +107,6 @@ class addSpecialistCategory extends Controller
         ]);
 
         $id = ($request->id);
-
         //update the specialist category based on the id
         Specialist::where('id', '=', $id)->update([
             'name' => $request->name,
@@ -103,6 +120,7 @@ class addSpecialistCategory extends Controller
 
     /**
      * Remove the specified resource from storage.
+     *
      * @param  \App\Models\Specialist  $specialist
      * @return \Illuminate\Http\Response
      */

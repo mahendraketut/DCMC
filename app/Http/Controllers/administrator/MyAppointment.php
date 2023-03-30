@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\patient;
+namespace App\Http\Controllers\administrator;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Schedule;
 use App\Models\Appointment;
@@ -10,21 +11,12 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class DashboardController extends Controller
+class MyAppointment extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
-        //$appointment_patient = Appointment::where('patient_id', '=', Auth::user()->id)->get();
-        $doctor = User::where('role', 'doctor')->get();
-        $schedule = Schedule::get();
         $appointment = Appointment::get();
-        return view('patient.dashboard', compact('appointment', 'schedule', 'doctor'));
+        return view('administrator.my-appointment', compact('appointment'));
     }
 
     /**
@@ -46,6 +38,27 @@ class DashboardController extends Controller
     public function store(Request $request)
     {
         //
+        $validatedData = $request->validate([
+            'doctor_name' => 'required',
+            'day' => 'required',
+            'start_time' => 'required|date_format:Y-m-d\TH:i',
+            'end_time' => 'required|date_format:Y-m-d\TH:i|after:start_time',
+        ]);
+
+        $query = DB::table('appointment')->insert([
+            'doctor_id' => User::where('name', '=', $request->doctor_name)->first()->id,
+            'doctor_name' => $request->doctor_name,
+            'day' => $request->day,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
+            'status' => 'pending',
+            'created_at' => Carbon::now(),
+        ]);
+        if ($query) {
+            return redirect()->route('patient.dashboard')->with('success', 'Appointment Successfully');
+        } else {
+            return redirect()->route('make.appointment')->with('error', 'Appointment Failed');
+        }
     }
 
     /**
@@ -57,7 +70,6 @@ class DashboardController extends Controller
     public function show($id)
     {
         //
-        
     }
 
     /**
@@ -81,6 +93,12 @@ class DashboardController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $id = $request->id;
+
+        Appointment::where('id', '=', $id)->update([
+            'status' => 'Waiting Call',
+        ]);
+        return redirect()->route('admin.appointment')->with('success', 'Appointment Update Successfully');
     }
 
     /**
@@ -92,12 +110,7 @@ class DashboardController extends Controller
     public function destroy($id)
     {
         //
-    }
-    public function filter(Request $request)
-    {
-        dd($request->all());
-        $filter = $request->input('filter');
-        $data = User::where('specialist', $filter)->get();
-        return response()->json($data);
+        Appointment::where('id', '=', $id)->delete();
+        return redirect()->back()->with('success', 'Appointment Deleted Successfully');
     }
 }

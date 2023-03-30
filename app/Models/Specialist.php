@@ -8,20 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class Specialist extends Model
 {
     use HasFactory;
+
     public $table = "specialists";
 
+
     protected $fillable = [
-        // 'id',
         'name',
         'description',
     ];
-
-
 
     public function users()
     {
         return $this->belongsToMany(User::class);
     }
+
 
     public function specialist()
     {
