@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\patient;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\Schedule;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -15,7 +20,11 @@ class DashboardController extends Controller
     public function index()
     {
         //
-        return view('patient.dashboard');
+        //$appointment_patient = Appointment::where('patient_id', '=', Auth::user()->id)->get();
+        $doctor = User::where('role', 'doctor')->get();
+        $schedule = Schedule::get();
+        $appointment = Appointment::get();
+        return view('patient.dashboard', compact('appointment', 'schedule', 'doctor'));
     }
 
     /**
@@ -48,6 +57,7 @@ class DashboardController extends Controller
     public function show($id)
     {
         //
+        
     }
 
     /**
@@ -82,5 +92,12 @@ class DashboardController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function filter(Request $request)
+    {
+        dd($request->all());
+        $filter = $request->input('filter');
+        $data = User::where('specialist', $filter)->get();
+        return response()->json($data);
     }
 }

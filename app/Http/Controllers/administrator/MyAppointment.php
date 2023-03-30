@@ -1,28 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\patient;
+namespace App\Http\Controllers\administrator;
 
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Schedule;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
-class MakeAppointment extends Controller
+class MyAppointment extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
-        $schedule = Schedule::get();
-        $doctorName = $schedule->user->name;
-        User::where('role', '=', 'doctor')->get();
-        return view('patient.makeappointment', compact('schedule'));
+        $appointment = Appointment::get();
+        return view('administrator.my-appointment', compact('appointment'));
     }
 
     /**
@@ -99,6 +93,12 @@ class MakeAppointment extends Controller
     public function update(Request $request, $id)
     {
         //
+        $id = $request->id;
+
+        Appointment::where('id', '=', $id)->update([
+            'status' => 'Waiting Call',
+        ]);
+        return redirect()->route('admin.appointment')->with('success', 'Appointment Update Successfully');
     }
 
     /**
@@ -110,5 +110,7 @@ class MakeAppointment extends Controller
     public function destroy($id)
     {
         //
+        Appointment::where('id', '=', $id)->delete();
+        return redirect()->back()->with('success', 'Appointment Deleted Successfully');
     }
 }

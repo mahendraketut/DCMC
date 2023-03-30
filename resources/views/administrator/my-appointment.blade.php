@@ -1,15 +1,76 @@
-@extends('patient.navbar')
+@extends('administrator.navbar')
 @section('title', 'Dashboard')
 @section('css')
-    <style>
-        .data {
-            display: none;
-        }
-    </style>
+
 @endsection
 
 @section('content')
-<div class="card mb-5 mb-xl-10">
+
+<!--begin::Col-->
+<div class="col-xl-12">
+    <!--begin::Tables Widget 9-->
+    <div class="card card-xl-stretch mb-5 mb-xl-8">
+        <!--begin::Header-->
+        <div class="card-header border-0 pt-5">
+            <h3 class="card-title align-items-start flex-column">
+                <span class="card-label fw-bolder fs-3 mb-1">Appointment Table</span>
+            </h3>
+        </div>
+        <!--end::Header-->
+        <!--begin::Body-->
+        <div class="card-body py-3">
+            <!--begin::Table container-->
+            <div class="table-responsive">
+                <!--begin::Table-->
+                <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+                    <!--begin::Table head-->
+                    <thead>
+                        <tr class="fw-bold fs-6 text-gray-800 border-bottom border-gray-300">
+                            <th class="ps-4 min-w-20px text-center">#</th>
+                            <th class="ps-4 min-w-100px text-center">Name</th>
+                            <th class="ps-4 min-w-50px text-center">Day</th>
+                            <th class="ps-4 min-w-50px text-center">Start Time</th>
+                            <th class="ps-4 min-w-50px text-center">End Time</th>
+                            <th class="ps-4 min-w-50px text-center">Status</th>
+                            <th class="ps-4 min-w-50px text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <!--end::Table head-->
+                    <!--begin::Table body-->
+                    <tbody>
+                        @if ($appointment->count() == 0)
+                            <th class="ps-4 min-w-20px text-center" colspan="6">No Schedule Data</th>
+                        @else
+                            @foreach ($appointment as $schedule)
+                            
+                            <tr>
+                                <td class="ps-4 min-w-20px text-center">{{$loop->iteration}}</td>
+                                <td class="ps-4 min-w-200px text-center">{{$schedule->patient->name}}</td>
+                                <td class="ps-4 min-w-50px text-center">{{$schedule->schedule->day}}</td>
+                                <td class="ps-4 min-w-50px text-center">{{$schedule->schedule->start_time}}</td>
+                                <td class="ps-4 min-w-50px text-center">{{$schedule->schedule->end_time}}</td>
+                                <td class="ps-4 min-w-50px text-center">{{$schedule->status}}</td>
+                                <td class="ps-4 min-w-20px text-center">
+                                    <a href="{{url('/admin.dashboard/appointment.update/'.$schedule->id)}}" class="btn btn-primary">Update</a>
+                                    <a href="{{url('/admin.dashboard/appointment.delete/'.$schedule->id)}}" class="btn btn-danger">Reject</a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        @endif
+                    </tbody>
+                    <!--end::Table body-->
+                </table>
+                <!--end::Table-->
+            </div>
+            <!--end::Table container-->
+        </div>
+        <!--begin::Body-->
+    </div>
+    <!--end::Tables Widget 9-->
+</div>
+<!--end::Col-->
+
+{{-- <div class="card mb-5 mb-xl-10">
     <!--begin::Card header-->
     <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
         <!--begin::Card title-->
@@ -35,12 +96,15 @@
                         <label class="col col-form-label required fw-bold fs-6">Doctor</label>
                         <!--end::Label-->
                         <!--begin::Col-->
+                        @foreach ($schedule_doctor as $user_id)
+                                   <p>$user_id->id</p>
+                                @endforeach
                         <div class="col fv-row">
                             <select id="doctor" name="doctor" class="form-select form-select-solid form-select-lg fw-bold form-control @error('specialist') is-invalid @enderror" value="{{old("doctor")}}">
-                                @foreach ($schedule as $schedule)
-                                    <option value="{{$schedule->doctor_id}}">{{$schedule->doctor_id->name}}</option>
+                                <option>Select Doctor</option>
+                                @foreach ($schedule_doctor as $user_id)
+                                    <option value="{{$user_id->id}}">{{$user_id->id}}</option>
                                 @endforeach
-                                
                             </select>
                             @error('doctor')
                                 <span class="invalid-feedback" role="alert">
@@ -48,37 +112,6 @@
                                 </span>
                             @enderror
                         </div>
-                        <!--end::Col-->
-                        {{-- <div id="content" class="data">
-                            <div class=" fs-6">
-                                <!--begin::Details item-->
-                                <div class="fw-bolder mt-5">Doctor ID</div>
-                                <div class="text-gray-600">{{$doctor->user_id}}</div>
-                                <!--begin::Details item-->
-                                <!--begin::Details item-->
-                                <div class="fw-bolder mt-5">Email</div>
-                                <div class="text-gray-600">
-                                    <a href="#" class="text-gray-600 text-hover-primary">{{$doctor->email}}</a>
-                                </div>
-                                <!--begin::Details item-->
-                                <!--begin::Details item-->
-                                <div class="fw-bolder mt-5">License</div>
-                                <div class="text-gray-600">{{$doctor->license}}</div>
-                                <!--begin::Details item-->
-                                <!--begin::Details item-->
-                                <div class="fw-bolder mt-5">Gender</div>
-                                <div class="text-gray-600">{{$doctor->gender}}</div>
-                                <!--begin::Details item-->
-                                <!--begin::Details item-->
-                                <div class="fw-bolder mt-5">City</div>
-                                <div class="text-gray-600">{{$doctor->city}}</div>
-                                <!--begin::Details item-->
-                                <!--begin::Details item-->
-                                <div class="fw-bolder mt-5">Joined Since</div>
-                                <div class="text-gray-600">{{$doctor->created_at->diffForHumans()}}</div>
-                                <!--begin::Details item-->
-                            </div>
-                        </div> --}}
                     </div>
                     <!--end::Input group-->
                     
@@ -161,17 +194,9 @@
         <!--end::Form-->
     </div>
     <!--end::Content-->
-</div>
+</div> --}}
 @endsection
 
 @section('js')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
-        $(document).ready(function(){
-            $("#doctor").on('change', function(){
-                $(".data").hide();
-                alert($(this).val());
-            })
-        })
-    </script>
+
 @endsection

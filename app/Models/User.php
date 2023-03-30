@@ -58,4 +58,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(Schedule::class);
     }
+
+    public function appointment()
+    {
+        return $this->hasMany(Appointment::class);
+    }
+
+    public function scopeSearch($query, $search)
+    {
+        return $query->where('name', 'LIKE', '%'.$search.'%')
+                     ->orWhere('specialist', 'LIKE', '%'.$search.'%');
+    }
 }
