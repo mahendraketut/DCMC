@@ -11,7 +11,8 @@
         <!--begin::Mixed Widget 2-->
         <div class="card card-xl-stretch ">
             <!--begin::Header-->
-            <div class="card-header border-0 bg-dark py-5">
+            <div class="card-header border-0 bg-dark py-5" style="background: rgb(0,17,148);
+            background: linear-gradient(90deg, rgba(0,17,148,1) 0%, rgba(28,178,194,1) 100%);">
                 <h3 class="card-title fw-bolder text-white"></h3>
                 <div class="card-toolbar">
                     <!--begin::Menu-->
@@ -112,7 +113,8 @@
             <!--begin::Body-->
             <div class="card-body p-0">
                 <!--begin::Chart-->
-                <div class="card-rounded-bottom bg-dark" data-kt-color="danger" style="height: 200px">
+                <div class="card-rounded-bottom bg-dark" data-kt-color="danger" style="height: 200px; background: rgb(0,17,148);
+                background: linear-gradient(90deg, rgba(0,17,148,1) 0%, rgba(28,178,194,1) 100%);">
                     <h1 class="text-left text-white ms-10">Welcome to the Admin Page<br> {{ Auth::user()->name }}</h1>
                     <a href="{{route('admin.profile')}}" class="btn btn-white btn-hover-scale me-5 ms-10 mt-5">Manage your profile here</a>
 

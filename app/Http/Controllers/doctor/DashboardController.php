@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\doctor;
 
 use App\Http\Controllers\Controller;
+use App\Models\Appointment;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -14,8 +16,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        //
-        return view('doctor.dashboard');
+        $schedules = Schedule::where('doctor_id', auth()->user()->id)->count();
+        return view('doctor.dashboard', compact('schedules'));
     }
 
     /**

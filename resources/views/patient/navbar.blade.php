@@ -134,7 +134,7 @@ License: For each use you must have a valid license purchased only from above li
 					<!--begin::Header-->
 					<div id="kt_header" style="" class="header align-items-stretch">
 						<!--begin::Container-->
-						<div class="container-fluid d-flex align-items-stretch justify-content-between">
+						<div class="container-fluid d-flex align-items-stretch justify-content-between" style="background: rgb(0,17,148); background: linear-gradient(262deg, rgba(0,17,148,1) 0%, rgba(28,178,194,1) 100%);">
 							<!--begin::Aside mobile toggle-->
 							<div class="d-flex align-items-center d-lg-none ms-n2 me-2" title="Show aside menu">
 								<div class="btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px" id="kt_aside_mobile_toggle">
@@ -167,6 +167,14 @@ License: For each use you must have a valid license purchased only from above li
 									<!--begin::User menu-->
 									<div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
 										<!--begin::Menu wrapper-->
+                                        <div class="d-flex align-items-center me-3">
+                                            {{-- //TODO : Add user name and user id --}}
+
+                                            <div class="d-flex flex-column">
+                                                <div class=" text-end fw-bolder d-flex align-items-center fs-5 text-white">{{Auth::user()->name}}</div>
+                                                <div class="text-end text-gray-400 fw-bold fs-7 text-white">{{Auth::user()->user_id}}</div>
+                                            </div>
+                                        </div>
 										<div class="cursor-pointer symbol symbol-30px symbol-md-40px symbol-circle" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
                                             @if (Auth::user()->profile_pic)
                                                 <img src="{{asset('storage/' . Auth::user()->profile_pic)}}" alt="image" />
@@ -249,10 +257,20 @@ License: For each use you must have a valid license purchased only from above li
 								</div>
 								<!--end::Page title-->
 								<!--begin::Actions-->
-								<div class="d-flex align-items-center gap-2 gap-lg-3">
-
-								</div>
-								<!--end::Actions-->
+                                {{-- //TODO : Add date and time --}}
+                                <div class="d-flex align-items-center gap-2 gap-lg-3">
+                                    <div id="clock"></div>
+                                    <script>
+                                        function updateClock() {
+                                            var now = new Date();
+                                            var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
+                                            var clock = document.getElementById("clock");
+                                            clock.innerHTML = now.toLocaleString('en-US', options);
+                                        }
+                                        setInterval(updateClock, 1000);
+                                    </script>
+                                </div>
+                                <!--end::Actions-->
 							</div>
 							<!--end::Container-->
 						</div>

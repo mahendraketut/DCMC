@@ -5,6 +5,151 @@
 @endsection
 
 @section('content')
+<div class="row gy-5 g-xl-8">
+    <!--begin::Col-->
+    <div class="col-xl-12">
+        <!--begin::Mixed Widget 2-->
+        <div class="card card-xl-stretch ">
+            <!--begin::Header-->
+            <div class="card-header border-0 bg-dark py-5" style="background: rgb(0,17,148);
+            background: linear-gradient(90deg, rgba(0,17,148,1) 0%, rgba(28,178,194,1) 100%);">
+                <h3 class="card-title fw-bolder text-white"></h3>
+                <div class="card-toolbar">
+                    <!--begin::Menu-->
+                    {{-- <button type="button" class="btn btn-sm btn-icon btn-color-white btn-active-white btn-active-color- border-0 me-n3" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen024.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <rect x="5" y="5" width="5" height="5" rx="1" fill="currentColor" />
+                                    <rect x="14" y="5" width="5" height="5" rx="1" fill="currentColor" opacity="0.3" />
+                                    <rect x="5" y="14" width="5" height="5" rx="1" fill="currentColor" opacity="0.3" />
+                                    <rect x="14" y="14" width="5" height="5" rx="1" fill="currentColor" opacity="0.3" />
+                                </g>
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </button> --}}
+                    <!--begin::Menu 3-->
+                    {{-- <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px py-3" data-kt-menu="true">
+                        <!--begin::Heading-->
+                        <div class="menu-item px-3">
+                            <div class="menu-content text-muted pb-2 px-3 fs-7 text-uppercase">Payments</div>
+                        </div>
+                        <!--end::Heading-->
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3">
+                            <a href="#" class="menu-link px-3">Create Invoice</a>
+                        </div>
+                        <!--end::Menu item-->
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3">
+                            <a href="#" class="menu-link flex-stack px-3">Create Payment
+                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a target name for future usage and reference"></i></a>
+                        </div>
+                        <!--end::Menu item-->
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3">
+                            <a href="#" class="menu-link px-3">Generate Bill</a>
+                        </div>
+                        <!--end::Menu item-->
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3" data-kt-menu-trigger="hover" data-kt-menu-placement="right-end">
+                            <a href="#" class="menu-link px-3">
+                                <span class="menu-title">Subscription</span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <!--begin::Menu sub-->
+                            <div class="menu-sub menu-sub-dropdown w-175px py-4">
+                                <!--begin::Menu item-->
+                                <div class="menu-item px-3">
+                                    <a href="#" class="menu-link px-3">Plans</a>
+                                </div>
+                                <!--end::Menu item-->
+                                <!--begin::Menu item-->
+                                <div class="menu-item px-3">
+                                    <a href="#" class="menu-link px-3">Billing</a>
+                                </div>
+                                <!--end::Menu item-->
+                                <!--begin::Menu item-->
+                                <div class="menu-item px-3">
+                                    <a href="#" class="menu-link px-3">Statements</a>
+                                </div>
+                                <!--end::Menu item-->
+                                <!--begin::Menu separator-->
+                                <div class="separator my-2"></div>
+                                <!--end::Menu separator-->
+                                <!--begin::Menu item-->
+                                <div class="menu-item px-3">
+                                    <div class="menu-content px-3">
+                                        <!--begin::Switch-->
+                                        <label class="form-check form-switch form-check-custom form-check-solid">
+                                            <!--begin::Input-->
+                                            <input class="form-check-input w-30px h-20px" type="checkbox" value="1" checked="checked" name="notifications" />
+                                            <!--end::Input-->
+                                            <!--end::Label-->
+                                            <span class="form-check-label text-muted fs-6">Recuring</span>
+                                            <!--end::Label-->
+                                        </label>
+                                        <!--end::Switch-->
+                                    </div>
+                                </div>
+                                <!--end::Menu item-->
+                            </div>
+                            <!--end::Menu sub-->
+                        </div>
+                        <!--end::Menu item-->
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3 my-1">
+                            <a href="#" class="menu-link px-3">Settings</a>
+                        </div>
+                        <!--end::Menu item-->
+                    </div> --}}
+                    <!--end::Menu 3-->
+                    <!--end::Menu-->
+                </div>
+            </div>
+            <!--end::Header-->
+            <!--begin::Body-->
+            <div class="card-body p-0">
+                <!--begin::Chart-->
+                <div class="card-rounded-bottom bg-dark" data-kt-color="danger" style="height: 200px; background: rgb(0,17,148);
+                background: linear-gradient(90deg, rgba(0,17,148,1) 0%, rgba(28,178,194,1) 100%);">
+                    <h1 class="text-left text-white ms-10">Welcome to the Pharmacist Page<br> {{ Auth::user()->name }}</h1>
+                    <a href="{{route('admin.profile')}}" class="btn btn-white btn-hover-scale me-5 ms-10 mt-5">Manage your profile here</a>
+
+                </div>
+                <!--end::Chart-->
+                <!--begin::Stats-->
+                <div class="card-p mt-n20 position-relative">
+                    <!--begin::Row-->
+                    <div class="row g-0">
+                        <!--begin::Col-->
+                        <div class="col bg-light-primary px-6 py-8 rounded-2 me-7 mb-7">
+                            {{-- count numbers of administrator --}}
+                            <p class="text-primary fw-bolder fs-1">{{$medicines}}</p>
+                            <!--end::Svg Icon-->
+                            <a href="#" class="text-primary fw-bold fs-6">Medicines</a>
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col bg-light-primary px-6 py-8 rounded-2 mb-7">
+                            <p class="text-primary fw-bolder fs-1">0</p>
+
+                            <!--end::Svg Icon-->
+                            <a href="#" class="text-primary fw-bold fs-6">Prescription</a>
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Row-->
+                </div>
+                <!--end::Stats-->
+            </div>
+            <!--end::Body-->
+        </div>
+        <!--end::Mixed Widget 2-->
+    </div>
+</div>
 {{-- <div class="row gy-5 g-xl-8">
     <!--begin::Col-->
     <div class="col-xl-4">

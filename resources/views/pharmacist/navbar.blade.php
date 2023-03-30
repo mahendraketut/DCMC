@@ -89,6 +89,38 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="menu-content pt-8 pb-2">
 										<span class="menu-section text-muted text-uppercase fs-8 ls-1">MENU</span>
 									</div>
+                                    <div class="menu-item">
+                                        <a class="menu-link" href="{{route('pharmacist.medicines')}}">
+                                            <span class="menu-icon">
+                                                <!--begin::Svg Icon | path: assets/media/icons/duotune/general/gen016.svg-->
+                                                <span class="svg-icon svg-icon-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                        <path d="M11.2929 2.70711C11.6834 2.31658 12.3166 2.31658 12.7071 2.70711L15.2929 5.29289C15.6834 5.68342 15.6834 6.31658 15.2929 6.70711L12.7071 9.29289C12.3166 9.68342 11.6834 9.68342 11.2929 9.29289L8.70711 6.70711C8.31658 6.31658 8.31658 5.68342 8.70711 5.29289L11.2929 2.70711Z" fill="currentColor" />
+                                                        <path d="M11.2929 14.7071C11.6834 14.3166 12.3166 14.3166 12.7071 14.7071L15.2929 17.2929C15.6834 17.6834 15.6834 18.3166 15.2929 18.7071L12.7071 21.2929C12.3166 21.6834 11.6834 21.6834 11.2929 21.2929L8.70711 18.7071C8.31658 18.3166 8.31658 17.6834 8.70711 17.2929L11.2929 14.7071Z" fill="currentColor" />
+                                                        <path opacity="0.3" d="M5.29289 8.70711C5.68342 8.31658 6.31658 8.31658 6.70711 8.70711L9.29289 11.2929C9.68342 11.6834 9.68342 12.3166 9.29289 12.7071L6.70711 15.2929C6.31658 15.6834 5.68342 15.6834 5.29289 15.2929L2.70711 12.7071C2.31658 12.3166 2.31658 11.6834 2.70711 11.2929L5.29289 8.70711Z" fill="currentColor" />
+                                                        <path opacity="0.3" d="M17.2929 8.70711C17.6834 8.31658 18.3166 8.31658 18.7071 8.70711L21.2929 11.2929C21.6834 11.6834 21.6834 12.3166 21.2929 12.7071L18.7071 15.2929C18.3166 15.6834 17.6834 15.6834 17.2929 15.2929L14.7071 12.7071C14.3166 12.3166 14.3166 11.6834 14.7071 11.2929L17.2929 8.70711Z" fill="currentColor" />
+                                                    </svg>
+                                                </span>
+                                                <!--end::Svg Icon-->
+                                            </span>
+                                            <span class="menu-title">Manage Medicines</span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
+                                        <a class="menu-link" href="">
+                                            <span class="menu-icon">
+                                                <!--begin::Svg Icon | path: assets/media/icons/duotune/general/gen016.svg-->
+                                                <span class="svg-icon svg-icon-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                        <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="currentColor" />
+                                                        <path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="currentColor" />
+                                                    </svg>
+                                                </span>
+                                                <!--end::Svg Icon-->
+                                            </span>
+                                            <span class="menu-title">Manage Prescription</span>
+                                        </a>
+                                    </div>
 								</div>
 							</div>
 							<!--end::Menu-->
@@ -103,7 +135,7 @@ License: For each use you must have a valid license purchased only from above li
 					<!--begin::Header-->
 					<div id="kt_header" style="" class="header align-items-stretch">
 						<!--begin::Container-->
-						<div class="container-fluid d-flex align-items-stretch justify-content-between">
+						<div class="container-fluid d-flex align-items-stretch justify-content-between" style="background: rgb(0,17,148); background: linear-gradient(262deg, rgba(0,17,148,1) 0%, rgba(28,178,194,1) 100%);">
 							<!--begin::Aside mobile toggle-->
 							<div class="d-flex align-items-center d-lg-none ms-n2 me-2" title="Show aside menu">
 								<div class="btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px" id="kt_aside_mobile_toggle">
@@ -138,7 +170,15 @@ License: For each use you must have a valid license purchased only from above li
 									<!--begin::User menu-->
 									<div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
 										<!--begin::Menu wrapper-->
-										<div class="cursor-pointer symbol symbol-30px symbol-md-40px symbol-circle" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
+										<div class="d-flex align-items-center me-3">
+                                            {{-- //TODO : Add user name and user id --}}
+
+                                            <div class="d-flex flex-column">
+                                                <div class=" text-end fw-bolder d-flex align-items-center fs-5 text-white">{{Auth::user()->name}}</div>
+                                                <div class="text-end text-gray-400 fw-bold fs-7 text-white">{{Auth::user()->user_id}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="cursor-pointer symbol symbol-30px symbol-md-40px symbol-circle" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
                                             @if (Auth::user()->profile_pic)
                                                 <img src="{{asset('storage/' . Auth::user()->profile_pic)}}" alt="image" />
                                             @else
@@ -220,8 +260,25 @@ License: For each use you must have a valid license purchased only from above li
 									<!--end::Description--></h1>
 									<!--end::Title-->
 								</div>
+                                <!--end::Page title-->
+                                <!--begin::Actions-->
+                                {{-- //TODO : Add date and time --}}
+                                <div class="d-flex align-items-center gap-2 gap-lg-3">
+                                    <div id="clock"></div>
+                                    <script>
+                                        function updateClock() {
+                                            var now = new Date();
+                                            var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
+                                            var clock = document.getElementById("clock");
+                                            clock.innerHTML = now.toLocaleString('en-US', options);
+                                        }
+                                        setInterval(updateClock, 1000);
+                                    </script>
+                                </div>
+                                <!--end::Actions-->
 								<!--end::Page title-->
 							</div>
+
 							<!--end::Container-->
 						</div>
 						<!--end::Toolbar-->
@@ -244,7 +301,15 @@ License: For each use you must have a valid license purchased only from above li
 						<div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
 							<!--begin::Copyright-->
 							<div class="text-dark order-2 order-md-1">
-								<span class="text-muted fw-bold me-1">2022©</span>
+								{{-- //TODO : Add year --}}
+                                <span class="text-muted fw-bold me-1">
+                                    <script>
+                                        var d = new Date();
+                                        var n = d.getFullYear();
+                                        document.write(n);
+                                    </script>
+                                    ©
+                                </span>
 								<a href="#" target="_blank" class="text-gray-800 text-hover-primary">DCMC</a>
 							</div>
 							<!--end::Copyright-->

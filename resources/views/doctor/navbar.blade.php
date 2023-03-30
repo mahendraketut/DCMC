@@ -106,6 +106,36 @@ License: For each use you must have a valid license purchased only from above li
 										<span class="menu-title">Manage Schedule</span>
 									</a>
 								</div>
+                                <div class="menu-item">
+									<a class="menu-link" href="{{route('doctor.queue')}}">
+										<span class="menu-icon">
+                                            <!--begin::Svg Icon | path: icons/duotune/graphs/gra006.svg-->
+                                            <span class="svg-icon svg-icon-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <path d="M13 5.91517C15.8 6.41517 18 8.81519 18 11.8152C18 12.5152 17.9 13.2152 17.6 13.9152L20.1 15.3152C20.6 15.6152 21.4 15.4152 21.6 14.8152C21.9 13.9152 22.1 12.9152 22.1 11.8152C22.1 7.01519 18.8 3.11521 14.3 2.01521C13.7 1.91521 13.1 2.31521 13.1 3.01521V5.91517H13Z" fill="currentColor" />
+                                                    <path opacity="0.3" d="M19.1 17.0152C19.7 17.3152 19.8 18.1152 19.3 18.5152C17.5 20.5152 14.9 21.7152 12 21.7152C9.1 21.7152 6.50001 20.5152 4.70001 18.5152C4.30001 18.0152 4.39999 17.3152 4.89999 17.0152L7.39999 15.6152C8.49999 16.9152 10.2 17.8152 12 17.8152C13.8 17.8152 15.5 17.0152 16.6 15.6152L19.1 17.0152ZM6.39999 13.9151C6.19999 13.2151 6 12.5152 6 11.8152C6 8.81517 8.2 6.41515 11 5.91515V3.01519C11 2.41519 10.4 1.91519 9.79999 2.01519C5.29999 3.01519 2 7.01517 2 11.8152C2 12.8152 2.2 13.8152 2.5 14.8152C2.7 15.4152 3.4 15.7152 4 15.3152L6.39999 13.9151Z" fill="currentColor" />
+                                                </svg>
+                                            </span>
+                                            <!--end::Svg Icon-->
+										</span>
+										<span class="menu-title">Appointment Queue</span>
+									</a>
+								</div>
+                                <div class="menu-item">
+									<a class="menu-link" href="{{route('doctor.medicalrecordBook')}}">
+										<span class="menu-icon">
+                                            <!--begin::Svg Icon | path: icons/duotune/graphs/gra006.svg-->
+                                            <span class="svg-icon svg-icon-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <path opacity="0.3" d="M21 19H3C2.4 19 2 18.6 2 18V6C2 5.4 2.4 5 3 5H21C21.6 5 22 5.4 22 6V18C22 18.6 21.6 19 21 19Z" fill="currentColor" />
+                                                    <path d="M21 5H2.99999C2.69999 5 2.49999 5.10005 2.29999 5.30005L11.2 13.3C11.7 13.7 12.4 13.7 12.8 13.3L21.7 5.30005C21.5 5.10005 21.3 5 21 5Z" fill="currentColor" />
+                                                </svg>
+                                            </span>
+                                            <!--end::Svg Icon-->
+										</span>
+										<span class="menu-title">Medical Record</span>
+									</a>
+								</div>
 							</div>
 							<!--end::Menu-->
 						</div>
@@ -119,7 +149,8 @@ License: For each use you must have a valid license purchased only from above li
 					<!--begin::Header-->
 					<div id="kt_header" style="" class="header align-items-stretch">
 						<!--begin::Container-->
-						<div class="container-fluid d-flex align-items-stretch justify-content-between">
+                        {{-- //TODO : add gradient topnav --}}
+						<div class="container-fluid d-flex align-items-stretch justify-content-between" style="background: rgb(0,17,148); background: linear-gradient(262deg, rgba(0,17,148,1) 0%, rgba(28,178,194,1) 100%);">
 							<!--begin::Aside mobile toggle-->
 							<div class="d-flex align-items-center d-lg-none ms-n2 me-2" title="Show aside menu">
 								<div class="btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px" id="kt_aside_mobile_toggle">
@@ -154,6 +185,13 @@ License: For each use you must have a valid license purchased only from above li
 									<!--begin::User menu-->
 									<div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
 										<!--begin::Menu wrapper-->
+                                        <div class="d-flex align-items-center me-3">
+                                            {{-- //TODO : Add user name and user id --}}
+                                            <div class="d-flex flex-column">
+                                                <div class=" text-end fw-bolder d-flex align-items-center fs-5 text-white">{{Auth::user()->name}}</div>
+                                                <div class="text-end text-gray-400 fw-bold fs-7 text-white">{{Auth::user()->user_id}}</div>
+                                            </div>
+                                        </div>
 										<div class="cursor-pointer symbol symbol-30px symbol-md-40px symbol-circle" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
 
                                                 @if (Auth::user()->profile_pic)
@@ -253,6 +291,21 @@ License: For each use you must have a valid license purchased only from above li
 									<!--end::Title-->
 								</div>
 								<!--end::Page title-->
+                                <!--begin::Actions-->
+                                {{-- //TODO : Add date and time --}}
+                                <div class="d-flex align-items-center gap-2 gap-lg-3">
+                                    <div id="clock"></div>
+                                    <script>
+                                        function updateClock() {
+                                            var now = new Date();
+                                            var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
+                                            var clock = document.getElementById("clock");
+                                            clock.innerHTML = now.toLocaleString('en-US', options);
+                                        }
+                                        setInterval(updateClock, 1000);
+                                    </script>
+                                </div>
+                                <!--end::Actions-->
 							</div>
 							<!--end::Container-->
 						</div>
@@ -276,7 +329,12 @@ License: For each use you must have a valid license purchased only from above li
 						<div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
 							<!--begin::Copyright-->
 							<div class="text-dark order-2 order-md-1">
-								<span class="text-muted fw-bold me-1">2022©</span>
+								<script type="text/javascript">
+                                    var d = new Date();
+                                    var n = d.getFullYear();
+                                    document.write(n);
+                                </script>
+                                <span class="text-muted fw-bold me-1">©</span>
 								<a href="#" target="_blank" class="text-gray-800 text-hover-primary">DCMC</a>
 							</div>
 							<!--end::Copyright-->
@@ -316,7 +374,7 @@ License: For each use you must have a valid license purchased only from above li
         @yield('script')
 		<script>var hostUrl = "{{asset('admin/assets/')}}";</script>
 		<!--begin::Global Javascript Bundle(used by all pages)-->
-		<script src="{{asset('admin/assets/plugins/global/plugins.bundle.js')}}"></script>
+        <script src="{{asset('admin/assets/plugins/global/plugins.bundle.js')}}"></script>
 		<script src="{{asset('admin/assets/js/scripts.bundle.js')}}"></script>
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Page Custom Javascript(used by this page)-->

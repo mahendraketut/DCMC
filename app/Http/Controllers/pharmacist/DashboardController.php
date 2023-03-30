@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\pharmacist;
 
 use App\Http\Controllers\Controller;
+use App\Models\Medicines;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -14,8 +15,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        //
-        return view('pharmacist.dashboard');
+        $medicines = Medicines::all()->count();
+        return view('pharmacist.dashboard', compact('medicines'));
     }
 
     /**
