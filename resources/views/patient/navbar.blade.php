@@ -106,7 +106,7 @@ License: For each use you must have a valid license purchased only from above li
 									</a>
 								</div>
                                 <div class="menu-item">
-									<a class="menu-link" href="{{route('patient.appointment')}}">
+									<a class="menu-link" href="#">
 										<span class="menu-icon">
 											<!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
 											<span class="svg-icon svg-icon-2">
@@ -118,7 +118,7 @@ License: For each use you must have a valid license purchased only from above li
 											</span>
 											<!--end::Svg Icon-->
 										</span>
-										<span class="menu-title">My Appointment</span>
+										<span class="menu-title">Make Appointment</span>
 									</a>
 								</div>
 							</div>
