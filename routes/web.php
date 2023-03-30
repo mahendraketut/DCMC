@@ -69,6 +69,10 @@ Route::middleware(['auth', 'user-access:administrator'])->group(function () {
     Route::get('/admin.specialist.edit/{id}', [App\Http\Controllers\administrator\addSpecialistCategory::class, 'edit'])->name('admin.specialist.edit');
     Route::post('/admin.specialist.update', [App\Http\Controllers\administrator\addSpecialistCategory::class, 'update'])->name('admin.specialist.update');
     Route::get('/admin.specialist.delete/{id}', [App\Http\Controllers\administrator\addSpecialistCategory::class, 'destroy'])->name('admin.specialist.delete');
+    Route::get('/admin.dashboard/appointment', [App\Http\Controllers\administrator\MyAppointment::class, 'index'])->name('admin.appointment');
+    Route::get('/admin.dashboard/appointment.update/{id}', [App\Http\Controllers\administrator\MyAppointment::class, 'update'])->name('admin.appointment.update');
+    Route::get('/admin.dashboard/appointment.delete/{id}', [App\Http\Controllers\administrator\MyAppointment::class, 'destroy'])->name('admin.appointment.delete');
+
 });
 Route::middleware(['auth', 'user-access:doctor'])->group(function () {
     Route::get('/doctor.dashboard', [App\Http\Controllers\doctor\DashboardController::class, 'index'])->name('doctor.dashboard');
@@ -111,6 +115,7 @@ Route::middleware(['auth', 'user-access:pharmacist'])->group(function () {
 
 Route::middleware(['auth', 'user-access:patient'])->group(function () {
     Route::get('/patient.dashboard', [App\Http\Controllers\patient\DashboardController::class, 'index'])->name('patient.dashboard');
+    Route::get('/filter', [App\Http\Controllers\patient\DashboardController::class, 'filter'])->name('filter');
     Route::get('/patient.profile', [App\Http\Controllers\patient\MyprofileController::class, 'index'])->name('patient.profile');
     Route::get('/patient.profile.edit', [App\Http\Controllers\patient\UpdateProfileController::class, 'edit'])->name('patient.profile.edit');
     Route::put('/patient.profile.update', [App\Http\Controllers\patient\UpdateProfileController::class, 'update'])->name('patient.profile.update');
@@ -118,6 +123,9 @@ Route::middleware(['auth', 'user-access:patient'])->group(function () {
     Route::get('/patient.view.doctor', [App\Http\Controllers\patient\ViewDoctorController::class, 'index'])->name('patient.view.doctor');
     Route::get('/patient.view.detail.doctor/{id}', [App\Http\Controllers\patient\ViewDoctorController::class, 'show'])->name('patient.view.detail.doctor');
     Route::get('/patient.medicalrecord', [App\Http\Controllers\patient\MedicalRecordControler::class, 'index'])->name('patient.medicalrecordBook');
+    Route::get('/patient.appointment', [App\Http\Controllers\patient\MyAppointment::class, 'index'])->name('patient.appointment');
+    Route::post('/patient.appointment/', [App\Http\Controllers\patient\MyAppointment::class, "store"])->name('patient.appointment.store');
+    Route::get('/patient.appointment.delete/{id}', [App\Http\Controllers\patient\MyAppointment::class, 'destroy'])->name('patient.appointment.delete');
 });
 
 // Auth::routes();

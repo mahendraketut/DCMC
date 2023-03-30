@@ -1,25 +1,28 @@
 @extends('patient.navbar')
-@section('title', 'Dashboard')
+@section('title', 'Search Products')
 @section('css')
 
 @endsection
 
 @section('content')
+
 <div class="card mt-8">
     <div class="card-body">
         <div class="row">
             {{-- <div class="col-md-6">
                 <h3 class="card-title">Doctor List</h3>
             </div> --}}
-            <form action="" class="col-md-6">
+            <form action="{{url('search')}}" method="GET" role="search">
+                <div class="col-md-6">
                     <div class="input-group mb-3">
                         <input type="search" name="search" class="form-control" placeholder="Search Doctor" aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
+                        <button class="btn btn-primary" type="button" id="button-addon2">Search</button>
                     </div>
+                </div>
             </form>
-            <form id="filter-form" class="col-md-6">
+            <div class="col-md-6">
                 <div class="input-group mb-3">
-                    <select name="filter" class="form-select" id="filter-select">
+                    <select class="form-select" id="inputGroupSelect02">
                         <option selected>Choose Specialist</option>
                         <option value="1">Cardiologist</option>
                         <option value="2">Dentist</option>
@@ -36,76 +39,52 @@
                         <option value="13">Pulmonologist</option>
                         <option value="14">Rheumatologist</option>
                         <option value="15">Urologist</option>
-                        <option value="Mouth Surgery">Mouth Surgery</option>
                     </select>
-                    <button class="btn btn-primary" type="submit" id="button-addon2">Filter</button>
+                    <button class="btn btn-primary" type="button" id="button-addon2">Filter</button>
                 </div>
-            </form>
             </div>
         </div>
         <div class="card border md-12 mt-4">
             <div class="row g-0">
-            @foreach ($schedule as $schedule)
+            @foreach ($results as $schedule)
               <div class="col-md-4">
                 <img src="$schedule->user->profile_pic" class="img-fluid rounded-start" alt="...">
               </div>
               <div class="col-md-6">
                 <div class="card-body">
-                  <h5 class="card-title">{{$schedule->user->name}}</h5>
-                  <p class="card-text">{{$schedule->user->specialist}}</p>
+                  <h5 class="card-title">{{$schedule->name}}</h5>
+                  <p class="card-text">{{$schedule->specialist}}</p>
                   <p class="card-text">{{$schedule->day}} {{$schedule->start_time}} {{$schedule->end_time}}</p>
                   <p class="card-text"><small class="text-body-secondary">{{$schedule->created_at}}</small></p>
                 </div>
               </div>
-              <input type="hidden" name="doctor_id" value="{{$schedule->user->id}}">
+              <input type="hidden" name="doctor_id" value="{{$schedule->id}}">
               <div class="col-md-2">
-                <a href="{{route('patient.view.detail.doctor', Crypt::encrypt($schedule->user->  id))}}" class="btn btn-primary">Make an Appointment</a>
+                <a href="{{route('patient.view.detail.doctor', Crypt::encrypt($schedule->  id))}}" class="btn btn-primary">Make an Appointment</a>
                 {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_add_schedule">Make an Appointment</button> --}}
               </div>
             @endforeach
-            </div>
-        </div>
-        <table id="data-table">
-          <thead>
-              <tr>
-                  <th>Name</th>
-                  <th>Description</th>
-              </tr>
-          </thead>
-          <tbody>
-              <!-- Table rows will be dynamically generated using JavaScript -->
-          </tbody>
-      </table>      
     </div>
 </div>
 
 @endsection
 
 @section('js')
-<script>
-  $(document).ready(function() {
-      $('#button-addon2').on('click', function() {
-          var filter = $(this).val();
-          
-          $.ajax({
-              url: '{{ route('filter') }}',
-              type: 'GET',
-              data: {
-                  filter: filter
-              },
-              success: function(data) {
-                  var html = '';
-                  $.each(data, function(key, value) {
-                      html += '<tr>';
-                      html += '<td>' + value.name + '</td>';
-                      html += '<td>' + value.description + '</td>';
-                      html += '</tr>';
-                  });
-                  $('#data-table tbody').html(html);
-              }
-          });
-      });
-  });
-</script>
+<script type="text/javascript">
+    $('#search').on('keyup',function(){
+        $value=$(this).val();
+        $.ajax({
+            type : 'get',
+            url : '{{URL::to('search')}}',
+            data:{'search':$value},
+            success:function(data){
+            $('tbody').html(data);
+        }
+    });
 
+    })
+</script>
+<script type="text/javascript">
+    $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+</script>
 @endsection
