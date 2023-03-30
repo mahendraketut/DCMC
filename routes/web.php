@@ -72,7 +72,6 @@ Route::middleware(['auth', 'user-access:administrator'])->group(function () {
     Route::get('/admin.dashboard/appointment', [App\Http\Controllers\administrator\MyAppointment::class, 'index'])->name('admin.appointment');
     Route::get('/admin.dashboard/appointment.update/{id}', [App\Http\Controllers\administrator\MyAppointment::class, 'update'])->name('admin.appointment.update');
     Route::get('/admin.dashboard/appointment.delete/{id}', [App\Http\Controllers\administrator\MyAppointment::class, 'destroy'])->name('admin.appointment.delete');
-
 });
 Route::middleware(['auth', 'user-access:doctor'])->group(function () {
     Route::get('/doctor.dashboard', [App\Http\Controllers\doctor\DashboardController::class, 'index'])->name('doctor.dashboard');
