@@ -15,6 +15,126 @@
             <h3 class="card-title align-items-start flex-column">
                 <span class="card-label fw-bolder fs-3 mb-1">Appointment Table</span>
             </h3>
+            <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Click to add a user">
+                <a href="" class="btn btn-sm btn-light btn-active-primary" data-bs-toggle="modal" data-bs-target="#modal_add_schedule">
+                <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
+                <span class="svg-icon svg-icon-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor" />
+                        <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor" />
+                    </svg>
+                </span>
+                <!--end::Svg Icon-->Make an Appointment</a>
+            </div>
+        </div>
+        <div class="modal fade" id="modal_add_schedule" tabindex="-1" aria-hidden="true">
+            <!--begin::Modal dialog-->
+            <div class="modal-dialog modal-dialog-centered mw-650px">
+                <!--begin::Modal content-->
+                <div class="modal-content">
+                    <!--begin::Modal header-->
+                    <div class="modal-header" id="modal_add_schedule_header">
+                        <!--begin::Modal title-->
+                        <h2 class="fw-bolder">Appointment Details</h2>
+                        <!--end::Modal title-->
+                        <!--begin::Close-->
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <!--end::Close-->
+                    </div>
+                    <!--end::Modal header-->
+                    <!--begin::Modal body-->
+                    <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                        <!--begin::Form-->
+                        <form class="form" id="modal_add_schedule_form" action="{{route('admin.appointment.store')}}" method="POST">
+                            @csrf
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-10">
+                                <!--begin::Label-->
+                                <label class="fs-6 fw-bold form-label mb-2">
+                                    <span class="required">Patient</span>
+                                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Specify the day"></i>
+                                </label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <div class="col fv-row">
+                                    <select id="patient" name="patient" class="form-select form-select-solid form-select-lg fw-bold form-control @error('patient') is-invalid @enderror">
+                                        <option value="">Select Day...</option>
+                                        @foreach($patient as $patient)
+                                            <option value="{{$patient->id}}">{{$patient->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('patient')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <!--end::Input-->
+                            </div>
+                            <div class="fv-row mb-10">
+                                <!--begin::Label-->
+                                <label class="fs-6 fw-bold form-label mb-2">
+                                    <span class="required">Doctor Name</span>
+                                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Specify the day"></i>
+                                </label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <div class="col fv-row">
+                                    <select id="doctor" name="doctor" class="form-select form-select-solid form-select-lg fw-bold form-control @error('doctor') is-invalid @enderror">
+                                        <option value="">Select Day...</option>
+                                        @foreach($schedule as $day)
+                                            <option value="{{$day->doctor_id}}">{{$day->user->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('doctor')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <!--end::Input-->
+                            </div>
+                            <div class="fv-row mb-10">
+                                <!--begin::Label-->
+                                <label class="fs-6 fw-bold form-label mb-2">
+                                    <span class="required">Day</span>
+                                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Specify the day"></i>
+                                </label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <div class="col fv-row">
+                                    <select id="day" name="day" class="form-select form-select-solid form-select-lg fw-bold form-control @error('day') is-invalid @enderror">
+                                        <option value="">Select Day...</option>
+                                        @foreach($schedule as $day)
+                                            <option value="{{$day->id}}">{{$day->day}} - {{$day->start_time}} - {{$day->end_time}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('day')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <!--end::Input-->
+                            </div>
+                            {{-- <input type="hidden" name="doctor_id" value="{{$doctor->id}}"> --}}
+                            <!--end::Input group-->
+                            
+                            <!--begin::Actions-->
+                            <div class="text-center pt-15">
+                                <button type="submit" id="modal_add_schedule_submit" class="btn btn-primary">
+                                    <span class="indicator-label">Submit</span>
+                                    <span class="indicator-progress">Please wait...
+                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                </button>
+                            </div>
+                            <!--end::Actions-->
+                        </form>
+                        <!--end::Form-->
+                    </div>
+                    <!--end::Modal body-->
+                </div>
+            </div>
         </div>
         <!--end::Header-->
         <!--begin::Body-->

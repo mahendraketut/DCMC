@@ -16,8 +16,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $appointment = Appointment::where('doctor_id', auth()->user()->id)->get();
         $schedules = Schedule::where('doctor_id', auth()->user()->id)->count();
-        return view('doctor.dashboard', compact('schedules'));
+        return view('doctor.dashboard', compact('schedules', 'appointment'));
     }
 
     /**

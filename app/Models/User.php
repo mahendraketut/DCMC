@@ -64,6 +64,11 @@ class User extends Authenticatable
         return $this->hasMany(Appointment::class);
     }
 
+    public function prescription()
+    {
+        return $this->hasOne(Prescription::class, 'prescription_id');
+    }
+
     public function scopeSearch($query, $search)
     {
         return $query->where('name', 'LIKE', '%'.$search.'%')

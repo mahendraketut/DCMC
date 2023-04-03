@@ -123,9 +123,9 @@
                             @endif
                         </div>
                         <br>
-                        Welcome to the Admin Page<br> {{ Auth::user()->name }}
+                        Welcome to the Patient Page<br> {{ Auth::user()->name }}
                         <br>
-                        <a href="{{route('admin.profile')}}" class="btn btn-white btn-hover-scale me-5 ms-10 mt-5">Manage your profile here</a>
+                        <a href="{{route('patient.profile')}}" class="btn btn-white btn-hover-scale me-5 ms-10 mt-5">Manage your profile here</a>
                     </h1>
                 </div>
                 <!--end::Chart-->

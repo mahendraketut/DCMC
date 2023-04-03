@@ -70,6 +70,7 @@ Route::middleware(['auth', 'user-access:administrator'])->group(function () {
     Route::post('/admin.specialist.update', [App\Http\Controllers\administrator\addSpecialistCategory::class, 'update'])->name('admin.specialist.update');
     Route::get('/admin.specialist.delete/{id}', [App\Http\Controllers\administrator\addSpecialistCategory::class, 'destroy'])->name('admin.specialist.delete');
     Route::get('/admin.dashboard/appointment', [App\Http\Controllers\administrator\MyAppointment::class, 'index'])->name('admin.appointment');
+    Route::post('/admin.dashboard/appointment', [App\Http\Controllers\administrator\MyAppointment::class, 'store'])->name('admin.appointment.store');
     Route::get('/admin.dashboard/appointment.update/{id}', [App\Http\Controllers\administrator\MyAppointment::class, 'update'])->name('admin.appointment.update');
     Route::get('/admin.dashboard/appointment.delete/{id}', [App\Http\Controllers\administrator\MyAppointment::class, 'destroy'])->name('admin.appointment.delete');
 
@@ -90,12 +91,15 @@ Route::middleware(['auth', 'user-access:doctor'])->group(function () {
     Route::get('/doctor.queue.delete/{id}', [App\Http\Controllers\doctor\appointmentQueue::class, 'destroy'])->name('doctor.queue.delete');
     Route::get('/doctor.medicalrecord', [App\Http\Controllers\doctor\medicalRecordBook::class, 'index'])->name('doctor.medicalrecordBook');
     Route::get('/doctor.medicalrecord.addRecord/{id}', [App\Http\Controllers\doctor\medicalRecordBook::class, 'makeNewRecord'])->name('doctor.medicalrecordBook.addRecord');
+    Route::post('doctor.medicalrecord.addRecord', [App\Http\Controllers\doctor\medicalRecordBook::class, 'recordPrescription'])->name('doctor.medicalrecordBook.recordPrescription');
     Route::post('/doctor.medicalrecord.saverecord', [App\Http\Controllers\doctor\medicalRecordBook::class, 'saveRecord'])->name('doctor.medicalrecordBook.saverecord');
     Route::get('/doctor.medicalrecord.list', [App\Http\Controllers\doctor\medicalRecordBook::class, 'index'])->name('doctor.medicalrecordBook.list');
     Route::post('/doctor.medicalrecord.addcategory', [App\Http\Controllers\doctor\medicalRecordBook::class, 'addNewCategory'])->name('doctor.medicalrecordBook.addcategory');
     Route::get('/doctor.medicalrecord.edit/{id}', [App\Http\Controllers\doctor\medicalRecordBook::class, 'edit'])->name('doctor.medicalrecordBook.edit');
     Route::post('/doctor.medicalrecord.update', [App\Http\Controllers\doctor\medicalRecordBook::class, 'update'])->name('doctor.medicalrecordBook.update');
     Route::get('doctor.medicalrecord.detailview/{id}', [App\Http\Controllers\doctor\medicalRecordBook::class, 'viewMedicalRecordDetail'])->name('doctor.medicalrecordBook.detailview');
+    Route::get('/doctor.medicalrecord.detailview.delete/{id}', [App\Http\Controllers\doctor\medicalRecordBook::class, 'deletePrescription'])->name('doctor.medicalrecordBook.detailView.delete');
+    Route::get('/doctor.medicalrecord.addRecord.request/{id}', [App\Http\Controllers\doctor\medicalRecordBook::class, 'requestPrescription'])->name('doctor.medicalrecordBook.addRecord.request');
 });
 Route::middleware(['auth', 'user-access:pharmacist'])->group(function () {
     Route::get('/pharmacist.dashboard', [App\Http\Controllers\pharmacist\DashboardController::class, 'index'])->name('pharmacist.dashboard');
@@ -111,6 +115,8 @@ Route::middleware(['auth', 'user-access:pharmacist'])->group(function () {
     Route::get('/pharmacist.medicines.delete/{id}', [App\Http\Controllers\pharmacist\manageMedicinesController::class, 'destroy'])->name('pharmacist.medicines.delete');
     Route::post('/pharmacist.medicines.import', [App\Http\Controllers\pharmacist\manageMedicinesController::class, 'import'])->name('pharmacist.medicines.import');
     Route::get('/pharmacist.recipes', [App\Http\Controllers\pharmacist\RecipeController::class, 'index'])->name('pharmacist.recipes');
+    Route::get('/pharmacist.view.prescription', [App\Http\Controllers\pharmacist\PrescriptionController::class, 'index'])->name('pharmacist.view.prescription');
+    Route::get('/pharmacisst.view.prescription.detail/{id}', [App\Http\Controllers\pharmacist\PrescriptionController::class, 'show'])->name('pharmacist.view.prescription.detail');
 });
 
 Route::middleware(['auth', 'user-access:patient'])->group(function () {
@@ -122,10 +128,14 @@ Route::middleware(['auth', 'user-access:patient'])->group(function () {
     Route::delete('/patient.profile.delete', [App\Http\Controllers\patient\UpdateProfileController::class, 'destroy'])->name('patient.profile.delete');
     Route::get('/patient.view.doctor', [App\Http\Controllers\patient\ViewDoctorController::class, 'index'])->name('patient.view.doctor');
     Route::get('/patient.view.detail.doctor/{id}', [App\Http\Controllers\patient\ViewDoctorController::class, 'show'])->name('patient.view.detail.doctor');
+    Route::post('/patient.view.detail.doctor/', [App\Http\Controllers\patient\ViewDoctorController::class, 'store'])->name('patient.view.detail.doctor.store');
     Route::get('/patient.medicalrecord', [App\Http\Controllers\patient\MedicalRecordControler::class, 'index'])->name('patient.medicalrecordBook');
     Route::get('/patient.appointment', [App\Http\Controllers\patient\MyAppointment::class, 'index'])->name('patient.appointment');
     Route::post('/patient.appointment/', [App\Http\Controllers\patient\MyAppointment::class, "store"])->name('patient.appointment.store');
     Route::get('/patient.appointment.delete/{id}', [App\Http\Controllers\patient\MyAppointment::class, 'destroy'])->name('patient.appointment.delete');
+    Route::get('/patient.view.prescription', [App\Http\Controllers\patient\PrescriptionController::class, 'index'])->name('patient.view.prescription');
+    Route::get('/patient.view.prescription.detail/{id}', [App\Http\Controllers\patient\PrescriptionController::class, 'show'])->name('patient.view.prescription.detail');
+
 });
 
 // Auth::routes();

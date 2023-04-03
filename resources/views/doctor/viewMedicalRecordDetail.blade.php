@@ -337,172 +337,47 @@
                         </div>
                     </div>
                     <!--end::Card header-->
-                    <!--begin::Card body-->
                     <div class="card-body py-0">
-                        <!--begin::Table wrapper-->
-                        <div class="table-responsive">
-                            <!--begin::Table-->
-                            {{-- <table class="table align-middle table-row-dashed fw-bold text-gray-600 fs-6 gy-5" id="kt_table_customers_logs">
-                                <!--begin::Table body-->
-                                <tbody>
-                                    <!--begin::Table row-->
+                        <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4" id="medicalrecord_table">
+                            <!--begin::Table head-->
+                            <thead>
+                                <tr class="fw-bolder text-muted bg-light">
+                                    <th class="min-w-50px">No</th>
+                                    <th class="min-w-100px">Medicine Name</th>
+                                    <th class="min-w-100px">Number of Medicine</th>
+                                    <th class="min-w-150px">Dosage</th>
+                                    <th class="min-w-100px">Date Given</th>
+                                    <th class="min-w-100px">Status</th>
+                                    <th class="min-w-20px">Action</th>
+                                </tr>
+                            </thead>
+                            <!--end::Table head-->
+                            <!--begin::Table body-->
+                            <tbody>
+                                @foreach ($prescription as $prescription)
                                     <tr>
-                                        <!--begin::Badge=-->
-                                        <td class="min-w-70px">
-                                            <div class="badge badge-light-success">ROOM 4</div>
+                                        <td>{{$loop->iteration}}</td>
+                                        <td>{{$prescription->medicine->name}}</td>
+                                        <td>{{$prescription->number_medicine}}</td>
+                                        <td>{{$prescription->dosage}}</td>
+                                        <td>{{$prescription->created_at->diffForHumans()}}</td>
+                                        <td>{{$prescription->status}}</td>
+                                        <td>
+                                            <a href="{{url('/doctor.medicalrecord.detailview.delete/'.$prescription->id)}}" class="btn btn-danger" alt="Delete Prescription">
+                                                <i class="fas fa-file-medical-alt"></i>
+                                                Delete
+                                            </a>
+                                            {{-- <a href="{{url('/doctor.medicalrecord.edit/'.$medicalrecord->id)}}" class="btn btn-sm btn-light btn-active-success me-2" alt="Make Medical Record Data">
+                                                <i class="fas fa-file-medical-alt"></i>
+                                                Detail
+                                            </a> --}}
                                         </td>
-                                        <!--end::Badge=-->
-                                        <!--begin::Status=-->
-                                        <td>Sunday, 21 January 2023</td>
-                                        <!--end::Status=-->
-                                        <!--begin::Timestamp=-->
-                                        <td class="pe-0 text-end min-w-200px">9.23 AM - 1.00 PM</td>
-                                        <!--end::Timestamp=-->
                                     </tr>
-                                    <!--end::Table row-->
-                                    <!--begin::Table row-->
-                                    {{-- <tr>
-                                        <!--begin::Badge=-->
-                                        <td class="min-w-70px">
-                                            <div class="badge badge-light-danger">500 ERR</div>
-                                        </td>
-                                        <!--end::Badge=-->
-                                        <!--begin::Status=-->
-                                        <td>POST /v1/invoice/in_9688_2667/invalid</td>
-                                        <!--end::Status=-->
-                                        <!--begin::Timestamp=-->
-                                        <td class="pe-0 text-end min-w-200px">25 Oct 2022, 6:05 pm</td>
-                                        <!--end::Timestamp=-->
-                                    </tr>
-                                    <!--end::Table row-->
-                                    <!--begin::Table row-->
-                                    <tr>
-                                        <!--begin::Badge=-->
-                                        <td class="min-w-70px">
-                                            <div class="badge badge-light-warning">404 WRN</div>
-                                        </td>
-                                        <!--end::Badge=-->
-                                        <!--begin::Status=-->
-                                        <td>POST /v1/customer/c_624475fdc3e9c/not_found</td>
-                                        <!--end::Status=-->
-                                        <!--begin::Timestamp=-->
-                                        <td class="pe-0 text-end min-w-200px">22 Sep 2022, 2:40 pm</td>
-                                        <!--end::Timestamp=-->
-                                    </tr>
-                                    <!--end::Table row-->
-                                    <!--begin::Table row-->
-                                    <tr>
-                                        <!--begin::Badge=-->
-                                        <td class="min-w-70px">
-                                            <div class="badge badge-light-danger">500 ERR</div>
-                                        </td>
-                                        <!--end::Badge=-->
-                                        <!--begin::Status=-->
-                                        <td>POST /v1/invoice/in_9688_2667/invalid</td>
-                                        <!--end::Status=-->
-                                        <!--begin::Timestamp=-->
-                                        <td class="pe-0 text-end min-w-200px">20 Jun 2022, 2:40 pm</td>
-                                        <!--end::Timestamp=-->
-                                    </tr>
-                                    <!--end::Table row-->
-                                    <!--begin::Table row-->
-                                    <tr>
-                                        <!--begin::Badge=-->
-                                        <td class="min-w-70px">
-                                            <div class="badge badge-light-success">200 OK</div>
-                                        </td>
-                                        <!--end::Badge=-->
-                                        <!--begin::Status=-->
-                                        <td>POST /v1/invoices/in_3102_4131/payment</td>
-                                        <!--end::Status=-->
-                                        <!--begin::Timestamp=-->
-                                        <td class="pe-0 text-end min-w-200px">10 Nov 2022, 8:43 pm</td>
-                                        <!--end::Timestamp=-->
-                                    </tr>
-                                    <!--end::Table row-->
-                                    <!--begin::Table row-->
-                                    <tr>
-                                        <!--begin::Badge=-->
-                                        <td class="min-w-70px">
-                                            <div class="badge badge-light-danger">500 ERR</div>
-                                        </td>
-                                        <!--end::Badge=-->
-                                        <!--begin::Status=-->
-                                        <td>POST /v1/invoice/in_9094_8155/invalid</td>
-                                        <!--end::Status=-->
-                                        <!--begin::Timestamp=-->
-                                        <td class="pe-0 text-end min-w-200px">22 Sep 2022, 11:05 am</td>
-                                        <!--end::Timestamp=-->
-                                    </tr>
-                                    <!--end::Table row-->
-                                    <!--begin::Table row-->
-                                    <tr>
-                                        <!--begin::Badge=-->
-                                        <td class="min-w-70px">
-                                            <div class="badge badge-light-success">200 OK</div>
-                                        </td>
-                                        <!--end::Badge=-->
-                                        <!--begin::Status=-->
-                                        <td>POST /v1/invoices/in_3102_4131/payment</td>
-                                        <!--end::Status=-->
-                                        <!--begin::Timestamp=-->
-                                        <td class="pe-0 text-end min-w-200px">10 Mar 2022, 10:30 am</td>
-                                        <!--end::Timestamp=-->
-                                    </tr>
-                                    <!--end::Table row-->
-                                    <!--begin::Table row-->
-                                    <tr>
-                                        <!--begin::Badge=-->
-                                        <td class="min-w-70px">
-                                            <div class="badge badge-light-danger">500 ERR</div>
-                                        </td>
-                                        <!--end::Badge=-->
-                                        <!--begin::Status=-->
-                                        <td>POST /v1/invoice/in_2607_4645/invalid</td>
-                                        <!--end::Status=-->
-                                        <!--begin::Timestamp=-->
-                                        <td class="pe-0 text-end min-w-200px">19 Aug 2022, 10:10 pm</td>
-                                        <!--end::Timestamp=-->
-                                    </tr>
-                                    <!--end::Table row-->
-                                    <!--begin::Table row-->
-                                    <tr>
-                                        <!--begin::Badge=-->
-                                        <td class="min-w-70px">
-                                            <div class="badge badge-light-warning">404 WRN</div>
-                                        </td>
-                                        <!--end::Badge=-->
-                                        <!--begin::Status=-->
-                                        <td>POST /v1/customer/c_624475fdc3e9a/not_found</td>
-                                        <!--end::Status=-->
-                                        <!--begin::Timestamp=-->
-                                        <td class="pe-0 text-end min-w-200px">05 May 2022, 2:40 pm</td>
-                                        <!--end::Timestamp=-->
-                                    </tr>
-                                    <!--end::Table row-->
-                                    <!--begin::Table row-->
-                                    <tr>
-                                        <!--begin::Badge=-->
-                                        <td class="min-w-70px">
-                                            <div class="badge badge-light-danger">500 ERR</div>
-                                        </td>
-                                        <!--end::Badge=-->
-                                        <!--begin::Status=-->
-                                        <td>POST /v1/invoice/in_9094_8155/invalid</td>
-                                        <!--end::Status=-->
-                                        <!--begin::Timestamp=-->
-                                        <td class="pe-0 text-end min-w-200px">20 Dec 2022, 10:10 pm</td>
-                                        <!--end::Timestamp=-->
-                                    </tr>
-                                    <!--end::Table row-->
-                                </tbody>
-                                <!--end::Table body-->
-                            </table> --}}
-                            <!--end::Table-->
-                        </div>
-                        <!--end::Table wrapper-->
+                                @endforeach
+                            </tbody>
+                            <!--end::Table body-->
+                        </table>
                     </div>
-                    <!--end::Card body-->
                 </div>
                 <!--end::Card-->
             </div>

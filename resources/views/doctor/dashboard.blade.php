@@ -134,7 +134,7 @@
                         <!--end::Col-->
                         <!--begin::Col-->
                         <div class="col bg-light-primary px-6 py-8 rounded-2 mb-7">
-                            <p class="text-primary fw-bolder fs-1">0</p>
+                            <p class="text-primary fw-bolder fs-1">{{count($appointment)}}</p>
 
                             <!--end::Svg Icon-->
                             <a href="#" class="text-primary fw-bold fs-6">Appointment</a>
