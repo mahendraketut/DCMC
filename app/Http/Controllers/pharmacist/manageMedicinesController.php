@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\pharmacist;
 
 use App\Http\Controllers\Controller;
-use App\DataTables\medicinesDataTable;
 use App\Imports\MedicineImport;
 use App\Models\MedicineCategory;
 use App\Models\Medicines;
@@ -21,19 +20,12 @@ class manageMedicinesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(medicinesDataTable $dataTable)
+    public function index()
     {
         $categories = MedicineCategory::all();
         $medicines = Medicines::all();
-        return $dataTable->render('pharmacist.manageMedicines', compact('categories', 'medicines'));
+        return view('pharmacist.manageMedicines', compact('medicines', 'categories'));
     }
-    // {
-    //     $categories = MedicineCategory::all();
-    //     $medicines = Medicines::all();
-    //     return view('pharmacist.manageMedicines', compact('medicines', 'categories'));
-
-
-    // }
 
     /**
      * Show the form for creating a new resource.
@@ -104,15 +96,7 @@ class manageMedicinesController extends Controller
             'other_information' => $request->other_information,
             'composition' => $request->composition,
         ]);
-        //if the query is successful, redirect to the medicines page and if not, show error swal
-        if (!$query) {
-            return redirect()->route('pharmacist.medicines')->with('error', 'Medicine not added');
-        } else {
-            return redirect()->route('pharmacist.medicines')->with('success', 'Medicine added successfully');
-        }
-        // return dd($query->all());
-
-        // return redirect()->route('pharmacist.medicines')->with('success', 'Medicine added successfully');
+        return redirect()->route('pharmacist.medicines')->with('success', 'Medicine added successfully');
     }
 
     /**

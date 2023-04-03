@@ -5,7 +5,6 @@ namespace App\Http\Controllers\administrator;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\User;
-use Yajra\DataTables\Facades\DataTables;
 
 class viewAllAdmin extends Controller
 {

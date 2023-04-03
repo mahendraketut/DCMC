@@ -123,7 +123,29 @@
                             @endif
                         </div>
                         <br>
+
                         Welcome to the Patient Page<br> {{ Auth::user()->name }}
+
+                        @php
+                            $hour = gmdate('H', time() + 60 * 60 * 7);
+                            if ($hour >= 5 && $hour <= 11) {
+                                echo "Good Morning";
+                            } elseif ($hour >= 12 && $hour <= 14) {
+                                echo "Good Afternoon";
+                            } elseif ($hour >= 15 && $hour <= 17) {
+                                echo "Good Afternoon";
+                            } elseif ($hour >= 18 && $hour <= 19) {
+                                echo "Good Evening";
+                            } elseif ($hour >= 20 && $hour <= 23) {
+                                echo "Good Night";
+                            } else {
+                                echo "Good Night";
+                            }
+                        @endphp
+                        <br>
+                        Welcome back
+                        {{ Auth::user()->name }}
+
                         <br>
                         <a href="{{route('patient.profile')}}" class="btn btn-white btn-hover-scale me-5 ms-10 mt-5">Manage your profile here</a>
                     </h1>

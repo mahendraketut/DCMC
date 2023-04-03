@@ -147,10 +147,6 @@ class medicalRecordBook extends Controller
     public function saveRecord(Request $request)
     {
         $request->validate([
-            'patient_id' => 'required',
-            'doctor_id' => 'required',
-            'appointment_id' => 'required',
-            'date' => 'required',
             'complaints' => 'required',
             'diagnosis' => 'required',
             'medical_category' => 'required',
