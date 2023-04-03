@@ -11,6 +11,7 @@
             {{-- <button type="button" class="btn btn-sm btn-light">
                 Action
             </button> --}}
+
         </div>
     </div>
     <div class="card-body">
@@ -101,9 +102,9 @@
         @endif
 
     </div>
-    <div class="card-footer">
+    {{-- <div class="card-footer">
         Footer
-    </div>
+    </div> --}}
 </div>
 
 @endsection

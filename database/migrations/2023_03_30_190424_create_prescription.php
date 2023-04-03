@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('prescriptions', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('patient_id')->constrained('user');
-            $table->string('phone_number');
-            $table->string('medical_facility');
-            $table->date('date');
-            $table->text('prescription');
-            $table->string('status');
+            $table->string('prescription_id')->unique();
+            $table->foreignId('patient_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('doctor_id')->constrained('users')->onDelete('cascade');
+            $table->dateTime('date');
+
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });
     }

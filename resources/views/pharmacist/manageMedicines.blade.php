@@ -1,10 +1,6 @@
 @extends('pharmacist.navbar')
 @section('title', 'Manage Medicines')
 @section('css')
-<link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet"/>
-<link href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.bootstrap5.min.css" rel="stylesheet"/>
-<link href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.bootstrap5.min.css" rel="stylesheet"/>
-<link href="https://cdn.datatables.net/searchbuilder/1.4.1/css/searchBuilder.bootstrap5.min.css" rel="stylesheet"/>
 @endsection
 
 @section('content')
@@ -186,10 +182,10 @@
                         <thead>
                             <tr class="fw-bolder text-muted bg-light">
                                 <th class="min-w-50px">No</th>
-                                <th class="min-w-50px">Name</th>
+                                <th class="min-w-100px">Name</th>
                                 <th class="min-w-50px">Category</th>
-                                <th class="min-w-50px">Description</th>
-                                <th class="min-w-100px">Action</th>
+                                <th class="min-w-100px">Description</th>
+                                <th class="min-w-50px">Action</th>
                             </tr>
                         </thead>
                         <!--end::Table head-->
@@ -212,7 +208,7 @@
                         </tbody>
                         <!--end::Table body-->
                     </table>
-                    {{$dataTable->table()}}
+
                 </div>
                 <!--end::Table-->
 
@@ -639,10 +635,6 @@
 @endsection
 
 @push('scripts')
-<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
-{{$dataTable->scripts()}}
 <script type="text/javascript">
     @if (count($errors) > 0)
         $('#modal_add_medicines').modal('show');

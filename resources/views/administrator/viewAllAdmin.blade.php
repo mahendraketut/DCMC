@@ -1,8 +1,6 @@
 @extends('administrator.navbar')
 @section('title', 'View All Administrator')
 @section('css')
-<link href="{{asset('admin/assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.13.2/b-2.3.4/b-html5-2.3.4/b-print-2.3.4/datatables.min.css"/>
 @endsection
 @section('content')
 <div class="col-xl-12">
@@ -64,13 +62,9 @@
 @section('js')
 
 <script src="{{asset('admin/assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.13.2/b-2.3.4/b-html5-2.3.4/b-print-2.3.4/datatables.min.js"></script>
-
 @endsection
 @push('scripts')
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         $(document).ready(function() {
             $('#kt_datatable_example_5').DataTable({
                 processing: true,
@@ -87,4 +81,5 @@
                 ]
             });
         });
+    </script> --}}
 @endpush
