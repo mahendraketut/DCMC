@@ -37,13 +37,11 @@ class ViewDoctorController extends Controller
         ]);
 
         $query = DB::table('appointments')->insert([
+            'appointment_id' => 'AP' . rand(100000, 999999),
             'schedule_id' => $request->day,
             'patient_id' => Auth::user()->id,
-            'admin_id' => $request->doctor_id,
-            'day' => '',
-            'start_time' => '',
-            'end_time' => '',
-            'status' => 'pending',
+            'doctor_id' => $request->doctor_id,
+            'status' => 'Pending',
             'created_at' => Carbon::now(),
         ]);
         if ($query) {

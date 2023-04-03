@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers\doctor;
 
-use App\Models\Appointment;
-use App\Models\medicalCategory;
-use App\Models\MedicalRecord;
-use App\Models\User;
-use App\Models\Schedule;
-
-use App\Http\Controllers\Controller;
-use Brick\Math\Internal\Calculator;
 use Carbon\Carbon;
-use Haruncpi\LaravelIdGenerator\IdGenerator;
+use App\Models\User;
+use App\Models\Medicine;
+use App\Models\Schedule;
+use App\Models\Appointment;
+
+use App\Models\Prescription;
 use Illuminate\Http\Request;
+use App\Models\MedicalRecord;
+use App\Models\medicalCategory;
+use Illuminate\Support\Facades\DB;
+use Brick\Math\Internal\Calculator;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class medicalRecordBook extends Controller
 {
@@ -24,6 +28,7 @@ class medicalRecordBook extends Controller
      */
     public function index()
     {
+        
         $patients = User::where('role', '=', 'patient')->get();
         return view('doctor.medicalRecord', compact('patients'));
     }
@@ -133,7 +138,9 @@ class medicalRecordBook extends Controller
         $countMR = MedicalRecord::where('patient_id', '=', $id)->count();
         $medicalCategories = medicalCategory::all();
         //change the appointment status to
-        return view('doctor.addNewRecord', compact('appointment', 'age', 'medicalrecords', 'countMR', 'medicalCategories'));
+        $medicine = Medicine::get();
+        $prescription = Prescription::where('appointment_id', '=', $appointment->id)->get();
+        return view('doctor.addNewRecord', compact('appointment', 'age', 'medicalrecords', 'countMR', 'medicalCategories', 'medicine', 'prescription'));
         // return dd($appointment);
     }
 
@@ -197,6 +204,45 @@ class medicalRecordBook extends Controller
         $medicalrecords = MedicalRecord::where('patient_id', '=', $id)->get();
         $medicalcategories = medicalCategory::all();
         $age = Carbon::parse($patient->dob)->diff(Carbon::now())->format('%y years, %m months and %d days');
-        return view('doctor.viewMedicalRecordDetail', compact('patient', 'medicalrecords', 'medicalcategories', 'age'));
+        $prescription = Prescription::where('patient_id', '=', $id)->get();
+        return view('doctor.viewMedicalRecordDetail', compact('patient', 'medicalrecords', 'medicalcategories', 'age', 'prescription'));
+    }
+
+    public function recordPrescription(Request $request)
+    {
+        $validatedData = $request->validate([
+            'number_medicine' => 'required',
+            'dosage' => 'required',
+        ]);
+
+        $query = DB::table('prescriptions')->insert([
+            'appointment_id' => $request->appointment_id,
+            'medicine_id' => $request->medicine,
+            'patient_id' => $request->patient_id,
+            'doctor_id' => $request->doctor_id,
+            'number_medicine' => $request->number_medicine,
+            'dosage' => $request->dosage,
+            'status' => 'New',
+            'created_at' => Carbon::now(),
+        ]);
+        if ($query) {
+            return redirect()->back()->with('success', 'Prescription Successfully');
+        } else {
+            return redirect()->back()->with('error', 'Prescription Failed');
+        }
+    }
+
+    public function deletePrescription($id)
+    {
+        Prescription::where('id', '=', $id)->delete();
+        return redirect()->back()->with('success', 'Prescription Deleted Successfully');
+    }
+
+    public function requestPrescription($id)
+    {
+        $prescription = Prescription::where('id', '=', $id)->first();
+        $prescription->status = 'Request';
+        $prescription->save();
+        return redirect()->back()->with('success', 'Prescription Requested Successfully');
     }
 }

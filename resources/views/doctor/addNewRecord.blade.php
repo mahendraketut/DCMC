@@ -302,16 +302,73 @@
                     </h2>
                     <div id="kt_accordion_1_body_5" class="accordion-collapse collapse" aria-labelledby="kt_accordion_1_header_5" data-bs-parent="#kt_accordion_1">
                         <div class="accordion-body">
-                            <form method="POST" action="">
+                            <form method="POST" action="{{route('doctor.medicalrecordBook.recordPrescription')}}">
                                 {{ csrf_field() }}
+                                <div class="card-body py-0">
+                                    <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4" id="medicalrecord_table">
+                                        <!--begin::Table head-->
+                                        <thead>
+                                            <tr class="fw-bolder text-muted bg-light">
+                                                <th class="min-w-50px">No</th>
+                                                <th class="min-w-100px">Medicine Name</th>
+                                                <th class="min-w-100px">Number of Medicine</th>
+                                                <th class="min-w-150px">Dosage</th>
+                                                <th class="min-w-100px">Date Given</th>
+                                                <th class="min-w-100px">Status</th>
+                                                <th class="min-w-20px">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <!--end::Table head-->
+                                        <!--begin::Table body-->
+                                        <tbody>
+                                            @foreach ($prescription as $prescription)
+                                                <tr>
+                                                    <td>{{$loop->iteration}}</td>
+                                                    <td>{{$prescription->medicine->name}}</td>
+                                                    <td>{{$prescription->number_medicine}}</td>
+                                                    <td>{{$prescription->dosage}}</td>
+                                                    <td>{{$prescription->created_at->diffForHumans()}}</td>
+                                                    <td>{{$prescription->status}}</td>
+                                                    @if ($prescription->status == 'New')
+                                                    <td>
+                                                        <a href="{{url('/doctor.medicalrecord.addRecord.request/'.$prescription->id)}}" class="btn btn-primary" alt="Request Prescription">
+                                                            <i class="fas fa-file-medical-alt"></i>
+                                                            Request
+                                                        </a>
+                                                        {{-- <a href="{{url('/doctor.medicalrecord.edit/'.$medicalrecord->id)}}" class="btn btn-sm btn-light btn-active-success me-2" alt="Make Medical Record Data">
+                                                            <i class="fas fa-file-medical-alt"></i>
+                                                            Detail
+                                                        </a> --}}
+                                                    </td>
+                                                    @else
+                                                    @endif
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                        <!--end::Table body-->
+                                    </table>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-5">
                                         <label class="col col-form-label fw-bold fs-6">Prescription</label>
-                                        <input type="text" class="form-control" name="prescription" id="prescription" required placeholder="Name of the medicines">
+                                        <select id="medicine" name="medicine" class="form-select form-select-solid form-select-lg fw-bold form-control @error('medicine') is-invalid @enderror">
+                                            <option value="">Select Medicine...</option>
+                                            @foreach($medicine as $medicine)
+                                                <option value="{{$medicine->id}}">{{$medicine->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('medicine')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
+                                    <input type="hidden" name="appointment_id" value="{{$appointment->id}}">
+                                    <input type="hidden" name="patient_id" value="{{$appointment->patient->id}}">
+                                    <input type="hidden" name="doctor_id" value="{{auth()->id()}}">
                                     <div class="col-md-3">
                                         <label class="col col-form-label fw-bold fs-6">No.</label>
-                                        <input type="text" class="form-control" name="number" id="number" required placeholder="number of medicines prescribed ">
+                                        <input type="text" class="form-control" name="number_medicine" id="number_medicine" required placeholder="number of medicines prescribed ">
                                     </div>
                                     <div class="col-md-3">
                                         <label class="col col-form-label fw-bold fs-6">Dosage</label>

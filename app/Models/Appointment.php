@@ -59,6 +59,11 @@ class Appointment extends Model
         return $this->belongsTo(User::class, 'admin_id');
     }
 
+    public function prescription()
+    {
+        return $this->hasOne(Prescription::class, 'prescription_id');
+    }
+
     // public function patient()
     // {
     //     return $this->belongsTo(User::class, 'patient_id');

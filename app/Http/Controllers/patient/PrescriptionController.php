@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\pharmacist;
+namespace App\Http\Controllers\patient;
 
-use App\Models\Medicines;
 use App\Models\Prescription;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
-class DashboardController extends Controller
+class PrescriptionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $medicines = Medicines::all()->count();
-        $prescription = Prescription::all()->count();
-        return view('pharmacist.dashboard', compact('medicines', 'prescription'));
+        $prescription = Prescription::where('patient_id', '=', Auth::user()->id)->get();
+        return view('patient.viewPrescription', compact('prescription'));
     }
 
     /**
@@ -51,6 +50,8 @@ class DashboardController extends Controller
     public function show($id)
     {
         //
+        $prescription = Prescription::where('id', $id)->first();
+        return view('patient.viewPrescription-detail', compact('prescription'));
     }
 
     /**

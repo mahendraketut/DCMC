@@ -116,7 +116,7 @@
                 <div class="card-rounded-bottom bg-dark" data-kt-color="danger" style="height: 200px; background: rgb(0,17,148);
                 background: linear-gradient(90deg, rgba(0,17,148,1) 0%, rgba(28,178,194,1) 100%);">
                     <h1 class="text-left text-white ms-10">Welcome to the Pharmacist Page<br> {{ Auth::user()->name }}</h1>
-                    <a href="{{route('admin.profile')}}" class="btn btn-white btn-hover-scale me-5 ms-10 mt-5">Manage your profile here</a>
+                    <a href="{{route('pharmacist.profile')}}" class="btn btn-white btn-hover-scale me-5 ms-10 mt-5">Manage your profile here</a>
 
                 </div>
                 <!--end::Chart-->
@@ -134,7 +134,7 @@
                         <!--end::Col-->
                         <!--begin::Col-->
                         <div class="col bg-light-primary px-6 py-8 rounded-2 mb-7">
-                            <p class="text-primary fw-bolder fs-1">0</p>
+                            <p class="text-primary fw-bolder fs-1">{{$prescription}}</p>
 
                             <!--end::Svg Icon-->
                             <a href="#" class="text-primary fw-bold fs-6">Prescription</a>

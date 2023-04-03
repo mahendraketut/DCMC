@@ -123,6 +123,9 @@
                             @endif
                         </div>
                         <br>
+
+                        Welcome to the Patient Page<br> {{ Auth::user()->name }}
+
                         @php
                             $hour = gmdate('H', time() + 60 * 60 * 7);
                             if ($hour >= 5 && $hour <= 11) {
@@ -142,8 +145,9 @@
                         <br>
                         Welcome back
                         {{ Auth::user()->name }}
+
                         <br>
-                        <a href="{{route('admin.profile')}}" class="btn btn-white btn-hover-scale me-5 ms-10 mt-5">Manage your profile here</a>
+                        <a href="{{route('patient.profile')}}" class="btn btn-white btn-hover-scale me-5 ms-10 mt-5">Manage your profile here</a>
                     </h1>
                 </div>
                 <!--end::Chart-->

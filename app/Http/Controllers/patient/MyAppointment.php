@@ -57,7 +57,7 @@ class MyAppointment extends Controller
             'day' => $request->day,
             'start_time' => $request->start_time,
             'end_time' => $request->end_time,
-            'status' => 'pending',
+            'status' => 'Pending',
             'created_at' => Carbon::now(),
         ]);
         if ($query) {

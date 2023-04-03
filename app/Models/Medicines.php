@@ -36,4 +36,9 @@ class Medicines extends Model
     {
         return $this->belongsTo(MedicineCategory::class, 'category_id');
     }
+
+    public function prescription()
+    {
+        return $this->hasOne(Prescription::class, 'prescription_id');
+    }
 }

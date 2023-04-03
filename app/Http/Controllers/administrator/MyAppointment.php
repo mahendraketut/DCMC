@@ -15,8 +15,12 @@ class MyAppointment extends Controller
 {
     public function index()
     {
+        // $doctor = User::where('id', $id)->first();
+        // $schedule = Schedule::where('doctor_id', $id)->get();
+        $patient = User::where('role', 'patient')->get();
+        $schedule = Schedule::get();
         $appointment = Appointment::get();
-        return view('administrator.my-appointment', compact('appointment'));
+        return view('administrator.my-appointment', compact('appointment', 'patient', 'schedule'));
     }
 
     /**
@@ -39,25 +43,23 @@ class MyAppointment extends Controller
     {
         //
         $validatedData = $request->validate([
-            'doctor_name' => 'required',
             'day' => 'required',
-            'start_time' => 'required|date_format:Y-m-d\TH:i',
-            'end_time' => 'required|date_format:Y-m-d\TH:i|after:start_time',
+            // 'time' => 'required',
+            // 'time_end' => 'required',
         ]);
 
-        $query = DB::table('appointment')->insert([
-            'doctor_id' => User::where('name', '=', $request->doctor_name)->first()->id,
-            'doctor_name' => $request->doctor_name,
-            'day' => $request->day,
-            'start_time' => $request->start_time,
-            'end_time' => $request->end_time,
-            'status' => 'pending',
+        $query = DB::table('appointments')->insert([
+            'appointment_id' => 'AP' . rand(100000, 999999),
+            'schedule_id' => $request->day,
+            'patient_id' => $request->patient,
+            'doctor_id' => $request->doctor,
+            'status' => 'Pending',
             'created_at' => Carbon::now(),
         ]);
         if ($query) {
             return redirect()->route('patient.dashboard')->with('success', 'Appointment Successfully');
         } else {
-            return redirect()->route('make.appointment')->with('error', 'Appointment Failed');
+            return redirect()->route('patient.view.detail.doctor')->with('error', 'Appointment Failed');
         }
     }
 

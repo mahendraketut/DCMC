@@ -169,64 +169,7 @@
                                     </div>
                                     <input type="hidden" name="doctor_id" value="{{$doctor->id}}">
                                     <!--end::Input group-->
-                                    <!--begin::Input group-->
-                                    {{-- <div class="row mb-6">
-                                        <div class="col">
-                                            <!--begin::Label-->
-                                            <label class="col-lg-12 col-form-label required fw-bold fs-6">Start Time</label>
-                                            <!--end::Label-->
-                                            <!--begin::Col-->
-                                            <div class="col-lg-12 fv-row">
-                                                <select id="time" name="time" class="form-select form-select-solid form-select-lg fw-bold form-control @error('time') is-invalid @enderror">
-                                                    <option value="">Select Time...</option>
-                                                    @foreach($schedule as $start_time)
-                                                        <option value="{{$start_time->start_time}}">{{$start_time->start_time}}</option>
-                                                    @endforeach
-                                                </select>
-                                                @error('time')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                                {{-- <input type="time" class="form-control form-control-lg form-control-solid form-control @error('start_time') is-invalid @enderror" name="start_time" placeholder="Start Time" value="{{ old("start_time") }}"/>
-                                                @error('start_time')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                            <!--end::Col-->
-                                        </div>
-                                        <!--end::Input group-->
-                                        <!--begin::Input group-->
-                                        <div class="col">
-                                            <!--begin::Label-->
-                                            <label class="col-lg-12 col-form-label required fw-bold fs-6">End Time</label>
-                                            <!--end::Label-->
-                                            <!--begin::Col-->
-                                            <div class="col-lg-12 fv-row">
-                                                <select id="time_end" name="time_end" class="form-select form-select-solid form-select-lg fw-bold form-control @error('time_end') is-invalid @enderror">
-                                                    <option value="">Select Time...</option>
-                                                    @foreach($schedule as $end_time)
-                                                        <option value="{{$end_time->end_time}}">{{$end_time->end_time}}</option>
-                                                    @endforeach
-                                                </select>
-                                                @error('time_end')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                                <input type="time" class="form-control form-control-lg form-control-solid form-control @error('end_time') is-invalid @enderror" name="end_time" placeholder="End Time" value="{{ old("end_time") }}"/>
-                                                @error('end_time')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                            <!--end::Col-->
-                                        </div>
-                                    </div> --}}
-
+                                    
                                     <!--begin::Actions-->
                                     <div class="text-center pt-15">
                                         <button type="submit" id="modal_add_schedule_submit" class="btn btn-primary">
