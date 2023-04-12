@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\administrator;
 
 use App\Http\Controllers\Controller;
+use App\Models\Appointment;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,10 @@ class DashboardController extends Controller
         //count numbers of users with role pharmacist
         $pharmacistCount = User::where('role', 'pharmacist')->count();
         //return view with data
-        return view('administrator.dashboard', compact('accounts', 'adminCount', 'doctorCount', 'patientCount', 'pharmacistCount'));
+        //return today's appointments queue
+        $queues = Appointment::where('appointment_date', date('Y-m-d'))->where('status', 'pending')->orWhere('status', 'approved')->orderBy('clinic_type', 'desc')->orderBy('appointment_date', 'asc')->orderBy('appointment_time', 'asc')->get();
+        $queueCount = Appointment::where('appointment_date', date('Y-m-d'))->where('status', 'pending')->orWhere('status', 'approved')->count();
+        return view('administrator.dashboard', compact('accounts', 'adminCount', 'doctorCount', 'patientCount', 'pharmacistCount', 'queues', 'queueCount'));
     }
 
     /**

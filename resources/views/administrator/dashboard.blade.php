@@ -694,8 +694,13 @@
             <!--begin::Header-->
             <div class="card-header border-0 pt-5">
                 <h3 class="card-title align-items-start flex-column">
-                    <span class="card-label fw-bolder fs-3 mb-1">Patient Queue</span>
-                    <span class="text-muted mt-1 fw-bold fs-7">Nanti disini diisi jumlah pasien hari ini</span>
+                    <span class="card-label fw-bolder fs-3 mb-1">Appointment Queue</span>
+                    {{-- <span class="text-muted mt-1 fw-bold fs-7">Today's Queue: {{$queueCount}}</span> --}}
+                    @if ($queueCount==0)
+                        <span class="text-muted mt-1 fw-bold fs-7">Today's Queue: No Appointment for today</span>
+                    @else
+                        <span class="text-muted mt-1 fw-bold fs-7">Today's Queue: {{$queueCount}} reservation</span>
+                    @endif
                 </h3>
                 <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Click to add a user">
                     <a href="#" class="btn btn-sm btn-light btn-active-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_invite_friends">
@@ -706,7 +711,7 @@
                             <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor" />
                         </svg>
                     </span>
-                    <!--end::Svg Icon-->New Member</a>
+                    <!--end::Svg Icon-->New Queue</a>
                 </div>
             </div>
             <!--end::Header-->
@@ -724,10 +729,11 @@
                                         <input class="form-check-input" type="checkbox" value="1" data-kt-check="true" data-kt-check-target=".widget-9-check" />
                                     </div>
                                 </th>
-                                <th class="min-w-200px">Authors</th>
-                                <th class="min-w-150px">Company</th>
-                                <th class="min-w-150px">Progress</th>
-                                <th class="min-w-100px text-end">Actions</th>
+                                <th class="min-w-20px">ID/Clinic</th>
+                                <th class="min-w-200px">Patient Name</th>
+                                <th class="min-w-150px">Address</th>
+                                <th class="min-w-50px">Status</th>
+                                <th class="min-w-50px text-center">Actions</th>
                             </tr>
                         </thead>
                         <!--end::Table head-->
@@ -1068,6 +1074,67 @@
                                     </div>
                                 </td>
                             </tr> --}}
+                            @foreach ($queues as $queue)
+                                <tr>
+                                    <td>
+                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                            <input class="form-check-input widget-9-check" type="checkbox" value="1" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-start flex-column">
+                                            <span class="text-dark fw-bolder text-hover-primary fs-6">{{$queue->appointment_id}}</span>
+                                            <span class="text-muted fw-bold text-muted d-block ">{{$queue->clinic_type}}</span>
+                                        </div>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="symbol symbol-45px me-5">
+                                                @if ($queue->patient->profile_pic)
+                                                    <img src="{{ asset('storage/' . $queue->patient->profile_pic) }}" alt="image" />
+                                                @else
+                                                    <img src="{{asset('admin/assets/media/avatars/blank.png')}}" class="card-img-top" alt="image" />
+                                                @endif
+                                            </div>
+                                            <div class="d-flex justify-content-start flex-column">
+                                                <a href="#" class="text-dark fw-bolder text-hover-primary fs-6">{{$queue->patient->name}}</a>
+                                                <span class="text-muted fw-bold text-muted d-block fs-7">{{$queue->patient->user_id}}</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-start flex-column">
+                                            <p class="text-dark fs-6">{{$queue->patient->address}}</p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex">
+                                            @if ($queue->status == 'waiting')
+                                                <span class="badge badge-light-warning">Waiting</span>
+                                            @elseif ($queue->status == 'in-progress')
+                                                <span class="badge badge-light-primary">In Progress</span>
+                                            @elseif ($queue->status == 'Approved')
+                                                <span class="badge badge-light-success">Approved</span>
+                                            @elseif ($queue->status == 'cancelled')
+                                                <span class="badge badge-light-danger">Cancelled</span>
+                                            @elseif ($queue->status == 'Pending')
+                                                <span class="badge badge-light-info">Pending</span>
+                                            @endif
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-start flex-column">
+                                            <a href="" class="btn btn-sm btn-light-primary">
+                                                Status
+                                            </a>
+
+                                            <a href="" class="btn btn-sm btn-light-danger">
+                                                Delete
+                                            </a>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            @endforeach
                         </tbody>
                         <!--end::Table body-->
                     </table>
