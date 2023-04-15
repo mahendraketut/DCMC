@@ -75,7 +75,7 @@
                             </div>
                             <label class="col col-col col-form-label fw-bold fs-6 fw-bold fs-6">Appointment Time</label>
                             <div class="col md-12">
-                                <input type="text" class="form-control" value="{{$appointment->appointment_time}}" disabled>
+                                <input type="text" class="form-control" value="{{$appointment->schedule->start_time}} - {{$appointment->schedule->end_time}}" disabled>
                             </div>
                             <label class="col col-col col-form-label fw-bold fs-6 fw-bold fs-6">Appointment Status</label>
                             <div class="col md-12">
@@ -376,7 +376,7 @@
                                     </div>
                                     <div class="col-md-1">
                                         <label class="col col-form-label fw-bold fs-6">Action</label>
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPrescriptionModal">
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="add-input">
                                             <i class="fas fa-plus"></i>
                                         </button>
                                     </div>
@@ -440,6 +440,39 @@
 
 @push('scripts')
 <script src="admin/assets/plugins/global/plugins.bundle.js"></script>
-
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script> --}}
 
 @endpush
+
+{{-- @section('js')
+<script>
+    $(document).ready(function() {
+    var max_fields      = 4; //maximum input boxes allowed
+    var wrapper         = $(".row"); //Fields wrapper
+    var add_button      = $("#add-input"); //Add button ID
+
+    var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            $("#rm").remove(); 
+
+            $(wrapper).append('<div id="divs"><input type="text" name="mytext[1]"/>'); //add input box
+             $(wrapper).append('<div id="divs"><input type="text" name="mytext[2]"/>'); //add input box
+              $(wrapper).append('<div id="divs"><input type="text" name="mytext[3]"/></div>'); //add input box
+               $(wrapper).append('<div id="divs"><input type="text" name="mytext[4]"/><a href="#" id="rm" class="remove_field">Remove</a></div>'); //add input box
+                $(wrapper).append('<br>')
+        }
+    });
+
+    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $("#divs").remove(); x--;
+        $("#divs").remove(); x--;
+        $("#divs").remove(); x--;
+        $("#divs").remove(); x--;
+
+    })
+});
+</script>
+@endsection --}}

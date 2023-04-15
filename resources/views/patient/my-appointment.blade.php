@@ -31,6 +31,7 @@
                     <thead>
                         <tr class="fw-bold fs-6 text-gray-800 border-bottom border-gray-300">
                             <th class="ps-4 min-w-20px text-center">#</th>
+                            <th class="ps-4 min-w-20px text-center">Number</th>
                             {{-- <th class="ps-4 min-w-100px text-center">Name</th> --}}
                             <th class="ps-4 min-w-50px text-center">Day</th>
                             <th class="ps-4 min-w-50px text-center">Start Time</th>
@@ -48,6 +49,7 @@
                             
                             <tr>
                                 <td class="ps-4 min-w-20px text-center">{{$loop->iteration}}</td>
+                                <td class="ps-4 min-w-20px text-center">{{$schedule->appointment_number}}</td>
                                 {{-- <td class="ps-4 min-w-200px text-center">{{$appointment->doctor_name}}</td> --}}
                                 <td class="ps-4 min-w-50px text-center">{{$schedule->schedule->day}}</td>
                                 <td class="ps-4 min-w-50px text-center">{{$schedule->schedule->start_time}}</td>

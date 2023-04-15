@@ -150,13 +150,9 @@
                         <!--begin::Col-->
                         <div class="col fv-row">
                             <select id="specialist" name="specialist" class="form-select form-select-solid form-select-lg fw-bold form-control @error('specialist') is-invalid @enderror" value="{{old("specialist")}}">
-                                <option value="Mouth Surgery">Mouth Surgery</option>
-                                <option value="Tooth Conservation">Tooth Conservation</option>
-                                <option value="Oral Disease">Oral Disease</option>
-                                <option value="Orthodontics">Orthodontics</option>
-                                <option value="Periodontics">Periodontics</option>
-                                <option value="Prosthodontics">Prosthodontics</option>
-                                <option value="Dental Radiology">Dental Radiology</option>
+                                @foreach($specialist as $specialist)
+                                <option value="{{$specialist->id}}">{{$specialist->name}}</option>
+                                @endforeach
                             </select>
                             @error('specialist')
                                 <span class="invalid-feedback" role="alert">

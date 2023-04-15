@@ -20,7 +20,8 @@ class addSpecialistCategory extends Controller
     public function index()
     {
         $specialists = Specialist::all();
-        return view('administrator.addSpecialistCategory', compact('specialists'));
+        $doctor = User::where('role', '=', 'doctor')->get();
+        return view('administrator.addSpecialistCategory', compact('specialists', 'doctor'));
     }
 
     /**

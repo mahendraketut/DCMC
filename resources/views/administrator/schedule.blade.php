@@ -16,7 +16,7 @@
             <h3 class="card-title align-items-start flex-column">
                 <span class="card-label fw-bolder fs-3 mb-1">Schedule Table</span>
             </h3>
-            <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Click to add a user">
+            <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Click to add a schedule">
                 <a href="{{route('admin.schedule.add')}}" class="btn btn-sm btn-light btn-active-primary" data-bs-toggle="modal" data-bs-target="#modal_add_schedule">
                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                 <span class="svg-icon svg-icon-3">
@@ -151,6 +151,25 @@
                             @enderror
                         </div>
                         <!--end::Input-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="fv-row mb-10">
+                        <!--begin::Label-->
+                        <label class="fs-6 fw-bold form-label mb-2">
+                            <span class="required">Number of Patient</span>
+                            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Specify the day"></i>
+                        </label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <div class="col fv-row">
+                            <input type="number" class="form-control form-control-lg form-control-solid form-control @error('number_patient') is-invalid @enderror" name="number_patient" placeholder="Number of Patient" value="{{ old("number_patient") }}"/>
+                            @error('number_patient')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                     </div>
                     <!--end::Input group-->
                     <!--begin::Input group-->

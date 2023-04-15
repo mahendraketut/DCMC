@@ -361,6 +361,7 @@ License: For each use you must have a valid license purchased only from above li
 		<script src="{{asset('admin/assets/js/custom/utilities/modals/create-app.js')}}"></script>
 		<script src="{{asset('admin/assets/js/custom/utilities/modals/users-search.js')}}"></script>
 		<!--end::Page Custom Javascript-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 		<!--end::Javascript-->
         @include('sweetalert::alert')
 

@@ -50,7 +50,7 @@ class ScheduleController extends Controller
             'day' => 'required',
             'start_time' => 'unique:schedule,start_time,NULL,id,day,' . $request->day,
             'end_time' => 'unique:schedule,end_time,NULL,id,day,' . $request->day,
-
+            'number_patient' => 'required',
         ]);
 
         $query = DB::table('schedule')->insert([
@@ -59,7 +59,9 @@ class ScheduleController extends Controller
             'day' => $request->day,
             'start_time' => $request->start_time,
             'end_time' => $request->end_time,
-            'created_at' => Carbon::now(),
+            'max_patient' => $request->number_patient,
+            'remaining_patient' => $request->number_patient,
+            'created_at' => Carbon::now('+08:00'),
         ]);
         // return redirect()->route('admin.schedule')->with('success', 'Schedule Added Successfully');
         //redirect ro schedule page if success and stay on same page if not

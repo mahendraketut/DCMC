@@ -41,6 +41,14 @@ class MyAppointment extends Controller
      */
     public function store(Request $request)
     {
+        $max_patient = Schedule::where('id', $request->day)->first();
+        if ($max_patient->remaining_patient == 0) {
+            return redirect()->route('patient.view.detail.doctor')->with('error', 'Schedule Already Full');
+        } else {
+            $query = DB::table('schedule')->where('id', $request->day)->update([
+                'max_patient' => $max_patient->remaining_patient - 1,
+            ]);
+        }
         //
         $validatedData = $request->validate([
             'day' => 'required',
@@ -53,6 +61,7 @@ class MyAppointment extends Controller
             'schedule_id' => $request->day,
             'patient_id' => $request->patient,
             'doctor_id' => $request->doctor,
+            'appointment_number' => $max_patient->max_patient - $max_patient->remaining_patient,
             'status' => 'Pending',
             'created_at' => Carbon::now(),
         ]);

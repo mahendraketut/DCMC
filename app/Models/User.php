@@ -74,4 +74,9 @@ class User extends Authenticatable
         return $query->where('name', 'LIKE', '%'.$search.'%')
                      ->orWhere('specialist', 'LIKE', '%'.$search.'%');
     }
+
+    public function specialist()
+    {
+        return $this->hasMany(Specialist::class);
+    }
 }

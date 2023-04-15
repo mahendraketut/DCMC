@@ -51,18 +51,28 @@
                         @if ($specialists->count() == 0)
                             <th class="ps-4 min-w-20px text-center" colspan="6">No Specialist Data Inputted</th>
                         @else
-                            @foreach ($specialists as $specialist)
+                            @foreach ($specialists as $specialists)
+                            @php
+                                $num = 0;
+                            @endphp
                             <tr>
                                 <td class="ps-4 min-w-20px text-center">{{$loop->iteration}}</td>
-                                <td class="ps-4 min-w-200px text-center">{{$specialist->name}}</td>
-                                <td class="ps-4 min-w-50px text-center">{{$specialist->description}}</td>
+                                <td class="ps-4 min-w-200px text-center">{{$specialists->name}}</td>
+                                <td class="ps-4 min-w-50px text-center">{{$specialists->description}}</td>
                                 {{-- <td class="ps-4 min-w-50px text-center">{{$schedule->start_time}}</td> --}}
-                                <td class="ps-4 min-w-50px text-center">0</td>
+                                @foreach ($doctor as $ds)
+                                    @if ($ds->specialist_id == $specialists->id)
+                                        @php
+                                            $num++;
+                                        @endphp
+                                    @endif
+                                @endforeach
+                                <td class="ps-4 min-w-50px text-center">{{$num}}</td>
                                 <td class="ps-4 min-w-20px text-center">
                                     {{-- <a href="{{url('/admin.dashboard/schedule.edit/'.$specialist->id)}}" class="btn btn-primary">Edit</a> --}}
                                     {{-- button to go to edit specialist modal --}}
                                     {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_edit_schedule" data-id="Crypt::encrypt($specialist->id)">Edit</button> --}}
-                                    <a href="{{url('/admin.specialist.edit/'.Crypt::encrypt($specialist->id))}}" class="btn btn-primary">Edit</a>
+                                    <a href="{{url('/admin.specialist.edit/'.Crypt::encrypt($specialists->id))}}" class="btn btn-primary">Edit</a>
                                     {{-- <a href="{{url('/admin.specialist.delete/'.$specialist->id)}}" class="btn btn-danger">Delete</a> --}}
 
                                 </td>

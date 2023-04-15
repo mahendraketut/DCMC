@@ -51,6 +51,7 @@ class ScheduleController extends Controller
             'day' => 'required',
             'start_time' => 'required',
             'end_time' => 'required',
+            'number_patient' => 'required',
         ]);
 
         $query = DB::table('schedule')->insert([
@@ -59,6 +60,8 @@ class ScheduleController extends Controller
             'day' => $request->day,
             'start_time' => $request->start_time,
             'end_time' => $request->end_time,
+            'max_patient' => $request->number_patient,
+            'remaining_patient' => $request->number_patient,
             'created_at' => Carbon::now('+08:00'),
         ]);
         return redirect()->route('doctor.schedule')->with('success', 'Schedule Added Successfully');
@@ -113,7 +116,6 @@ class ScheduleController extends Controller
             'day' => $request->day,
             'start_time' => $request->start_time,
             'end_time' => $request->end_time,
-
         ]);
         return redirect()->route('doctor.schedule')->with('success', 'Schedule Update Successfully');
     }

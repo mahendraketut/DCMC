@@ -30,7 +30,7 @@
                     <a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bolder mb-1">{{$doctor->name}}</a>
                     <!--end::Name-->
                     <!--begin::Position-->
-                    <div class="fs-5 fw-bold text-muted mb-6">{{$doctor->specialist}} Specialist</div>
+                    {{-- <div class="fs-5 fw-bold text-muted mb-6">{{$doctor->specialist}} Specialist</div> --}}
                     <!--end::Position-->
                 </div>
                 <!--end::Summary-->
@@ -244,13 +244,20 @@
                                     @foreach ($schedule as $schedule)
                                     <tr>
                                         <!--begin::Badge=-->
+                                        @if ($schedule->remaining_patient == 0)
+                                        <td class="min-w-70px">
+                                            <div class="badge badge-light-danger">Not Available</div>
+                                        </td>
+                                        @else
                                         <td class="min-w-70px">
                                             <div class="badge badge-light-success">Available</div>
                                         </td>
+                                        @endif
                                         <!--end::Badge=-->
                                         <!--begin::Status=-->
                                         <td>{{$schedule->day}}</td>
                                         <!--end::Status=-->
+                                        <td>Remaining Slot: {{$schedule->remaining_patient}}</td>
                                         <!--begin::Timestamp=-->
                                         <td class="pe-0 text-end min-w-200px">{{$schedule->start_time}} - {{$schedule->end_time}}</td>
                                         <!--end::Timestamp=-->

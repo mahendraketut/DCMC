@@ -17,7 +17,7 @@
         @endif
         <div class="card-body">
           <h5 class="card-title">{{ $doctor->name }}</h5>
-          <p class="card-text">Specialist: {{ $doctor->specialist }}</p>
+          {{-- <p class="card-text">Specialist: {{ $doctor->specialist->name }}</p> --}}
           <a href="{{ route('patient.view.detail.doctor', Crypt::encrypt($doctor->  id)) }}" class="btn btn-primary ">View Detail</a>
         </div>
         </div>

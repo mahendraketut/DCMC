@@ -143,10 +143,6 @@
                             }
                         @endphp
                         <br>
-                        Welcome back
-                        {{ Auth::user()->name }}
-
-                        <br>
                         <a href="{{route('patient.profile')}}" class="btn btn-white btn-hover-scale me-5 ms-10 mt-5">Manage your profile here</a>
                     </h1>
                 </div>
@@ -158,9 +154,13 @@
                         <!--begin::Col-->
                         <div class="col bg-light-primary px-6 py-8 rounded-2 mb-7 text-center">
                             {{-- count numbers of administrator --}}
-                            <p class="text-primary fw-bolder fs-1">No Appointment Data</p>
-                            <!--end::Svg Icon-->
-                            <a href="#" class="text-primary fw-bold fs-6">Appointment</a>
+                            @if (count($appointment_patient) > 0)
+                                <p class="text-primary fw-bolder fs-1">{{count($appointment_patient)}}</p>
+                            @else
+                                <p class="text-primary fw-bolder fs-1">No Appointment Data</p>
+                            @endif
+                                <!--end::Svg Icon-->
+                            <a href="{{route('patient.appointment')}}" class="text-primary fw-bold fs-6">Appointment</a>
                         </div>
                         <!--end::Col-->
                     </div>
@@ -245,34 +245,21 @@
             {{-- <div class="col-md-6">
                 <h3 class="card-title">Doctor List</h3>
             </div> --}}
-            <form action="" class="col-md-6">
+            <form action="/patient.dashboard/search" method="GET" class="col-md-6">
                 <div class="input-group mb-3">
                     <input type="search" name="search" class="form-control" placeholder="Search Doctor" aria-label="Recipient's username" aria-describedby="button-addon2">
-                    <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
+                    <button class="btn btn-primary" type="submit" value="search">Search</button>
                 </div>
             </form>
-            <form id="filter-form" class="col-md-6">
+            <form action="/patient.dashboard/filter" method="GET" class="col-md-6">
                 <div class="input-group mb-3">
                     <select name="filter" class="form-select" id="filter-select">
                         <option selected>Choose Specialist</option>
-                        <option value="1">Cardiologist</option>
-                        <option value="2">Dentist</option>
-                        <option value="3">Dermatologist</option>
-                        <option value="4">Endocrinologist</option>
-                        <option value="5">Gastroenterologist</option>
-                        <option value="6">Gynecologist</option>
-                        <option value="7">Neurologist</option>
-                        <option value="8">Oncologist</option>
-                        <option value="9">Ophthalmologist</option>
-                        <option value="10">Orthopedic Surgeon</option>
-                        <option value="11">Pediatrician</option>
-                        <option value="12">Psychiatrist</option>
-                        <option value="13">Pulmonologist</option>
-                        <option value="14">Rheumatologist</option>
-                        <option value="15">Urologist</option>
-                        <option value="Mouth Surgery">Mouth Surgery</option>
+                        @foreach ($specialist as $specialist)
+                            <option value="{{$specialist->id}}">{{$specialist->name}}</option>
+                        @endforeach
                     </select>
-                    <button class="btn btn-primary" type="submit" id="button-addon2">Filter</button>
+                    <button class="btn btn-primary" type="submit" value="filter">Filter</button>
                 </div>
             </form>
         </div>
@@ -290,7 +277,8 @@
               <div class="col-md-8">
                 <div class="card-body">
                   <h5 class="card-title">{{$schedule->user->name}}</h5>
-                  <p class="card-text">{{$schedule->user->specialist}}</p>
+                  {{-- need to fix the below name --}}
+                  {{-- <p class="card-text">{{$schedule->user->specialist->name}}</p> --}}
                   <p class="card-text">{{$schedule->day}} {{$schedule->start_time}} {{$schedule->end_time}}</p>
                   <p class="card-text"><small class="text-body-secondary">{{$schedule->created_at}}</small></p>
                 </div>
@@ -303,24 +291,13 @@
             @endforeach
             </div>
         </div>
-        <table id="data-table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Table rows will be dynamically generated using JavaScript -->
-            </tbody>
-        </table>
     </div>
 </div>
 
 @endsection
 
 @section('js')
-<script>
+{{-- <script>
   $(document).ready(function() {
       $('#button-addon2').on('click', function() {
           var filter = $(this).val();
@@ -344,6 +321,12 @@
           });
       });
   });
-</script>
-
+</script> --}}
+{{-- <script type="text/javascript">
+    $(document).ready(function() {
+        $('#search').on('click', function() {
+            alert('hello');
+        });
+    });
+</script> --}}
 @endsection

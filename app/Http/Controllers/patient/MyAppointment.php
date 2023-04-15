@@ -110,7 +110,13 @@ class MyAppointment extends Controller
     public function destroy($id)
     {
         //
+        $slot_num = Appointment::where('id', $id)->first();
+        $query = DB::table('schedule')->where('id', $slot_num->schedule_id)->update([
+            'remaining_patient' => $slot_num->schedule->remaining_patient + 1,
+        ]);
+
         Appointment::where('id', '=', $id)->delete();
+        
         return redirect()->back()->with('success', 'Schedule Deleted Successfully');
     }
 

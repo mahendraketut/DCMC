@@ -29,7 +29,15 @@ class ViewDoctorController extends Controller
 
     public function store(Request $request)
     {
-        
+        $max_patient = Schedule::where('id', $request->day)->first();
+        if ($max_patient->remaining_patient == 0) {
+            return redirect()->route('patient.view.detail.doctor', Crypt::encrypt($request->doctor_id))->with('error', 'Schedule Already Full');
+        } else {
+            $query = DB::table('schedule')->where('id', $request->day)->update([
+                'remaining_patient' => $max_patient->remaining_patient - 1,
+            ]);
+        }
+
         $validatedData = $request->validate([
             'day' => 'required',
             // 'time' => 'required',
@@ -41,6 +49,7 @@ class ViewDoctorController extends Controller
             'schedule_id' => $request->day,
             'patient_id' => Auth::user()->id,
             'doctor_id' => $request->doctor_id,
+            'appointment_number' => $max_patient->max_patient + 1 - $max_patient->remaining_patient,
             'status' => 'Pending',
             'created_at' => Carbon::now(),
         ]);

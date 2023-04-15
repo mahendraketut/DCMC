@@ -98,7 +98,7 @@
                                             <span class="badge badge-light-danger">Cancelled</span>
                                         @elseif ($appointment->status == 'completed')
                                             <span class="badge badge-light-success">Done</span>
-                                        @elseif ($appointment->status == 'Waiting')
+                                        @elseif ($appointment->status == 'Waiting Call')
                                             <span class="badge badge-light-warning">Waiting</span>
                                         @elseif ($appointment->status == 'In Service')
                                             <span class="badge badge-light-primary">In Queue</span>

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\administrator;
 
-use Haruncpi\LaravelIdGenerator\IdGenerator;
+use App\Models\Specialist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class RegisterDoctorController extends Controller
 {
@@ -18,7 +19,8 @@ class RegisterDoctorController extends Controller
     public function index()
     {
         //
-        return view('administrator.doctor_registration');
+        $specialist = Specialist::all();
+        return view('administrator.doctor_registration', compact('specialist'));
     }
 
     /**
@@ -66,7 +68,7 @@ class RegisterDoctorController extends Controller
             'role' => 'doctor',
             'password' => bcrypt($request->psw),
             'phone' => $request->phone,
-            'specialist' => $request->input('specialist'),
+            'specialist_id' => $request->specialist,
             'license' => $request->license,
             'gender' => $request->input('gender'),
             'address' => $request->address,
