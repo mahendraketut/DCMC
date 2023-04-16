@@ -64,6 +64,7 @@ class User extends Authenticatable
         return $this->hasMany(Appointment::class);
     }
 
+
     public function prescription()
     {
         return $this->hasOne(Prescription::class, 'prescription_id');
@@ -71,7 +72,12 @@ class User extends Authenticatable
 
     public function scopeSearch($query, $search)
     {
-        return $query->where('name', 'LIKE', '%'.$search.'%')
-                     ->orWhere('specialist', 'LIKE', '%'.$search.'%');
+        return $query->where('name', 'LIKE', '%' . $search . '%')
+            ->orWhere('specialist', 'LIKE', '%' . $search . '%');
+    }
+
+    public function routeNotificationForWhatsApp()
+    {
+        return $this->phone;
     }
 }

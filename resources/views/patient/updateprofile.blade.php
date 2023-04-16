@@ -282,14 +282,26 @@
                     <label class="col-lg-4 col-form-label required fw-bold fs-6">Contact Phone</label>
                     <!--end::Label-->
                     <!--begin::Col-->
+                    {{-- //input group to add country code to phone number --}}
                     <div class="col-lg-8 fv-row">
+                        <div class="input-group">
+                            <span class="input-group-text">+62</span>
+                            <input type="text" name="phone" class="form-control form-control-lg form-control-solid form-control @error('phone') is-invalid @enderror" placeholder="Phone Number" value="{{old('phone', $user->phone)}}" />
+                            @error('phone')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    {{-- <div class="col-lg-8 fv-row">
                         <input type="text" name="phone" class="form-control form-control-lg form-control-solid form-control @error('phone') is-invalid @enderror" placeholder="Phone Number" value="{{old('phone', $user->phone)}}" />
                         @error('phone')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                    </div>
+                    </div> --}}
                     <!--end::Col-->
                 </div>
                 <div class="row mb-6">

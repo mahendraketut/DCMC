@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+// use App\Notifications\AppointmentNotification;
 
 class MyAppointment extends Controller
 {
@@ -20,7 +21,7 @@ class MyAppointment extends Controller
      */
     public function index()
     {
-        $patient = User::where('role', '=', 'patient')->get();  
+        $patient = User::where('role', '=', 'patient')->get();
         $appointment = Appointment::where('patient_id', '=', Auth::user()->id)->get();
         return view('patient.my-appointment', compact('appointment'));
     }
@@ -61,6 +62,7 @@ class MyAppointment extends Controller
             'created_at' => Carbon::now(),
         ]);
         if ($query) {
+            // $request->user()->notify(new AppointmentNotification($request->));
             return redirect()->route('patient.dashboard')->with('success', 'Appointment Successfully');
         } else {
             return redirect()->route('make.appointment')->with('error', 'Appointment Failed');
