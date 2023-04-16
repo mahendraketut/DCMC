@@ -586,7 +586,7 @@
                         <div class="d-flex flex-column">
                             <!--begin::Content-->
                             <span>Before you want to upload the medicines data via CSV Document, please download the CSV template</span>
-                            <a href="{{url('https://drive.google.com/u/2/uc?id=1kn2OtQ_z_BwEFOfrhPUlQMU9ElWWQiZU&export=download')}}" class="btn btn-light-success" target="_blank">
+                            <a href="{{url('https://drive.google.com/u/2/uc?id=1uSYUj858Mt4dtaiUbQwHgnKhtgtENJAa&export=download')}}" class="btn btn-light-success" target="_blank">
                                 <i class="fas fa-file-download"></i>
                                 Download CSV Template
                             </a>

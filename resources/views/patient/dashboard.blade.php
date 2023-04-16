@@ -124,7 +124,7 @@
                         </div>
                         <br>
 
-                        Welcome to the Patient Page<br> {{ Auth::user()->name }}
+                        {{-- Welcome to the Patient Page<br> {{ Auth::user()->name }} --}}
 
                         @php
                             $hour = gmdate('H', time() + 60 * 60 * 7);

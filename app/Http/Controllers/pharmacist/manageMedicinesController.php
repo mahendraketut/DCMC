@@ -4,6 +4,7 @@ namespace App\Http\Controllers\pharmacist;
 
 use App\Http\Controllers\Controller;
 use App\Imports\MedicineImport;
+use App\Imports\MedicinesImport;
 use App\Models\MedicineCategory;
 use App\Models\Medicines;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
@@ -11,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
-use Maatwebsite\Excel\Exceptions\NoTypeDetectedException;
+
 
 class manageMedicinesController extends Controller
 {
@@ -196,35 +197,8 @@ class manageMedicinesController extends Controller
 
     public function import(Request $request)
     {
-        // $request->validate([
-        //     'file' => 'required|mimes:csv,xls,xlsx'
-
-        // ]);
-
         $file = $request->file('file');
-
-        try {
-            Excel::import(new MedicineImport, $file);
-            return redirect()->route('pharmacist.medicines')->with('success', 'Medicines imported successfully');
-        } catch (NoTypeDetectedException $e) {
-            return redirect()->route('pharmacist.medicines')->with('error', 'Medicines not imported');
-        }
-
-        // $filename = $file->hashName();
-
-        // $path = $file->storeAs('public/medicines', $filename);
-
-        // $import = Excel::import(new MedicineImport, storage_path('public/medicines/' . $filename));
-
-        // Storage::delete($path);
-
-        // if (!$import) {
-        //     return redirect()->route('pharmacist.medicines')->with('error', 'Medicines not imported');
-        // } else {
-        //     return redirect()->route('pharmacist.medicines')->with('success', 'Medicines imported successfully');
-        // }
-
-        //dd to check csv file
-        // dd($import);
+        Excel::import(new MedicinesImport, $file);
+        return redirect()->route('pharmacist.medicines')->with('success', 'Medicines imported successfully');
     }
 }
