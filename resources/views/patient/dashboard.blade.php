@@ -158,7 +158,13 @@
                         <!--begin::Col-->
                         <div class="col bg-light-primary px-6 py-8 rounded-2 mb-7 text-center">
                             {{-- count numbers of administrator --}}
-                            <p class="text-primary fw-bolder fs-1">No Appointment Data</p>
+                            @if ($appointmentCount > 0 && $appointmentCount < 2)
+                                <p class="text-primary fw-bolder fs-1">You have {{$appointmentCount}} appointment</p>
+                            @elseif ($appointmentCount > 1)
+                                <p class="text-primary fw-bolder fs-1">You have {{$appointmentCount}} appointments</p>
+                            @else
+                                <p class="text-primary fw-bolder fs-1">No Appointment Data</p>
+                            @endif
                             <!--end::Svg Icon-->
                             <a href="#" class="text-primary fw-bold fs-6">Appointment</a>
                         </div>
@@ -254,6 +260,7 @@
             <form id="filter-form" class="col-md-6">
                 <div class="input-group mb-3">
                     <select name="filter" class="form-select" id="filter-select">
+                        {{-- //TODO it should be looping data from database :: CHANGE--}}
                         <option selected>Choose Specialist</option>
                         <option value="1">Cardiologist</option>
                         <option value="2">Dentist</option>
@@ -276,34 +283,31 @@
                 </div>
             </form>
         </div>
+        @foreach ($schedule as $schedule)
         <div class="card border md-12 mt-4">
-            <div class="row g-0">
-            @foreach ($schedule as $schedule)
-              <div class="col-md-2">
-                {{-- <img src="$schedule->user->profile_pic" class="img-fluid rounded-start" alt="..."> --}}
-                @if ($schedule->user->profile_pic)
-                    <img src="{{ asset('storage/' . $schedule->user->profile_pic) }}" class="img-fluid rounded-start" alt="image"/>
-                @else
-                    <img src="{{asset('admin/assets/media/avatars/blank.png')}}" class="img-fluid rounded-start" alt="image" />
-                @endif
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">{{$schedule->user->name}}</h5>
-                  <p class="card-text">{{$schedule->user->specialist}}</p>
-                  <p class="card-text">{{$schedule->day}} {{$schedule->start_time}} {{$schedule->end_time}}</p>
-                  <p class="card-text"><small class="text-body-secondary">{{$schedule->created_at}}</small></p>
+            <div class="card">
+                <div class="row g-0">
+                    <div class="col">
+                        @if ($schedule->user->profile_pic)
+                            <img src="{{ asset('storage/' . $schedule->user->profile_pic) }}" class="img-fluid rounded-start" alt="image"/>
+                        @else
+                            <img src="{{asset('admin/assets/media/avatars/blank.png')}}" class="img-fluid rounded-start" alt="image" />
+                        @endif
+                    </div>
+                    <div class="col-md-11">
+                        <div class="card-body d-flex align-items-center justify-content-between" style="padding: 2%">
+                            <div>
+                                <h4 class="card-title">{{$schedule->user->name}} | {{$schedule->user->specialist->name}}</h4>
+                                <p class="card-text">{{$schedule->day}}, {{$schedule->start_time}} - {{$schedule->end_time}}</p>
+                            </div>
+                            <a href="{{route('patient.view.detail.doctor', Crypt::encrypt($schedule->user->id))}}" class="btn btn-primary h-100">Make an Appointment</a>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <input type="hidden" name="doctor_id" value="{{$schedule->user->id}}">
-              <div class="col-md-2">
-                <a href="{{route('patient.view.detail.doctor', Crypt::encrypt($schedule->user->  id))}}" class="btn btn-primary">Make an Appointment</a>
-                {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_add_schedule">Make an Appointment</button> --}}
-              </div>
-            @endforeach
             </div>
         </div>
-        <table id="data-table">
+        @endforeach
+        {{-- <table id="data-table">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -313,7 +317,7 @@
             <tbody>
                 <!-- Table rows will be dynamically generated using JavaScript -->
             </tbody>
-        </table>
+        </table> --}}
     </div>
 </div>
 

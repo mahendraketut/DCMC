@@ -80,4 +80,9 @@ class User extends Authenticatable
     {
         return $this->phone;
     }
+
+    public function specialist()
+    {
+        return $this->belongsTo(Specialist::class);
+    }
 }

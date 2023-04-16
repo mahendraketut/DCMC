@@ -24,7 +24,8 @@ class DashboardController extends Controller
         $doctor = User::where('role', 'doctor')->get();
         $schedule = Schedule::get();
         $appointment = Appointment::get();
-        return view('patient.dashboard', compact('appointment', 'schedule', 'doctor'));
+        $appointmentCount = Appointment::where('patient_id', '=', Auth::user()->id)->count();
+        return view('patient.dashboard', compact('appointment', 'schedule', 'doctor', 'appointmentCount'));
     }
 
     /**
@@ -57,7 +58,7 @@ class DashboardController extends Controller
     public function show($id)
     {
         //
-        
+
     }
 
     /**

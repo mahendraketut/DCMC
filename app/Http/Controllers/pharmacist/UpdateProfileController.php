@@ -25,7 +25,7 @@ class UpdateProfileController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required',
-            'phone' => 'required',
+            'phone' => ['required', 'regex:/^(?:\+?62|0?)\d{9,12}$/'],
             'address' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -33,7 +33,7 @@ class UpdateProfileController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
-            'phone' => 'required|string|max:255',
+            'phone' => ['required', 'regex:/^(?:\+?62|0?)\d{9,12}$/'],
             'address' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'gender' => 'required|string|max:255',
@@ -47,13 +47,25 @@ class UpdateProfileController extends Controller
             $profile_pic = $request->file('profil_pic')->store('profile_pic');
         }
 
+        $phoneNumber = $request->phone;
+
+        if (preg_match('/^0/', $phoneNumber)) {
+            $phoneNumber = preg_replace('/^0/', '+62', $phoneNumber);
+        } elseif (preg_match('/^62/', $phoneNumber)) {
+            $phoneNumber = preg_replace('/^62/', '+62', $phoneNumber);
+        } elseif (preg_match('/^\+62/', $phoneNumber)) {
+            $phoneNumber = $phoneNumber;
+        } else {
+            $phoneNumber = '+62' . $phoneNumber;
+        }
+
         User::where('id', auth()->user()->id)
             ->update([
                 'name' => $request->name,
                 'username' => $request->username,
                 'dob' => $request->dob,
                 'email' => $request->email,
-                'phone' => $request->phone,
+                'phone' => $phoneNumber,
                 'address' => $request->address,
                 'city' => $request->city,
                 'gender' => $request->gender,
