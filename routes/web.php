@@ -73,7 +73,6 @@ Route::middleware(['auth', 'user-access:administrator'])->group(function () {
     Route::post('/admin.dashboard/appointment', [App\Http\Controllers\administrator\MyAppointment::class, 'store'])->name('admin.appointment.store');
     Route::get('/admin.dashboard/appointment.update/{id}', [App\Http\Controllers\administrator\MyAppointment::class, 'update'])->name('admin.appointment.update');
     Route::get('/admin.dashboard/appointment.delete/{id}', [App\Http\Controllers\administrator\MyAppointment::class, 'destroy'])->name('admin.appointment.delete');
-
 });
 Route::middleware(['auth', 'user-access:doctor'])->group(function () {
     Route::get('/doctor.dashboard', [App\Http\Controllers\doctor\DashboardController::class, 'index'])->name('doctor.dashboard');
@@ -135,7 +134,6 @@ Route::middleware(['auth', 'user-access:patient'])->group(function () {
     Route::get('/patient.appointment.delete/{id}', [App\Http\Controllers\patient\MyAppointment::class, 'destroy'])->name('patient.appointment.delete');
     Route::get('/patient.view.prescription', [App\Http\Controllers\patient\PrescriptionController::class, 'index'])->name('patient.view.prescription');
     Route::get('/patient.view.prescription.detail/{id}', [App\Http\Controllers\patient\PrescriptionController::class, 'show'])->name('patient.view.prescription.detail');
-
 });
 
 // Auth::routes();

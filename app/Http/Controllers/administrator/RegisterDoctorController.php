@@ -6,6 +6,7 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Specialist;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterDoctorController extends Controller
@@ -17,8 +18,8 @@ class RegisterDoctorController extends Controller
      */
     public function index()
     {
-        //
-        return view('administrator.doctor_registration');
+        $specialists = Specialist::all();
+        return view('administrator.doctor_registration', compact('specialists'));
     }
 
     /**
@@ -37,7 +38,7 @@ class RegisterDoctorController extends Controller
             'firstname' => 'required',
             'lastname' => 'required',
             'username' => 'required|unique:users,username',
-            'phone' => 'required',
+            'phone' => ['required', 'regex:/^(?:\+?62|0?)\d{9,12}$/'],
             'email' => 'required',
             'psw' => 'required',
             'confirm_psw' => 'required|same:psw',
@@ -56,6 +57,18 @@ class RegisterDoctorController extends Controller
 
         $userid = IdGenerator::generate($config);
 
+        $phoneNumber = $request->phone;
+
+        if (preg_match('/^0/', $phoneNumber)) {
+            $phoneNumber = preg_replace('/^0/', '+62', $phoneNumber);
+        } elseif (preg_match('/^62/', $phoneNumber)) {
+            $phoneNumber = preg_replace('/^62/', '+62', $phoneNumber);
+        } elseif (preg_match('/^\+62/', $phoneNumber)) {
+            $phoneNumber = $phoneNumber;
+        } else {
+            $phoneNumber = '+62' . $phoneNumber;
+        }
+
         // $school->save();
         $query = DB::table('users')->insert([
             'user_id' => $userid,
@@ -65,8 +78,8 @@ class RegisterDoctorController extends Controller
             'email' => $request->email,
             'role' => 'doctor',
             'password' => bcrypt($request->psw),
-            'phone' => $request->phone,
-            'specialist' => $request->input('specialist'),
+            'phone' => $phoneNumber,
+            'specialist_id' => $request->input('specialist'),
             'license' => $request->license,
             'gender' => $request->input('gender'),
             'address' => $request->address,

@@ -15,18 +15,20 @@ class SpecialistSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Specialist::factory()->create([
-            'name' => 'Endodontist',
-            'description' => 'Endodontists are dentists who specialize in the prevention, diagnosis, and treatment of diseases and injuries of the dental pulp and surrounding tissues of the teeth. Endodontists are also known as root canal specialists.'
-        ]);
-        \App\Models\Specialist::factory()->create([
-            'name' => 'Dentist',
-            'description' => 'Dentists are doctors who specialize in the prevention, diagnosis, and treatment of diseases and conditions of the oral cavity. The oral cavity includes the teeth and gums and other tissues in the mouth.'
-        ]);
-        \App\Models\Specialist::factory()->create([
-            'name' => 'Orthodontist',
-            'description' => 'Orthodontists are dentists who specialize in the prevention, diagnosis, and treatment of dental and facial irregularities. Orthodontists correct teeth and jaws that are positioned improperly. They also treat jaw joint disorders, such as TMJ.'
-        ]);
+        // \App\Models\Specialist::factory()->create([
+        //     'name' => 'Endodontist',
+        //     'description' => 'Endodontists are dentists who specialize in the prevention, diagnosis, and treatment of diseases and injuries of the dental pulp and surrounding tissues of the teeth. Endodontists are also known as root canal specialists.'
+        // ]);
+        // \App\Models\Specialist::factory()->create([
+        //     'name' => 'Dentist',
+        //     'description' => '
+        //     Dentists are doctors who specialize in the prevention, diagnosis, and treatment of diseases and conditions of the oral cavity. The oral cavity includes the teeth and gums and other tissues in the mouth.
+        //     '
+        // ]);
+        // \App\Models\Specialist::factory()->create([
+        //     'name' => 'Orthodontist',
+        //     'description' => 'Orthodontists are dentists who specialize in the prevention, diagnosis, and treatment of dental and facial irregularities. Orthodontists correct teeth and jaws that are positioned improperly. They also treat jaw joint disorders, such as TMJ.'
+        // ]);
         \App\Models\Specialist::factory()->create([
             'name' => 'Periodontist',
             'description' => 'Periodontists are dentists who specialize in the prevention, diagnosis, and treatment of diseases and conditions that affect the gums and supporting structures of the teeth, as well as the replacement of teeth.'

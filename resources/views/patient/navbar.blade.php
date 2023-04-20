@@ -310,7 +310,12 @@ License: For each use you must have a valid license purchased only from above li
 						<div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
 							<!--begin::Copyright-->
 							<div class="text-dark order-2 order-md-1">
-								<span class="text-muted fw-bold me-1">2022©</span>
+								<script type="text/javascript">
+                                    var d = new Date();
+                                    var n = d.getFullYear();
+                                    document.write(n);
+                                </script>
+                                <span class="text-muted fw-bold me-1">©</span>
 								<a href="#" target="_blank" class="text-gray-800 text-hover-primary">DCMC</a>
 							</div>
 							<!--end::Copyright-->

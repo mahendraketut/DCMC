@@ -36,7 +36,6 @@ class GoogleController extends Controller
 
         if ($finduser) {
             Auth::login($finduser);
-            // return redirect()->intended('home');
             return redirect()->intended('patient.dashboard');
         } else {
             $newUser = User::create([
@@ -44,12 +43,10 @@ class GoogleController extends Controller
                 'name' => $user->getName(),
                 'email' => $user->getEmail(),
                 'google_id' => $user->getId(),
-                'password' => bcrypt('123456dummy'),
+                'password' => bcrypt('googleauth . $userId'),
                 'role' => 'patient'
             ]);
             Auth::login($newUser);
-            // return redirect()->intended('{{route('home')}}');
-            // return to patient dashboard
             return redirect()->intended('patient.dashboard');
         }
     }

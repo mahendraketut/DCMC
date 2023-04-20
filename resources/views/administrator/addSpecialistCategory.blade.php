@@ -56,8 +56,7 @@
                                 <td class="ps-4 min-w-20px text-center">{{$loop->iteration}}</td>
                                 <td class="ps-4 min-w-200px text-center">{{$specialist->name}}</td>
                                 <td class="ps-4 min-w-50px text-center">{{$specialist->description}}</td>
-                                {{-- <td class="ps-4 min-w-50px text-center">{{$schedule->start_time}}</td> --}}
-                                <td class="ps-4 min-w-50px text-center">0</td>
+                                <td class="ps-4 min-w-50px text-center">{{$specialist->doctors ? $specialist->doctors->count() : 0}}</td>
                                 <td class="ps-4 min-w-20px text-center">
                                     {{-- <a href="{{url('/admin.dashboard/schedule.edit/'.$specialist->id)}}" class="btn btn-primary">Edit</a> --}}
                                     {{-- button to go to edit specialist modal --}}

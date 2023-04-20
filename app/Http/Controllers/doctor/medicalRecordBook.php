@@ -15,6 +15,7 @@ use App\Models\medicalCategory;
 use Illuminate\Support\Facades\DB;
 use Brick\Math\Internal\Calculator;
 use App\Http\Controllers\Controller;
+use App\Models\Medicines;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
@@ -28,7 +29,7 @@ class medicalRecordBook extends Controller
      */
     public function index()
     {
-        
+
         $patients = User::where('role', '=', 'patient')->get();
         return view('doctor.medicalRecord', compact('patients'));
     }
@@ -138,7 +139,7 @@ class medicalRecordBook extends Controller
         $countMR = MedicalRecord::where('patient_id', '=', $id)->count();
         $medicalCategories = medicalCategory::all();
         //change the appointment status to
-        $medicine = Medicine::get();
+        $medicine = Medicines::get();
         $prescription = Prescription::where('appointment_id', '=', $appointment->id)->get();
         return view('doctor.addNewRecord', compact('appointment', 'age', 'medicalrecords', 'countMR', 'medicalCategories', 'medicine', 'prescription'));
         // return dd($appointment);

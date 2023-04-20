@@ -37,7 +37,7 @@ class RegisterPharmacistController extends Controller
             'firstname' => 'required',
             'lastname' => 'required',
             'username' => 'required|unique:users,username',
-            'phone' => 'required',
+            'phone' => ['required', 'regex:/^(?:\+?62|0?)\d{9,12}$/'],
             'email' => 'required',
             'psw' => 'required',
             'confirm_psw' => 'required|same:psw',
@@ -52,6 +52,18 @@ class RegisterPharmacistController extends Controller
 
         $userid = IdGenerator::generate($config);
 
+        $phoneNumber = $request->phone;
+
+        if (preg_match('/^0/', $phoneNumber)) {
+            $phoneNumber = preg_replace('/^0/', '+62', $phoneNumber);
+        } elseif (preg_match('/^62/', $phoneNumber)) {
+            $phoneNumber = preg_replace('/^62/', '+62', $phoneNumber);
+        } elseif (preg_match('/^\+62/', $phoneNumber)) {
+            $phoneNumber = $phoneNumber;
+        } else {
+            $phoneNumber = '+62' . $phoneNumber;
+        }
+
         // $school->save();
         $query = DB::table('users')->insert([
             'user_id' => $userid,
@@ -61,7 +73,7 @@ class RegisterPharmacistController extends Controller
             'dob' => $request->dob,
             'role' => 'pharmacist',
             'password' => bcrypt($request->psw),
-            'phone' => $request->phone,
+            'phone' => $phoneNumber,
             'license' => $request->license,
             'gender' => $request->input('gender'),
             'address' => $request->address,
