@@ -22,7 +22,7 @@ class MyAppointment extends Controller
     public function index()
     {
         $patient = User::where('role', '=', 'patient')->get();
-        $appointment = Appointment::where('patient_id', '=', Auth::user()->id)->get();
+        $appointment = Appointment::where('patient_id', '=', Auth::user()->id)->get()->sortByDesc('created_at');
         return view('patient.my-appointment', compact('appointment'));
     }
 

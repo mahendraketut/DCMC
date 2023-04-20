@@ -35,6 +35,7 @@
                             <th class="ps-4 min-w-50px text-center">Day</th>
                             <th class="ps-4 min-w-50px text-center">Start Time</th>
                             <th class="ps-4 min-w-50px text-center">End Time</th>
+                            <th class="ps-4 min-w-50px text-center">Status</th>
                             <th class="ps-4 min-w-50px text-center">Action</th>
                         </tr>
                     </thead>
@@ -45,15 +46,40 @@
                             <th class="ps-4 min-w-20px text-center" colspan="6">No Schedule Data</th>
                         @else
                             @foreach ($appointment as $schedule)
-                            
+
                             <tr>
                                 <td class="ps-4 min-w-20px text-center">{{$loop->iteration}}</td>
                                 {{-- <td class="ps-4 min-w-200px text-center">{{$appointment->doctor_name}}</td> --}}
                                 <td class="ps-4 min-w-50px text-center">{{$schedule->schedule->day}}</td>
                                 <td class="ps-4 min-w-50px text-center">{{$schedule->schedule->start_time}}</td>
                                 <td class="ps-4 min-w-50px text-center">{{$schedule->schedule->end_time}}</td>
+                                <td class="ps-4 min-w-50px text-center">
+                                    @if ($schedule->status == 'Pending')
+                                        <span class="badge badge-light-warning">Pending</span>
+                                    @elseif($schedule->status == 'Approved')
+                                        <span class="badge badge-light-success">Approved</span>
+                                    @elseif ($schedule->status == 'Waiting Call')
+                                        <span class="badge badge-light-success">Waiting Call</span>
+                                    @elseif ($schedule->status == 'Under Examination')
+                                        <span class="badge badge-light-success">Under Examination</span>
+                                    @elseif ($schedule->status == 'Waiting Payment')
+                                        <span class="badge badge-light-success">Waiting Payment</span>
+                                    @elseif($schedule->status == 'Rejected')
+                                        <span class="badge badge-light-danger">Rejected</span>
+                                    @elseif($schedule->status == 'Canceled')
+                                        <span class="badge badge-light-danger">Canceled</span>
+                                    @elseif($schedule->status == 'Completed')
+                                        <span class="badge badge-light-success">Completed</span>
+                                    @endif
+                                </td>
                                 <td class="ps-4 min-w-20px text-center">
-                                    <a href="{{url('/patient.appointment.delete/'.$schedule->id)}}" class="btn btn-danger">Delete</a>
+                                    @if ($schedule->status == 'Completed')
+                                        <a href="{{url('#')}}" class="btn btn-primary">Review</a>
+                                    @elseif($schedule->status == 'Waiting Payment')
+                                        <a href="{{url('/patient.payment/'.$schedule->id)}}" class="btn btn-success">Pay</a>
+                                    @else
+                                        <a href="{{url('/patient.appointment.delete/'.$schedule->id)}}" class="btn btn-danger">Delete</a>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach
@@ -115,7 +141,7 @@
                         </div>
                     </div>
                     <!--end::Input group-->
-                    
+
                 </div>
                 <!--end::Input group-->
                 <div class="fv-row mb-10">
@@ -126,7 +152,7 @@
                     </label>
                     <!--end::Label-->
                     <!--begin::Input-->
-                    
+
                     <div class="col fv-row">
                         <select id="day" name="day" class="form-select form-select-solid form-select-lg fw-bold form-control @error('day') is-invalid @enderror">
                             <option value="">Select Day...</option>
@@ -183,7 +209,7 @@
                     </div>
                 </div>
 
-                
+
             </div>
             <!--end::Card body-->
             <!--begin::Actions-->
