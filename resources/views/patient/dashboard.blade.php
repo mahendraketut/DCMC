@@ -143,7 +143,7 @@
                             }
                         @endphp
                         <br>
-                        Welcome back
+                        Welcome back,
                         {{ Auth::user()->name }}
 
                         <br>
@@ -180,6 +180,7 @@
         <!--end::Mixed Widget 2-->
     </div>
 </div>
+
 
 <div class="py-5">
     <div class="row">
