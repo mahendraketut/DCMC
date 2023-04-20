@@ -74,7 +74,7 @@
                                 </td>
                                 <td class="ps-4 min-w-20px text-center">
                                     @if ($schedule->status == 'Completed')
-                                        <a href="{{url('#')}}" class="btn btn-primary">Review</a>
+                                        <a href="{{url('/patient.review.create/'.Crypt::encrypt($schedule->id))}}" class="btn btn-primary">Review</a>
                                     @elseif($schedule->status == 'Waiting Payment')
                                         <a href="{{url('/patient.payment/'.$schedule->id)}}" class="btn btn-success">Pay</a>
                                     @else
