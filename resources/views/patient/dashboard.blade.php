@@ -206,7 +206,7 @@
         </div>
 
         <div class="col-md-3">
-            <a href="#" class="card hover-elevate-up shadow-sm parent-hover">
+            <a href="{{route('patient.view.prescription')}}" class="card hover-elevate-up shadow-sm parent-hover">
                 <div class="card-body d-flex align-items">
                     <i class="fas fa-prescription-bottle-alt fs-1"></i>
                     <span class="ms-3 text-gray-700 parent-hover-primary fs-6 fw-bold">
