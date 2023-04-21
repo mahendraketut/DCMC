@@ -13,6 +13,7 @@ class MedicalRecord extends Model
         'record_id',
         'patient_id',
         'doctor_id',
+        'appointment_id',
         'date',
         'complaints',
         'diagnosis',
@@ -43,5 +44,10 @@ class MedicalRecord extends Model
     public function MedicalCategory()
     {
         return $this->belongsTo(MedicalCategory::class, 'medical_category_id');
+    }
+
+    public function Appointment()
+    {
+        return $this->belongsTo(Appointment::class, 'appointment_id');
     }
 }

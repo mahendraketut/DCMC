@@ -147,7 +147,7 @@ License: For each use you must have a valid license purchased only from above li
 									</a>
 								</div>
                                 <div class="menu-item">
-									<a class="menu-link" href="{{route('patient.view.prescription')}}">
+									<a class="menu-link" href="{{route('patient.review')}}">
 										<span class="menu-icon">
                                             <!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm002.svg-->
                                             <span class="svg-icon svg-icon-2">

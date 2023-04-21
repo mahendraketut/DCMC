@@ -163,7 +163,7 @@
                             @elseif ($appointmentCount > 1)
                                 <p class="text-primary fw-bolder fs-1">You have {{$appointmentCount}} appointments</p>
                             @else
-                                <p class="text-primary fw-bolder fs-1">No Appointment Data</p>
+                                <p class="text-primary fw-bolder fs-1">You don't have an appointment yet</p>
                             @endif
                             <!--end::Svg Icon-->
                             <a href="#" class="text-primary fw-bold fs-6">Appointment</a>
