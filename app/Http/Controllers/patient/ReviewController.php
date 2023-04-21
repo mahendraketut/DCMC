@@ -7,6 +7,7 @@ use App\Models\Appointment;
 use App\Models\Review;
 use App\Http\Requests\StoreReviewRequest;
 use App\Http\Requests\UpdateReviewRequest;
+use App\Models\MedicalRecord;
 use App\Models\User;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Request;
@@ -20,6 +21,10 @@ class ReviewController extends Controller
      */
     public function index()
     {
+        $appointments = Appointment::where('patient_id', auth()->user()->id)->where('status', 'completed')->get();
+        $medicalrecords = MedicalRecord::all();
+        $reviews = Review::all()->sortDesc();
+        return view('patient.review', compact('appointments', 'medicalrecords', 'reviews'));
     }
 
     /**
@@ -34,7 +39,7 @@ class ReviewController extends Controller
         $appointment = Appointment::where('id', $id)->first();
         $patient = User::where('id', $appointment->patient_id)->first();
         $doctor = User::where('id', $appointment->doctor_id)->first();
-        return view('patient.review', compact('appointment', 'patient', 'doctor', 'review'));
+        return view('patient.reviewDetail', compact('appointment', 'patient', 'doctor', 'review'));
     }
 
     /**
