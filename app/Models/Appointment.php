@@ -40,19 +40,7 @@ class Appointment extends Model
         return $this->hasOne('App\Models\MedicalRecord', 'appointment_id');
     }
 
-    // 'schedule_id',
-    // 'admin_id',
-    // 'patient_id',
-    // 'day',
-    // 'start_time',
-    // 'end_time',
-    // 'status',
 
-
-    // public function schedule()
-    // {
-    //     return $this->belongsTo(Schedule::class);
-    // }
 
     public function admin()
     {

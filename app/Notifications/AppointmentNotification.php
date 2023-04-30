@@ -35,16 +35,13 @@ class AppointmentNotification extends Notification
 
     public function toWhatsApp($notifiable)
     {
-        //return data appointment id, patient name from patient_id connect to user table, doctor name from doctor_id connect to user table, day, day, start_time, end_time from appointment table
         $patientName = $this->appointment->patient->name;
         $doctorName = $this->appointment->doctor->name;
         $day = $this->appointment->schedule->day;
         $appointmentId = $this->appointment->appointment_id;
 
-        //return message with bold in patient name, doctor name, day, appointment id
         return (new WhatsAppMessage)
             ->content(
-                // "Hello {{$patientName}}, your appointment with doctor {{$doctorName}} on {{$day}} has been created. Your appointment ID is {{$appointmentId}}"
                 "Hello *{$patientName}*, your appointment with doctor *{$doctorName}* on *{$day}* has been created. Your appointment ID is *{$appointmentId}*"
                     . PHP_EOL . PHP_EOL . "*Note:* "
                     . PHP_EOL . "1️⃣ Please confirm your presence at the clinic administration staff when you arrive."
