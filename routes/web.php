@@ -134,6 +134,9 @@ Route::middleware(['auth', 'user-access:patient'])->group(function () {
     Route::get('/patient.appointment.delete/{id}', [App\Http\Controllers\patient\MyAppointment::class, 'destroy'])->name('patient.appointment.delete');
     Route::get('/patient.view.prescription', [App\Http\Controllers\patient\PrescriptionController::class, 'index'])->name('patient.view.prescription');
     Route::get('/patient.view.prescription.detail/{id}', [App\Http\Controllers\patient\PrescriptionController::class, 'show'])->name('patient.view.prescription.detail');
+    Route::get('/patient.review', [App\Http\Controllers\patient\ReviewController::class, 'index'])->name('patient.review');
+    Route::get('/patient.review.create/{id}', [App\Http\Controllers\patient\ReviewController::class, 'create'])->name('patient.review.create');
+    Route::post('/patient.review.store', [App\Http\Controllers\patient\ReviewController::class, 'store'])->name('patient.review.store');
 });
 
 // Auth::routes();

@@ -24,7 +24,7 @@ class DashboardController extends Controller
         $doctor = User::where('role', 'doctor')->get();
         $schedule = Schedule::get();
         $appointment = Appointment::get();
-        $appointmentCount = Appointment::where('patient_id', '=', Auth::user()->id)->count();
+        $appointmentCount = Appointment::where('patient_id', '=', Auth::user()->id)->where('status', '=', 'Pending')->orWhere('status', '=', 'Approved')->orWhere('status', '=', 'Waiting Call')->orWhere('status', '=', 'Under Examination')->orWhere('status', '=', 'Waiting Payment')->count();
         return view('patient.dashboard', compact('appointment', 'schedule', 'doctor', 'appointmentCount'));
     }
 
