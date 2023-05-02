@@ -123,8 +123,6 @@ class MyAppointment extends Controller
                 'discount' => 0,
                 'grand_total' => $service->price,
                 'notes' => 'Admission Fee',
-                'payment_method' => 'Cash',
-                'payment_status' => 'Unpaid',
                 'created_at' => Carbon::now(),
             ]);
 
