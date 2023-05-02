@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers\administrator;
 
+use App\Models\Invoice;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Schedule;
 use App\Models\Appointment;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Service;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 
 class MyAppointment extends Controller
@@ -97,9 +101,53 @@ class MyAppointment extends Controller
         //
         $id = $request->id;
 
-        Appointment::where('id', '=', $id)->update([
-            'status' => 'Waiting Call',
-        ]);
+        $config = [
+            'table' => 'invoices',
+            'field' => 'invoice_id',
+            'length' => 10,
+            'prefix' => 'INV' . date('Ymd') . rand(100000, 999999)
+        ];
+
+        $invoiceId = IdGenerator::generate($config);
+
+        //get admission fee from service table
+        $service = Service::where('service_name', 'Admission Fee')->first();
+        $appointment = Appointment::where('id', $id)->first();
+        if ($appointment->status == 'Pending') {
+            DB::table('invoices')->insert([
+                'invoice_id' => $invoiceId,
+                'appointment_id' => $id,
+                'patient_id' => $appointment->patient_id,
+                'doctor_id' => $appointment->doctor_id,
+                'total' => $service->price,
+                'discount' => 0,
+                'grand_total' => $service->price,
+                'notes' => 'Admission Fee',
+                'payment_method' => 'Cash',
+                'payment_status' => 'Unpaid',
+                'created_at' => Carbon::now(),
+            ]);
+
+            $invoice = Invoice::where('invoice_id', $invoiceId)->first();
+
+            DB::table('transactions')->insert([
+                'invoice_id' => $invoice->id,
+                'name' => $service->service_name,
+                'price' => $service->price,
+                'quantity' => 1,
+                'total' => $service->price,
+                'discount' => 0,
+                'grand_total' => $service->price,
+                'notes' => 'Admission Fee',
+                'created_at' => Carbon::now(),
+            ]);
+
+            Appointment::where('id', '=', $id)->update([
+                'status' => 'Waiting Call',
+            ]);
+        }
+
+
         return redirect()->route('admin.appointment')->with('success', 'Appointment Update Successfully');
     }
 

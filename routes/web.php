@@ -73,6 +73,12 @@ Route::middleware(['auth', 'user-access:administrator'])->group(function () {
     Route::post('/admin.dashboard/appointment', [App\Http\Controllers\administrator\MyAppointment::class, 'store'])->name('admin.appointment.store');
     Route::get('/admin.dashboard/appointment.update/{id}', [App\Http\Controllers\administrator\MyAppointment::class, 'update'])->name('admin.appointment.update');
     Route::get('/admin.dashboard/appointment.delete/{id}', [App\Http\Controllers\administrator\MyAppointment::class, 'destroy'])->name('admin.appointment.delete');
+    Route::get('admin.dashboard.services', [App\Http\Controllers\administrator\ServiceController::class, 'index'])->name('admin.services');
+    Route::get('admin.dashboard.services.add', [App\Http\Controllers\administrator\ServiceController::class, 'create'])->name('admin.services.add');
+    Route::post('admin.dashboard.services', [App\Http\Controllers\administrator\ServiceController::class, 'store'])->name('admin.services.store');
+    Route::get('admin.dashboard.services.edit/{id}', [App\Http\Controllers\administrator\ServiceController::class, 'edit'])->name('admin.services.edit');
+    Route::post('admin.dashboard.services.update', [App\Http\Controllers\administrator\ServiceController::class, 'update'])->name('admin.services.update');
+    Route::get('admin.dashboard.services.delete/{id}', [App\Http\Controllers\administrator\ServiceController::class, 'destroy'])->name('admin.services.delete');
 });
 Route::middleware(['auth', 'user-access:doctor'])->group(function () {
     Route::get('/doctor.dashboard', [App\Http\Controllers\doctor\DashboardController::class, 'index'])->name('doctor.dashboard');
@@ -99,6 +105,7 @@ Route::middleware(['auth', 'user-access:doctor'])->group(function () {
     Route::get('doctor.medicalrecord.detailview/{id}', [App\Http\Controllers\doctor\medicalRecordBook::class, 'viewMedicalRecordDetail'])->name('doctor.medicalrecordBook.detailview');
     Route::get('/doctor.medicalrecord.detailview.delete/{id}', [App\Http\Controllers\doctor\medicalRecordBook::class, 'deletePrescription'])->name('doctor.medicalrecordBook.detailView.delete');
     Route::get('/doctor.medicalrecord.addRecord.request/{id}', [App\Http\Controllers\doctor\medicalRecordBook::class, 'requestPrescription'])->name('doctor.medicalrecordBook.addRecord.request');
+    Route::post('/doctor.medicalrecord.transactionAdd', [App\Http\Controllers\doctor\medicalRecordBook::class, 'addTransaction'])->name('doctor.medicalrecordBook.transactionAdd');
 });
 Route::middleware(['auth', 'user-access:pharmacist'])->group(function () {
     Route::get('/pharmacist.dashboard', [App\Http\Controllers\pharmacist\DashboardController::class, 'index'])->name('pharmacist.dashboard');
@@ -137,6 +144,9 @@ Route::middleware(['auth', 'user-access:patient'])->group(function () {
     Route::get('/patient.review', [App\Http\Controllers\patient\ReviewController::class, 'index'])->name('patient.review');
     Route::get('/patient.review.create/{id}', [App\Http\Controllers\patient\ReviewController::class, 'create'])->name('patient.review.create');
     Route::post('/patient.review.store', [App\Http\Controllers\patient\ReviewController::class, 'store'])->name('patient.review.store');
+    Route::get('patient.payment', [App\Http\Controllers\patient\PaymentController::class, 'index'])->name('patient.payment');
+    Route::get('patient.payment.detail/{id}', [App\Http\Controllers\patient\PaymentController::class, 'show'])->name('patient.payment.detail');
+    Route::post('patient.payment.detail', [App\Http\Controllers\patient\PaymentController::class, 'payment_post'])->name('patient.payment.detail.store');
 });
 
 // Auth::routes();
