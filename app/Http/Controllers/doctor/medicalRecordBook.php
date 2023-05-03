@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\doctor;
 
+use App\Models\Invoice;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Medicine;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Brick\Math\Internal\Calculator;
 use App\Http\Controllers\Controller;
 use App\Models\Medicines;
+use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
@@ -138,10 +140,14 @@ class medicalRecordBook extends Controller
         $medicalrecords = MedicalRecord::where('patient_id', '=', $appointment->patient->id)->get();
         $countMR = MedicalRecord::where('patient_id', '=', $id)->count();
         $medicalCategories = medicalCategory::all();
-        //change the appointment status to
+        //change the appointment status to Under Examination
+        Appointment::where('id', '=', $id)->update([
+            'status' => 'Under Examination',
+        ]);
         $medicine = Medicines::get();
         $prescription = Prescription::where('appointment_id', '=', $appointment->id)->get();
-        return view('doctor.addNewRecord', compact('appointment', 'age', 'medicalrecords', 'countMR', 'medicalCategories', 'medicine', 'prescription'));
+        $services = Service::all();
+        return view('doctor.addNewRecord', compact('appointment', 'age', 'medicalrecords', 'countMR', 'medicalCategories', 'medicine', 'prescription', 'services'));
         // return dd($appointment);
     }
 
@@ -245,5 +251,40 @@ class medicalRecordBook extends Controller
         $prescription->status = 'Request';
         $prescription->save();
         return redirect()->back()->with('success', 'Prescription Requested Successfully');
+    }
+
+    //make function to add new transaction with comparing to appointment id, if appointment id is same, then add new transaction
+    public function addTransaction(Request $request)
+    {
+        $validatedData = $request->validate([
+            'service' => 'required',
+        ]);
+
+        $appointment = Appointment::where('id', '=', $request->appointment_id)->first();
+        $invoice = Invoice::where('appointment_id', '=', $request->appointment_id)->first();
+        $service = Service::where('id', '=', $request->service)->first();
+
+        $query = DB::table('transactions')->insert([
+            'invoice_id' => $invoice->id,
+            'name' => $service->service_name,
+            'quantity' => 1,
+            'price' => $service->price,
+            'total' => $service->price,
+            'discount' => 0,
+            'grand_total' => $service->price,
+            'created_at' => Carbon::now(),
+        ]);
+
+        Invoice::where('id', '=', $invoice->id)->update([
+            'total' => $invoice->total + $service->price,
+            'grand_total' => $invoice->grand_total + $service->price,
+            'discount' => 0,
+            'notes' => $invoice->notes . ', ' . $request->notes,
+        ]);
+        if ($query) {
+            return redirect()->back()->with('success', 'Transaction Successfully');
+        } else {
+            return redirect()->back()->with('error', 'Transaction Failed');
+        }
     }
 }
