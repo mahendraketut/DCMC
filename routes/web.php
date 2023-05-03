@@ -73,6 +73,7 @@ Route::middleware(['auth', 'user-access:administrator'])->group(function () {
     Route::post('/admin.dashboard/appointment', [App\Http\Controllers\administrator\MyAppointment::class, 'store'])->name('admin.appointment.store');
     Route::get('/admin.dashboard/appointment.update/{id}', [App\Http\Controllers\administrator\MyAppointment::class, 'update'])->name('admin.appointment.update');
     Route::get('/admin.dashboard/appointment.delete/{id}', [App\Http\Controllers\administrator\MyAppointment::class, 'destroy'])->name('admin.appointment.delete');
+    Route::get('/admin.dashboard/website.monthly.report', [App\Http\Controllers\administrator\MonthlyReportController::class, 'index'])->name('admin.monthly.report');
     Route::get('admin.dashboard.services', [App\Http\Controllers\administrator\ServiceController::class, 'index'])->name('admin.services');
     Route::get('admin.dashboard.services.add', [App\Http\Controllers\administrator\ServiceController::class, 'create'])->name('admin.services.add');
     Route::post('admin.dashboard.services', [App\Http\Controllers\administrator\ServiceController::class, 'store'])->name('admin.services.store');
