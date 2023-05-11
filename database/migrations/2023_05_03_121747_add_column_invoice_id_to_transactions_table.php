@@ -13,11 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('invoices', function (Blueprint $table) {
-            $table
-                ->string('snap_token')
-                ->nullable()
-                ->after('grand_total');
+        Schema::table('transactions', function (Blueprint $table) {
+            $table->foreignId('invoice_id')->after('id')->constrained('invoices')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -28,7 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('invoice', function (Blueprint $table) {
+        Schema::table('transactions', function (Blueprint $table) {
             //
         });
     }
