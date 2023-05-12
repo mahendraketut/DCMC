@@ -1,3 +1,6 @@
+@php
+use Carbon\Carbon;
+@endphp
 @extends('patient.navbar')
 @section('title', 'Dashboard')
 @section('css')
@@ -32,9 +35,10 @@
                         <tr class="fw-bold fs-6 text-gray-800 border-bottom border-gray-300">
                             <th class="ps-4 min-w-20px text-center">#</th>
                             {{-- <th class="ps-4 min-w-100px text-center">Name</th> --}}
+                            <th class="ps-4 min-w-20px text-center">Queue Number</th>
                             <th class="ps-4 min-w-50px text-center">Day</th>
-                            <th class="ps-4 min-w-50px text-center">Start Time</th>
-                            <th class="ps-4 min-w-50px text-center">End Time</th>
+                            <th class="ps-4 min-w-50px text-center">Appointment Time</th>
+                            <th class="ps-4 min-w-50px text-center">Estimated Time</th>
                             <th class="ps-4 min-w-50px text-center">Status</th>
                             <th class="ps-4 min-w-50px text-center">Action</th>
                         </tr>
@@ -50,9 +54,20 @@
                             <tr>
                                 <td class="ps-4 min-w-20px text-center">{{$loop->iteration}}</td>
                                 {{-- <td class="ps-4 min-w-200px text-center">{{$appointment->doctor_name}}</td> --}}
-                                <td class="ps-4 min-w-50px text-center">{{$schedule->schedule->day}}</td>
-                                <td class="ps-4 min-w-50px text-center">{{$schedule->schedule->start_time}}</td>
-                                <td class="ps-4 min-w-50px text-center">{{$schedule->schedule->end_time}}</td>
+                                <td class="ps-4 min-w-20px text-center">{{$schedule->appointment_number}}</td>
+                                <td class="ps-4 min-w-50px text-center">{{$schedule->schedule->day}} - {{$schedule->schedule->date}}</td>
+                                <td class="ps-4 min-w-50px text-center">{{$schedule->schedule->start_time}} - {{$schedule->schedule->end_time}}</td>
+                                @php   
+                                              
+                                // Get the current date and time
+                                    $currentDateTime = Carbon::now();
+                                // Get the schedule date and time from the database
+                                    $scheduleDateTime = Carbon::parse($schedule->schedule->date . ' ' . $schedule->schedule->start_time);
+                                
+                                // Calculate the remaining time
+                                    $remainingTime = $scheduleDateTime->diff($currentDateTime);
+                                @endphp
+                                <td class="ps-4 min-w-50px text-center">{{ $remainingTime->format('%d days, %h hours, %i minutes, %s seconds') }}</td>
                                 <td class="ps-4 min-w-50px text-center">
                                     @if ($schedule->status == 'Pending')
                                         <span class="badge badge-light-warning">Pending</span>

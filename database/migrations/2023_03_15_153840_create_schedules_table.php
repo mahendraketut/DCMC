@@ -20,6 +20,9 @@ return new class extends Migration
             $table->string('day');
             $table->time('start_time');
             $table->time('end_time');
+            $table->integer('max_patient');
+            $table->integer('remaining_patient');
+            $table->date('date')->nullable();
             $table->timestamps();
         });
     }

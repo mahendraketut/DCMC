@@ -59,6 +59,9 @@ class ScheduleController extends Controller
             'day' => $request->day,
             'start_time' => $request->start_time,
             'end_time' => $request->end_time,
+            'max_patient' => $request->number_patient,
+            'remaining_patient' => $request->number_patient,
+            'date' => $startDate = Carbon::parse('next ' . $request->day)->format('Y-m-d'),
             'created_at' => Carbon::now('+08:00'),
         ]);
         return redirect()->route('doctor.schedule')->with('success', 'Schedule Added Successfully');
