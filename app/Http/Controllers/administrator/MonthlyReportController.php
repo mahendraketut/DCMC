@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\administrator;
 
+use PDF;
 use App\Models\User;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
+use App\Models\MedicalRecord;
 use App\Http\Controllers\Controller;
 
 class MonthlyReportController extends Controller
@@ -22,7 +24,16 @@ class MonthlyReportController extends Controller
         $new_user = User::where('created_at','>=',$date)->get();
         $employee = User::where('role', '<>', 'patient')->get();
         $appointment = Appointment::get();
-        return view('administrator.monthlyReport',compact('user','new_user','employee','appointment'));
+        $appointmentData = MedicalRecord::get();
+        return view('administrator.monthlyReport',compact('user','new_user','employee','appointment', 'appointmentData'));
+    }
+
+    public function printPDF() {
+        $currentDate = \Carbon\Carbon::now()->format('d-m-Y');
+        $appointmentData = MedicalRecord::get();
+ 
+    	$pdf = PDF::loadview('administrator.monthlyReport-pdf',compact('currentDate', 'appointmentData'))->setOptions(['defaultFont' => 'sans-serif']);
+    	return $pdf->download('monthly_report.pdf');
     }
 
     /**
