@@ -81,6 +81,10 @@ Route::middleware(['auth', 'user-access:administrator'])->group(function () {
     Route::get('admin.dashboard.services.edit/{id}', [App\Http\Controllers\administrator\ServiceController::class, 'edit'])->name('admin.services.edit');
     Route::post('admin.dashboard.services.update', [App\Http\Controllers\administrator\ServiceController::class, 'update'])->name('admin.services.update');
     Route::get('admin.dashboard.services.delete/{id}', [App\Http\Controllers\administrator\ServiceController::class, 'destroy'])->name('admin.services.delete');
+    Route::get('admin.invoices', [App\Http\Controllers\administrator\InvoiceController::class, 'index'])->name('admin.invoices');
+    Route::get('admin.invoice.detail/{id}', [App\Http\Controllers\administrator\InvoiceController::class, 'show'])->name('admin.invoice.detail');
+    Route::get('admin.invoice.detail.delete/{id}', [App\Http\Controllers\administrator\InvoiceController::class, 'destroy'])->name('admin.invoice.delete');
+    Route::get('admin.invoice.detail./{id}/printPDF', [App\Http\Controllers\administrator\InvoiceController::class, 'printPDF'])->name('admin.invoice.printPDF');
 });
 Route::middleware(['auth', 'user-access:doctor'])->group(function () {
     Route::get('/doctor.dashboard', [App\Http\Controllers\doctor\DashboardController::class, 'index'])->name('doctor.dashboard');

@@ -320,7 +320,7 @@ License: For each use you must have a valid license purchased only from above li
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a class="menu-link" href="{{ route('admin.specialist') }}">
+                                <a class="menu-link" href="{{ route('admin.invoices') }}">
                                     <span class="menu-icon">
                                         <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
                                         <span class="svg-icon svg-icon-2">
