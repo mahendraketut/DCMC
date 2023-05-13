@@ -3,10 +3,16 @@
 namespace App\Http\Controllers\administrator;
 
 use App\Http\Controllers\Controller;
+use App\Models\Appointment;
 use App\Models\Invoice;
 use App\Http\Requests\StoreInvoiceRequest;
 use App\Http\Requests\UpdateInvoiceRequest;
+use App\Models\MedicalRecord;
+use App\Models\Transaction;
 use App\Services\Midtrans\CreateSnapTokenService;
+use PDF;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Crypt;
 
 class InvoiceController extends Controller
 {
@@ -17,7 +23,9 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        //
+        $invoices = Invoice::all()->sortByDesc('created_at');
+        $medicalRecords = Invoice::all()->sortByDesc('created_at');
+        return view('administrator.invoiceList', compact('invoices', 'medicalRecords'));
     }
 
     /**
@@ -47,8 +55,110 @@ class InvoiceController extends Controller
      * @param  \App\Models\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function show(Invoice $invoice)
+    public function show($id)
     {
+        $id = Crypt::decrypt($id);
+        $invoice = Invoice::where('id', $id)->first();
+        $appointment = Appointment::where('id', $invoice->appointment_id)->first();
+        $medicalRecord = MedicalRecord::where('appointment_id', $appointment->id)->first();
+        $transactions = Transaction::where('invoice_id', $invoice->id)->get();
+        $age = Carbon::parse($appointment->patient->dob)->diff(Carbon::now())->format('%y years, %m months and %d days');
+
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => $invoice->invoice_id,
+                'gross_amount' => $invoice->grand_total,
+            ),
+
+            'item_details' => array(),
+
+            'customer_details' => array(
+                'first_name' => $invoice->patient->name,
+                'last_name' => '',
+                'email' => $invoice->patient->email,
+                'phone' => $invoice->patient->phone,
+            ),
+        );
+
+        foreach ($transactions as $transaction) {
+            $item = array(
+                'id' => $transaction->id,
+                'price' => $transaction->price,
+                'quantity' => $transaction->quantity,
+                'name' => $transaction->name,
+            );
+            array_push($params['item_details'], $item);
+        }
+
+
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+
+        $clientKey = env('MIDTRANS_CLIENT_KEY');
+
+        return view('administrator.invoiceDetail', compact('invoice', 'appointment', 'medicalRecord', 'age', 'transactions', 'snapToken', 'clientKey'));
+    }
+
+    public function printPDF($id)
+    {
+        $id = Crypt::decrypt($id);
+        $invoice = Invoice::where('id', $id)->first();
+        $appointment = Appointment::where('id', $invoice->appointment_id)->first();
+        $medicalRecord = MedicalRecord::where('appointment_id', $appointment->id)->first();
+        $transactions = Transaction::where('invoice_id', $invoice->id)->get();
+        $age = Carbon::parse($appointment->patient->dob)->diff(Carbon::now())->format('%y years, %m months and %d days');
+
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => $invoice->invoice_id,
+                'gross_amount' => $invoice->grand_total,
+            ),
+
+            'item_details' => array(),
+
+            'customer_details' => array(
+                'first_name' => $invoice->patient->name,
+                'last_name' => '',
+                'email' => $invoice->patient->email,
+                'phone' => $invoice->patient->phone,
+            ),
+        );
+
+        foreach ($transactions as $transaction) {
+            $item = array(
+                'id' => $transaction->id,
+                'price' => $transaction->price,
+                'quantity' => $transaction->quantity,
+                'name' => $transaction->name,
+            );
+            array_push($params['item_details'], $item);
+        }
+
+
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+
+        $clientKey = env('MIDTRANS_CLIENT_KEY');
+
+        $pdf = PDF::loadView('administrator.invoiceDetail-PDF', compact('invoice', 'appointment', 'medicalRecord', 'age', 'transactions', 'snapToken', 'clientKey'))->setOptions(['defaultFont' => 'sans-serif']);
+
+        return $pdf->download('invooice.pdf');
     }
 
     /**

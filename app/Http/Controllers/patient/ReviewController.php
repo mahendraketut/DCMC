@@ -22,9 +22,10 @@ class ReviewController extends Controller
     public function index()
     {
         $appointments = Appointment::where('patient_id', auth()->user()->id)->where('status', 'completed')->get();
+        $totalAppointments = Appointment::where('patient_id', auth()->user()->id)->where('status', 'completed')->count();
         $medicalrecords = MedicalRecord::all();
         $reviews = Review::all()->sortDesc();
-        return view('patient.review', compact('appointments', 'medicalrecords', 'reviews'));
+        return view('patient.review', compact('appointments', 'medicalrecords', 'reviews', 'totalAppointments'));
     }
 
     /**

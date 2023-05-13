@@ -1,12 +1,7 @@
-@extends('patient.navbar')
-@section('title', 'Payment Detail')
+@extends('administrator.navbar')
+@section('title', 'Invoice Detail')
 @section('css')
-    <!-- @TODO: replace SET_YOUR_CLIENT_KEY_HERE with your client key -->
-    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key={{ $clientKey }}>
-    </script>
-    <!-- Note: replace with src="https://app.midtrans.com/snap/snap.js" for Production environment -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
 @endsection
 @section('content')
     <div class="col-xl-12">
@@ -23,7 +18,7 @@
                     <!--begin::Toolbar-->
                     <div class="d-flex justify-content-end" data-kt-filemanager-table-toolbar="base">
                         <!--begin::Add-->
-                        @if ($invoice->transaction_status == 'unpaid')
+                        {{-- @if ($invoice->transaction_status == 'unpaid')
                             <button class="btn btn-light-primary me-3" id="pay-button">
                                 <i class="fas fa-money-bill-wave"></i>
                                 Pay Now
@@ -33,9 +28,10 @@
                                 <i class="fas fa-money-bill-wave"></i>
                                 Already Paid
                             </a>
-                        @endif
+                        @endif --}}
                         <!--end::Add-->
-                        <a class="btn btn-light-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_upload">
+                        <a class="btn btn-light-primary me-3"
+                            href="{{ route('admin.invoice.printPDF', Crypt::encrypt($invoice->id)) }}" target="_blank"">
                             <i class="fas fa-print"></i>
                             Print Invoice
                         </a>
@@ -122,7 +118,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div class="fw-bold fs-6
-                                        text-gray-800">:
+                                    text-gray-800">:
                                         {{ $invoice->transaction_status }}</div>
                                 </div>
                             </div>
@@ -183,7 +179,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div class="fw-bold fs-6
-                                        text-gray-800">:
+                                    text-gray-800">:
                                         {{ $age }}</div>
                                 </div>
                             </div>
@@ -267,62 +263,7 @@
             <!--end::Mixed Widget 2-->
         </div>
     </div>
-    <form action="{{ route('patient.payment.detail.store') }}" id="submit_form" method="POST">
-        @csrf
-        <input type="hidden" name="json" id="json_callback">
-    </form>
-    <script type="text/javascript">
-        // For example trigger on button clicked, or any time you need
-        var payButton = document.getElementById('pay-button');
-        payButton.addEventListener('click', function() {
-            // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
-            window.snap.pay('{{ $snapToken }}', {
-                onSuccess: function(result) {
-                    /* You may add your own implementation here */
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Payment success!',
-                        text: 'Your payment has been successful.',
-                    });
-                    console.log(result);
-                },
-                onPending: function(result) {
-                    /* You may add your own implementation here */
-                    Swal.fire({
-                        icon: 'info',
-                        title: 'Waiting for payment!',
-                        text: 'Your payment is being processed.',
-                    });
-                    console.log(result);
-                },
-                onError: function(result) {
-                    /* You may add your own implementation here */
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Payment failed!',
-                        text: 'Sorry, your payment has failed.',
-                    });
-                    console.log(result);
-                },
-                onClose: function() {
-                    /* You may add your own implementation here */
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Payment cancelled!',
-                        text: 'You have closed the payment popup without completing the payment.',
-                    });
-                }
-
-            })
-        });
-
-        // function send_response_to_form(result) {
-        //     document.getElementById('json_callback').value = JSON.stringify(result);
-        //     $('#submit_form').submit();
-        // }
-    </script>
 @endsection
-@section('script')
-
+@section('js')
 
 @endsection

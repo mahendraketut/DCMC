@@ -9,6 +9,7 @@ use App\Models\Schedule;
 use App\Models\Appointment;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Service;
@@ -57,11 +58,16 @@ class MyAppointment extends Controller
             'schedule_id' => $request->day,
             'patient_id' => $request->patient,
             'doctor_id' => $request->doctor,
+            'clinic_type' => $request->clinic_type,
             'status' => 'Pending',
             'created_at' => Carbon::now(),
         ]);
-        if ($query) {
+        if ($query == true && Auth::user()->role == 'patient') {
             return redirect()->route('patient.dashboard')->with('success', 'Appointment Successfully');
+        } elseif ($query == true && Auth::user()->role == 'doctor') {
+            return redirect()->route('doctor.dashboard')->with('success', 'Appointment Successfully');
+        } elseif ($query == true && Auth::user()->role == 'administrator') {
+            return redirect()->route('admin.appointment')->with('success', 'Appointment Successfully');
         } else {
             return redirect()->route('patient.view.detail.doctor')->with('error', 'Appointment Failed');
         }
@@ -100,6 +106,8 @@ class MyAppointment extends Controller
     {
         //
         $id = $request->id;
+
+        $id = Crypt::decrypt($id);
 
         $config = [
             'table' => 'invoices',
@@ -157,7 +165,7 @@ class MyAppointment extends Controller
      */
     public function destroy($id)
     {
-        //
+        $id  = Crypt::decrypt($id);
         Appointment::where('id', '=', $id)->delete();
         return redirect()->back()->with('success', 'Appointment Deleted Successfully');
     }

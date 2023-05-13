@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Crypt;
 
 class ScheduleController extends Controller
 {
@@ -89,7 +90,7 @@ class ScheduleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $id = Crypt::decrypt($id);
         $data = Schedule::where('id', '=', $id)->first();
         $doctor = User::where('role', '=', 'doctor')->get();
         return view('administrator.schedule-update', compact('data', 'doctor'));
@@ -132,7 +133,7 @@ class ScheduleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $id = Crypt::decrypt($id);
         Schedule::where('id', '=', $id)->delete();
         return redirect()->back()->with('success', 'Schedule Deleted Successfully');
     }
