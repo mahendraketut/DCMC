@@ -79,7 +79,7 @@
                                                 <a href="{{ url('/patient.payment/' . $schedule->id) }}"
                                                     class="btn btn-success">Pay</a>
                                             @else
-                                                <a href="{{ url('/patient.appointment.delete/' . $schedule->id) }}"
+                                                <a href="{{ url('/patient.appointment.delete/' . Crypt::encrypt($schedule->id)) }}"
                                                     class="btn btn-danger">Delete</a>
                                             @endif
                                         </td>

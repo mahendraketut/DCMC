@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Schedule;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -111,7 +112,7 @@ class MyAppointment extends Controller
      */
     public function destroy($id)
     {
-        //
+        $id = Crypt::decrypt($id);
         Appointment::where('id', '=', $id)->delete();
         return redirect()->back()->with('success', 'Schedule Deleted Successfully');
     }

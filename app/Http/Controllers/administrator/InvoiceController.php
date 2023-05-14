@@ -158,7 +158,7 @@ class InvoiceController extends Controller
 
         $pdf = PDF::loadView('administrator.invoiceDetail-PDF', compact('invoice', 'appointment', 'medicalRecord', 'age', 'transactions', 'snapToken', 'clientKey'))->setOptions(['defaultFont' => 'sans-serif']);
 
-        return $pdf->download('invooice.pdf');
+        return $pdf->stream('invoice.pdf');
     }
 
     /**

@@ -70,9 +70,19 @@
                         </tr>
                         <tr>
                             <td style="width: 20%">Date of Admission</td>
-                            <td style="width: 30%">: {{ $invoice->created_at->format('d-M-Y h:m:s') }}</td>
+                            <td style="width: 30%">: @if ($invoice->created_at != null)
+                                    {{ $invoice->created_at->format('d-M-Y h:m:s') }}
+                                @else
+                                    -
+                                @endif
+                            </td>
                             <td style="width: 20%">Date of discharge</td>
-                            <td style="width: 30%">: {{ $invoice->updated_at->format('d-M-Y h:m:s') }}</td>
+                            <td style="width: 30%">: @if ($invoice->updated_at == null)
+                                    -
+                                @else
+                                    {{ $invoice->updated_at->format('d-M-Y h:m:s') }}
+                                @endif
+                            </td>
                         </tr>
                         <tr>
                             <td style="width: 20%">Patient ID</td>

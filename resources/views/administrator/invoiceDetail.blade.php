@@ -78,7 +78,12 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div class="fw-bold fs-6 text-gray-800">:
-                                        {{ $invoice->created_at->format('d-M-Y h:m:s') }}</div>
+                                        @if ($invoice->created_at != null)
+                                            {{ $invoice->created_at->format('d-M-Y h:m:s') }}
+                                        @else
+                                            -
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -91,7 +96,12 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div class="fw-bold fs-6 text-gray-800">:
-                                        {{ $invoice->updated_at->format('d-M-Y h:m:s') }}</div>
+                                        @if ($invoice->updated_at == null)
+                                            -
+                                        @else
+                                            {{ $invoice->updated_at->format('d-M-Y h:m:s') }}
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>

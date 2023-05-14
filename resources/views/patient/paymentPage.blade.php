@@ -16,7 +16,7 @@
 
             <div class="card-body pt-5 pb-3">
                 @foreach ($invoices as $invoice)
-                    <div class="card card-dashed">
+                    <div class="card card-dashed mt-5">
                         <div class="card-header">
                             <h3 class="card-title">#{{ $invoice->invoice_id }} </h3>
                             <div class="card-toolbar">
