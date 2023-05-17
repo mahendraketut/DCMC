@@ -119,6 +119,17 @@ class PaymentController extends Controller
         return dd($invoice);
     }
 
+    public function callback(Request $request) {
+        $serverKey = env('MIDTRANS_SERVER_KEY');
+        $hashed = hash('sha512', $request->input('order_id') . $request->input('status_code') . $request->input('gross_amount') . $serverKey);
+        if ($hashed == $request->input('signature_key')) {
+            if ($request->input('transaction_status') == 'capture') {
+                $invoice = Invoice::where('invoice_id', $request->input('order_id'))->first();
+                $invoice->update(['status' => 'paid']);
+            }
+        }
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
