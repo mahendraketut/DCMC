@@ -12,7 +12,7 @@
                     <span class="card-label fw-bolder fs-3 mb-1">Clinic Services Table</span>
                 </h3>
                 <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover"
-                    title="Click to add a user">
+                    title="Click to add a new services">
                     <a href="{{ route('admin.services.add') }}" class="btn btn-sm btn-light btn-active-primary"
                         data-bs-toggle="modal" data-bs-target="#modal_add_services">
                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->

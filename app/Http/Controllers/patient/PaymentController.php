@@ -61,7 +61,7 @@ class PaymentController extends Controller
         $transactions = Transaction::where('invoice_id', $invoice->id)->get();
         $age = Carbon::parse($appointment->patient->dob)->diff(Carbon::now())->format('%y years, %m months and %d days');
 
-        // Set your Merchant Server Key
+        // Set Merchant Server Key
         \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
         // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
         \Midtrans\Config::$isProduction = false;
