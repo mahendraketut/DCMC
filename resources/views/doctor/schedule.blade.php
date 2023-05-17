@@ -132,10 +132,65 @@
                         </div>
                         <!--end::Col-->
                     </div> --}}
+
+                    <!--end::Input group-->
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="fv-row mb-10">
+                        <!--begin::Label-->
+                        <label class="fs-6 fw-bold form-label mb-2">
+                            <span class="required">Day</span>
+                            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Specify the day"></i>
+                        </label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <div class="col fv-row">
+                            <select id="day" name="day" class="form-select form-select-solid form-select-lg fw-bold form-control @error('day') is-invalid @enderror">
+                                <option value="">Select Day...</option>
+                                <option value="Sunday">Sunday</option>
+                                <option value="Monday">Monday</option>
+                                <option value="Tuesday">Tuesday</option>
+                                <option value="Wednesday">Wednesday</option>
+                                <option value="Thursday">Thursday</option>
+                                <option value="Friday">Friday</option>
+                                <option value="Saturday">Saturday</option>
+                            </select>
+                            @error('day')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <!--end::Input-->
+                    </div>
+                    <!--end::Input group-->
+                    <div class="fv-row mb-10">
+                        <!--begin::Label-->
+                        <label class="fs-6 fw-bold form-label mb-2">
+                            <span class="required">Number of Patient</span>
+                            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Specify the day"></i>
+                        </label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <div class="col fv-row">
+                            <input type="number" class="form-control form-control-lg form-control-solid form-control @error('number_patient') is-invalid @enderror" name="number_patient" placeholder="Number of Patient" value="{{ old("number_patient") }}"/>
+                            @error('number_patient')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="row mb-6">
+                        <div class="col">
+
                         <!--end::Input group-->
                         <!--end::Input group-->
                         <!--begin::Input group-->
                         <div class="fv-row mb-10">
+
                             <!--begin::Label-->
                             <label class="fs-6 fw-bold form-label mb-2">
                                 <span class="required">Day</span>

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('patient_id')->constrained('users');
             $table->foreignId('doctor_id')->constrained('users');
             $table->foreignId('schedule_id')->constrained('schedule');
+            $table->integer('appointment_number');
             $table->enum('status', ['Pending', 'Approved', 'Rejected', 'Cancelled', 'Waiting Call', 'Under Examination', 'Waiting Payment', 'Completed']);
             $table->enum('clinic_type', ['Reservation', 'Emergency']);
             $table->date('appointment_date')->nullable();

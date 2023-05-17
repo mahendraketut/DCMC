@@ -1,3 +1,6 @@
+@php
+use Carbon\Carbon;
+@endphp
 @extends('patient.navbar')
 @section('title', 'Dashboard')
 @section('css')
@@ -9,6 +12,91 @@
 @endsection
 
 @section('content')
+
+
+<!--begin::Col-->
+<div class="col-xl-12">
+    <!--begin::Tables Widget 9-->
+    <div class="card card-xl-stretch mb-5 mb-xl-8">
+        <!--begin::Header-->
+        <div class="card-header border-0 pt-5">
+            <h3 class="card-title align-items-start flex-column">
+                <span class="card-label fw-bolder fs-3 mb-1">Appointment Table</span>
+            </h3>
+        </div>
+        <!--end::Header-->
+        <!--begin::Body-->
+        <div class="card-body py-3">
+            <!--begin::Table container-->
+            <div class="table-responsive">
+                <!--begin::Table-->
+                <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+                    <!--begin::Table head-->
+                    <thead>
+                        <tr class="fw-bold fs-6 text-gray-800 border-bottom border-gray-300">
+                            <th class="ps-4 min-w-20px text-center">#</th>
+                            {{-- <th class="ps-4 min-w-100px text-center">Name</th> --}}
+                            <th class="ps-4 min-w-20px text-center">Queue Number</th>
+                            <th class="ps-4 min-w-50px text-center">Day</th>
+                            <th class="ps-4 min-w-50px text-center">Appointment Time</th>
+                            <th class="ps-4 min-w-50px text-center">Estimated Time</th>
+                            <th class="ps-4 min-w-50px text-center">Status</th>
+                            <th class="ps-4 min-w-50px text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <!--end::Table head-->
+                    <!--begin::Table body-->
+                    <tbody>
+                        @if ($appointment->count() == 0)
+                            <th class="ps-4 min-w-20px text-center" colspan="6">No Schedule Data</th>
+                        @else
+                            @foreach ($appointment as $schedule)
+
+                            <tr>
+                                <td class="ps-4 min-w-20px text-center">{{$loop->iteration}}</td>
+                                {{-- <td class="ps-4 min-w-200px text-center">{{$appointment->doctor_name}}</td> --}}
+                                <td class="ps-4 min-w-20px text-center">{{$schedule->appointment_number}}</td>
+                                <td class="ps-4 min-w-50px text-center">{{$schedule->schedule->day}} - {{$schedule->schedule->date}}</td>
+                                <td class="ps-4 min-w-50px text-center">{{$schedule->schedule->start_time}} - {{$schedule->schedule->end_time}}</td>
+                                @php   
+                                              
+                                // Get the current date and time
+                                    $currentDateTime = Carbon::now();
+                                // Get the schedule date and time from the database
+                                    $scheduleDateTime = Carbon::parse($schedule->schedule->date . ' ' . $schedule->schedule->start_time);
+                                
+                                // Calculate the remaining time
+                                    $remainingTime = $scheduleDateTime->diff($currentDateTime);
+                                @endphp
+                                <td class="ps-4 min-w-50px text-center">{{ $remainingTime->format('%d days, %h hours, %i minutes, %s seconds') }}</td>
+                                <td class="ps-4 min-w-50px text-center">
+                                    @if ($schedule->status == 'Pending')
+                                        <span class="badge badge-light-warning">Pending</span>
+                                    @elseif($schedule->status == 'Approved')
+                                        <span class="badge badge-light-success">Approved</span>
+                                    @elseif ($schedule->status == 'Waiting Call')
+                                        <span class="badge badge-light-success">Waiting Call</span>
+                                    @elseif ($schedule->status == 'Under Examination')
+                                        <span class="badge badge-light-success">Under Examination</span>
+                                    @elseif ($schedule->status == 'Waiting Payment')
+                                        <span class="badge badge-light-success">Waiting Payment</span>
+                                    @elseif($schedule->status == 'Rejected')
+                                        <span class="badge badge-light-danger">Rejected</span>
+                                    @elseif($schedule->status == 'Canceled')
+                                        <span class="badge badge-light-danger">Canceled</span>
+                                    @elseif($schedule->status == 'Completed')
+                                        <span class="badge badge-light-success">Completed</span>
+                                    @endif
+                                </td>
+                                <td class="ps-4 min-w-20px text-center">
+                                    @if ($schedule->status == 'Completed')
+                                        <a href="{{url('/patient.review.create/'.Crypt::encrypt($schedule->id))}}" class="btn btn-primary">Review</a>
+                                    @elseif($schedule->status == 'Waiting Payment')
+                                        <a href="{{url('/patient.payment/'.$schedule->id)}}" class="btn btn-success">Pay</a>
+                                    @else
+                                        <a href="{{url('/patient.appointment.delete/'.$schedule->id)}}" class="btn btn-danger">Delete</a>
+                                    @endif
+                                </td>
 
     <!--begin::Col-->
     <div class="col-xl-12">
@@ -37,6 +125,7 @@
                                 <th class="ps-4 min-w-50px text-center">End Time</th>
                                 <th class="ps-4 min-w-50px text-center">Status</th>
                                 <th class="ps-4 min-w-50px text-center">Action</th>
+
                             </tr>
                         </thead>
                         <!--end::Table head-->

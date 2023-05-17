@@ -256,6 +256,47 @@
                 {{-- <div class="col-md-6">
                 <h3 class="card-title">Doctor List</h3>
             </div> --}}
+
+            <form action="/patient.dashboard/search" method="GET" class="col-md-6">
+                <div class="input-group mb-3">
+                    <input type="search" name="search" class="form-control" placeholder="Search Doctor" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <button class="btn btn-primary" type="submit" value="search">Search</button>
+                </div>
+            </form>
+            <form action="/patient.dashboard/filter" method="GET" class="col-md-6">
+                <div class="input-group mb-3">
+                    <select name="filter" class="form-select" id="filter-select">
+                        <option selected>Choose Specialist</option>
+                        @foreach ($specialist as $specialist)
+                            <option value="{{$specialist->id}}">{{$specialist->name}}</option>
+                        @endforeach
+                    </select>
+                    <button class="btn btn-primary" type="submit" value="filter">Filter</button>
+                </div>
+            </form>
+        </div>
+        @foreach ($schedule as $schedule)
+        <div class="card border md-12 mt-4">
+            <div class="card">
+                <div class="row g-0">
+                    <div class="col">
+                        @if ($schedule->user->profile_pic)
+                            <img src="{{ asset('storage/' . $schedule->user->profile_pic) }}" class="img-fluid rounded-start" alt="image"/>
+                        @else
+                            <img src="{{asset('admin/assets/media/avatars/blank.png')}}" class="img-fluid rounded-start" alt="image" />
+                        @endif
+                    </div>
+                    <div class="col-md-11">
+                        <div class="card-body d-flex align-items-center justify-content-between" style="padding: 2%">
+                            <div>
+                                <h4 class="card-title">{{$schedule->user->name}} | {{$schedule->user->specialist->name}}</h4>
+                                <p class="card-text">{{$schedule->day}}, {{$schedule->date}} | {{$schedule->start_time}} - {{$schedule->end_time}}</p>
+                                @if ($schedule->remaining_patient == 0)
+                                            <div class="badge badge-light-danger">Not Available: Remaining Patient: {{$schedule->remaining_patient}}</div>
+                                @else
+                                            <div class="badge badge-light-success">Available: Remaining Patient: {{$schedule->remaining_patient}}</div>
+                                @endif
+
                 <form action="" class="col-md-6">
                     <div class="input-group mb-3">
                         <input type="search" name="search" class="form-control" placeholder="Search Doctor"
@@ -314,6 +355,7 @@
                                     <a href="{{ route('patient.view.detail.doctor', Crypt::encrypt($schedule->user->id)) }}"
                                         class="btn btn-primary h-100">Make an Appointment</a>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -336,6 +378,33 @@
 @endsection
 
 @section('js')
+
+{{-- <script>
+  $(document).ready(function() {
+      $('#button-addon2').on('click', function() {
+          var filter = $(this).val();
+
+          $.ajax({
+              url: '{{ route('filter') }}',
+              type: 'GET',
+              data: {
+                  filter: filter
+              },
+              success: function(data) {
+                  var html = '';
+                  $.each(data, function(key, value) {
+                      html += '<tr>';
+                      html += '<td>' + value.name + '</td>';
+                      html += '<td>' + value.description + '</td>';
+                      html += '</tr>';
+                  });
+                  $('#data-table tbody').html(html);
+              }
+          });
+      });
+  });
+</script> --}}
+
     <script>
         $(document).ready(function() {
             $('#button-addon2').on('click', function() {

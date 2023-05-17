@@ -134,7 +134,8 @@ Route::middleware(['auth', 'user-access:pharmacist'])->group(function () {
 
 Route::middleware(['auth', 'user-access:patient'])->group(function () {
     Route::get('/patient.dashboard', [App\Http\Controllers\patient\DashboardController::class, 'index'])->name('patient.dashboard');
-    Route::get('/filter', [App\Http\Controllers\patient\DashboardController::class, 'filter'])->name('filter');
+    Route::get('/patient.dashboard/search', [App\Http\Controllers\patient\DashboardController::class, 'search'])->name('patient.dashboard.search');
+    Route::get('/patient.dashboard/filter', [App\Http\Controllers\patient\DashboardController::class, 'filter'])->name('patient.dashboard.filter');
     Route::get('/patient.profile', [App\Http\Controllers\patient\MyprofileController::class, 'index'])->name('patient.profile');
     Route::get('/patient.profile.edit', [App\Http\Controllers\patient\UpdateProfileController::class, 'edit'])->name('patient.profile.edit');
     Route::put('/patient.profile.update', [App\Http\Controllers\patient\UpdateProfileController::class, 'update'])->name('patient.profile.update');
