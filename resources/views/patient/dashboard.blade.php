@@ -1,3 +1,6 @@
+@php
+    Use Carbon\Carbon;
+@endphp
 @extends('patient.navbar')
 @section('title', 'Dashboard')
 @section('css')
@@ -276,105 +279,45 @@
             </form>
         </div>
         @foreach ($schedule as $schedule)
-        <div class="card border md-12 mt-4">
-            <div class="card">
-                <div class="row g-0">
-                    <div class="col">
-                        @if ($schedule->user->profile_pic)
-                            <img src="{{ asset('storage/' . $schedule->user->profile_pic) }}" class="img-fluid rounded-start" alt="image"/>
-                        @else
-                            <img src="{{asset('admin/assets/media/avatars/blank.png')}}" class="img-fluid rounded-start" alt="image" />
-                        @endif
-                    </div>
-                    <div class="col-md-11">
-                        <div class="card-body d-flex align-items-center justify-content-between" style="padding: 2%">
-                            <div>
-                                <h4 class="card-title">{{$schedule->user->name}} | {{$schedule->user->specialist->name}}</h4>
-                                <p class="card-text">{{$schedule->day}}, {{$schedule->date}} | {{$schedule->start_time}} - {{$schedule->end_time}}</p>
-                                @if ($schedule->remaining_patient == 0)
-                                            <div class="badge badge-light-danger">Not Available: Remaining Patient: {{$schedule->remaining_patient}}</div>
-                                @else
-                                            <div class="badge badge-light-success">Available: Remaining Patient: {{$schedule->remaining_patient}}</div>
-                                @endif
-
-                <form action="" class="col-md-6">
-                    <div class="input-group mb-3">
-                        <input type="search" name="search" class="form-control" placeholder="Search Doctor"
-                            aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
-                    </div>
-                </form>
-                <form id="filter-form" class="col-md-6">
-                    <div class="input-group mb-3">
-                        <select name="filter" class="form-select" id="filter-select">
-                            {{-- //TODO it should be looping data from database :: CHANGE --}}
-                            <option selected>Choose Specialist</option>
-                            <option value="1">Cardiologist</option>
-                            <option value="2">Dentist</option>
-                            <option value="3">Dermatologist</option>
-                            <option value="4">Endocrinologist</option>
-                            <option value="5">Gastroenterologist</option>
-                            <option value="6">Gynecologist</option>
-                            <option value="7">Neurologist</option>
-                            <option value="8">Oncologist</option>
-                            <option value="9">Ophthalmologist</option>
-                            <option value="10">Orthopedic Surgeon</option>
-                            <option value="11">Pediatrician</option>
-                            <option value="12">Psychiatrist</option>
-                            <option value="13">Pulmonologist</option>
-                            <option value="14">Rheumatologist</option>
-                            <option value="15">Urologist</option>
-                            <option value="Mouth Surgery">Mouth Surgery</option>
-                        </select>
-                        <button class="btn btn-primary" type="submit" id="button-addon2">Filter</button>
-                    </div>
-                </form>
-            </div>
-            @foreach ($schedule as $schedule)
-                <div class="card border md-12 mt-4">
-                    <div class="card">
-                        <div class="row g-0">
-                            <div class="col">
-                                @if ($schedule->user->profile_pic)
-                                    <img src="{{ asset('storage/' . $schedule->user->profile_pic) }}"
-                                        class="img-fluid rounded-start" alt="image" />
-                                @else
-                                    <img src="{{ asset('admin/assets/media/avatars/blank.png') }}"
-                                        class="img-fluid rounded-start" alt="image" />
-                                @endif
-                            </div>
-                            <div class="col-md-11">
-                                <div class="card-body d-flex align-items-center justify-content-between"
-                                    style="padding: 2%">
-                                    <div>
-                                        <h4 class="card-title">{{ $schedule->user->name }} |
-                                            {{ $schedule->user->specialist->name }}</h4>
-                                        <p class="card-text">{{ $schedule->day }}, {{ $schedule->start_time }} -
-                                            {{ $schedule->end_time }}</p>
-                                    </div>
-                                    <a href="{{ route('patient.view.detail.doctor', Crypt::encrypt($schedule->user->id)) }}"
-                                        class="btn btn-primary h-100">Make an Appointment</a>
+        @php
+            $dateChecker = Carbon::parse($schedule->date);
+        @endphp
+        @if ($dateChecker->isPast())
+            @continue
+        @else
+            <div class="card border md-12 mt-4">
+                <div class="card">
+                    <div class="row g-0">
+                        <div class="col">
+                            @if ($schedule->user->profile_pic)
+                                <img src="{{ asset('storage/' . $schedule->user->profile_pic) }}" class="img-fluid rounded-start" alt="image"/>
+                            @else
+                                <img src="{{asset('admin/assets/media/avatars/blank.png')}}" class="img-fluid rounded-start" alt="image" />
+                            @endif
+                        </div>
+                        <div class="col-md-11">
+                            <div class="card-body d-flex align-items-center justify-content-between" style="padding: 2%">
+                                <div>
+                                    <h4 class="card-title">{{$schedule->user->name}} | {{$schedule->user->specialist->name}}</h4>
+                                    <p class="card-text">{{$schedule->day}}, {{$schedule->date}} | {{$schedule->start_time}} - {{$schedule->end_time}}</p>
+                                    @if ($schedule->remaining_patient == 0)
+                                                <div class="badge badge-light-danger">Not Available: Remaining Patient: {{$schedule->remaining_patient}}</div>
+                                    @else
+                                                <div class="badge badge-light-success">Available: Remaining Patient: {{$schedule->remaining_patient}}</div>
+                                    @endif
                                 </div>
-
+                                <a href="{{ route('patient.view.detail.doctor', Crypt::encrypt($schedule->user->id)) }}"
+                                    class="btn btn-primary h-100">Make an Appointment</a>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>                
+            </div>
+        @endif
             @endforeach
-            {{-- <table id="data-table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Table rows will be dynamically generated using JavaScript -->
-            </tbody>
-        </table> --}}
         </div>
     </div>
-
+    
 @endsection
 
 @section('js')
@@ -404,31 +347,5 @@
       });
   });
 </script> --}}
-
-    <script>
-        $(document).ready(function() {
-            $('#button-addon2').on('click', function() {
-                var filter = $(this).val();
-
-                $.ajax({
-                    url: '{{ route('filter') }}',
-                    type: 'GET',
-                    data: {
-                        filter: filter
-                    },
-                    success: function(data) {
-                        var html = '';
-                        $.each(data, function(key, value) {
-                            html += '<tr>';
-                            html += '<td>' + value.name + '</td>';
-                            html += '<td>' + value.description + '</td>';
-                            html += '</tr>';
-                        });
-                        $('#data-table tbody').html(html);
-                    }
-                });
-            });
-        });
-    </script>
 
 @endsection

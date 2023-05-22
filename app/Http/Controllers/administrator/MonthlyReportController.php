@@ -32,9 +32,20 @@ class MonthlyReportController extends Controller
     {
         $currentDate = \Carbon\Carbon::now()->format('d-m-Y');
         $appointmentData = MedicalRecord::get();
+        $type = 'appointment';
 
-        $pdf = PDF::loadview('administrator.appointmentReport-pdf', compact('currentDate', 'appointmentData'))->setOptions(['defaultFont' => 'sans-serif']);
-        return $pdf->download('monthly_report.pdf');
+        $pdf = PDF::loadview('administrator.appointmentReport-pdf', compact('currentDate', 'appointmentData', 'type'))->setOptions(['defaultFont' => 'sans-serif']);
+        return $pdf->download('monthly_appointment_report.pdf');
+    }
+
+    public function appointmentStaffReportPrintPDF()
+    {
+        $currentDate = \Carbon\Carbon::now()->format('d-m-Y');
+        $employee = User::where('role', '<>', 'patient')->get();
+        $type = 'staff';
+
+        $pdf = PDF::loadview('administrator.appointmentReport-pdf', compact('currentDate', 'employee', 'type'))->setOptions(['defaultFont' => 'sans-serif']);
+        return $pdf->download('monthly_staff_report.pdf');
     }
 
     public function userReport()

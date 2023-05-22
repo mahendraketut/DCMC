@@ -268,7 +268,7 @@
                     <!--end::Secondary button-->
 
                     <!--begin::Primary button-->
-                    <a href="{{ route('admin.monthly.report.print.pdf') }}" class="btn btn-sm fw-bold btn-primary">
+                    <a href="{{ route('admin.monthly.report.staffprint.pdf') }}" class="btn btn-sm fw-bold btn-primary">
                         <span>
                             <i class="bi bi-file-earmark-pdf-fill"></i>
                         </span>

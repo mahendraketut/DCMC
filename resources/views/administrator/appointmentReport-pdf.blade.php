@@ -22,10 +22,15 @@
 	</style>
 	<center>
 		<h3>Juniarta Dental Clinic Monthly Report</h3>
-		<p><strong>Appointment Data</strong></p>
+		@if ($type == 'staff')
+			<p><strong>Staff Data</strong></p>
+		@elseif ($type == 'appointment')
+			<p><strong>Appointment Data</strong></p>
+		@endif
 		<h5>Monthly Report: {{$currentDate}}</h5>
 	</center>
- 
+	
+	@if ($type == 'appointment')
 	<table class='table table-bordered'>
 		<thead>
 			<tr>
@@ -53,6 +58,38 @@
 			@endforeach
 		</tbody>
 	</table>
- 
+	@elseif ($type == 'staff')
+	<table class='table table-bordered'>
+		<thead>
+			<tr>
+				<th>No</th>
+				<th>Employee Name</th>
+				<th>Role</th>
+				<th>Gender</th>
+				<th>Phone</th>
+				<th>Joined Since</th>
+			</tr>
+		</thead>
+		<tbody>
+			@php $i=1 @endphp
+			@foreach($employee as $p)
+			<tr>
+				<td>{{ $i++ }}</td>
+				<td>{{$p->name}}</td>
+				@if ($p->role == 'administrator')
+					<td>Administrator</td>
+				@elseif ($p->role == 'doctor')
+					<td>Doctor - {{$p->specialist->name}}</td>
+				@elseif ($p->role == 'pharmacist')
+					<td>Pharmacist</td>
+				@endif
+				<td>{{$p->gender}}</td>
+				<td>{{$p->phone}}</td>
+				<td>{{ Carbon::parse($p->created_at)->format('d M, Y') }}</td>
+			</tr>
+			@endforeach
+		</tbody>
+	</table>
+	@endif
 </body>
 </html>

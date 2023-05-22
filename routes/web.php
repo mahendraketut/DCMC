@@ -74,7 +74,7 @@ Route::middleware(['auth', 'user-access:administrator'])->group(function () {
     Route::get('/admin.dashboard/appointment.update/{id}', [App\Http\Controllers\administrator\MyAppointment::class, 'update'])->name('admin.appointment.update');
     Route::get('/admin.dashboard/appointment.delete/{id}', [App\Http\Controllers\administrator\MyAppointment::class, 'destroy'])->name('admin.appointment.delete');
     Route::get('/admin.dashboard/website.monthly.report', [App\Http\Controllers\administrator\MonthlyReportController::class, 'appointmentReport'])->name('admin.monthly.report');
-
+    Route::get('/admin.dashboard/website.monthly.report/staff/print-pdf', [App\Http\Controllers\administrator\MonthlyReportController::class, 'appointmentStaffReportPrintPDF'])->name('admin.monthly.report.staffprint.pdf');
     Route::get('/admin.dashboard/website.monthly.report/appointment/print-pdf', [App\Http\Controllers\administrator\MonthlyReportController::class, 'appointmentReportPrintPDF'])->name('admin.monthly.report.print.pdf');
     Route::get('admin.dashboard.services', [App\Http\Controllers\administrator\ServiceController::class, 'index'])->name('admin.services');
     Route::get('admin.dashboard.services.add', [App\Http\Controllers\administrator\ServiceController::class, 'create'])->name('admin.services.add');
